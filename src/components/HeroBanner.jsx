@@ -34,7 +34,7 @@ const HeroBanner = () => {
           {/* Date Area */}
           <div className="hidden md:flex md:gap-4">
             <div className="flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
-              <div className="text-[14px] py-2 font-bold md:text-[21px] text-[#153148] dark:text-[#431b7e]">
+              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
                 July
               </div>
               <div className="text-[14px] py-3 px-5 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
@@ -43,7 +43,7 @@ const HeroBanner = () => {
             </div>
 
             <div className="flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
-              <div className="text-[14px] py-2 font-bold md:text-[21px] text-[#153148] dark:text-[#431b7e]">
+              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
                 July
               </div>
               <div className="text-[14px] py-3 px-5 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
@@ -52,7 +52,7 @@ const HeroBanner = () => {
             </div>
 
             <div className="flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
-              <div className="text-[14px] py-2 font-bold md:text-[21px] text-[#153148] dark:text-[#431b7e]">
+              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
                 July
               </div>
               <div className="text-[14px] py-3 px-5 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
@@ -67,7 +67,7 @@ const HeroBanner = () => {
       <div className="mt-3 flex-col items-start flex md:justify-between md:items-center px-1 md:flex-row md:px-5">
         <div className="flex gap-4">
           <div className="hidden md:flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
-            <div className="text-[14px] py-2 font-bold md:text-[21px] text-[#153148] dark:text-[#431b7e]">
+            <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
               July
             </div>
             <div className="text-[14px] p-3 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
@@ -77,7 +77,7 @@ const HeroBanner = () => {
 
           <div className="flex md:gap-2 md:hidden">
             <div className="flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
-              <div className="text-[14px] py-2 font-bold md:text-[21px] text-[#153148] dark:text-[#431b7e]">
+              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
                 July
               </div>
               <div className="text-[14px] py-3 px-5 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
@@ -86,7 +86,7 @@ const HeroBanner = () => {
             </div>
 
             <div className="flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
-              <div className="text-[14px] py-2 font-bold md:text-[21px] text-[#153148] dark:text-[#431b7e]">
+              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
                 July
               </div>
               <div className="text-[14px] py-3 px-5 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
@@ -95,7 +95,7 @@ const HeroBanner = () => {
             </div>
 
             <div className="flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
-              <div className="text-[14px] py-2 font-bold md:text-[21px] text-[#153148] dark:text-[#431b7e]">
+              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
                 July
               </div>
               <div className="text-[14px] py-3 px-5 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
@@ -109,7 +109,7 @@ const HeroBanner = () => {
               Saturday, 20 May
             </h4>
             <p className="text-[12px] md:text-[18px] font-[400] text-[#153148] dark:text-slate-100">
-              10:00 AM - 6:00 PM
+              9:00 AM - 7:00 PM
             </p>
           </div>
         </div>
@@ -124,9 +124,9 @@ const HeroBanner = () => {
           </div>
 
           <div className="">
-            <a href="">
+            <a href="https://goo.gl/maps/sCdbZyrHVNNE8BYz7">
               <p className="text-[#153148] text-[16px] md:text-[22px] font-[400] dark:text-slate-100">
-                Westlands The Mall, Nairobi Kenya...
+                The KICC, Nairobi Kenya...
               </p>
             </a>
           </div>

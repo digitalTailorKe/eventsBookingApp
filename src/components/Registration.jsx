@@ -4,7 +4,7 @@ import { FaUserLock, FaUnlockAlt } from "react-icons/fa";
 const Registration = () => {
   return (
     <div className="">
-      <h4 className="flex gap-4 items-center text-[#153148] text-[16px] md:text-[22px] font-[400] dark:text-slate-100 pb-2">
+      <h4 className="flex gap-4 items-center text-[#153148] text-[20px] md:text-[22px] font-[400] dark:text-slate-100 pb-2">
         <FaUnlockAlt style={{ fontSize: "21px" }} /> Registration
       </h4>
 
@@ -14,7 +14,7 @@ const Registration = () => {
       <div className="mt-5">
         <div className="flex flex-col gap-4">
           <h4 className="text-[21px] font-bold">Registration Ongoing...</h4>
-          <p>
+          <p className="text-[18px]">
             Don't miss out on this exciting event. By registering, you'll ensure
             that you have a ticket reserved and ready for the event day. Secure
             your spot now and join us for an unforgettable experience.{" "}
