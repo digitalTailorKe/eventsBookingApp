@@ -41,6 +41,11 @@ const Footer = () => {
           <SocialIcon url="https://www.instagram.com/" bgColor="#8449dc" />
         </div>
       </div>
+
+      <hr />
+      <div className="flex justify-center my-4">
+        <p>Marketed By Digital Tailor Kenya &copy; 2023</p>
+      </div>
     </div>
   );
 };

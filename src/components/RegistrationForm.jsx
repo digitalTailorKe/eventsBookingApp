@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import { FaExclamationTriangle } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FormInputText from "./FormInputText";
+import SelectInput from "./SelectInput";
+import CheckboxInput from "./CheckBoxInput";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    emailAddress: "",
-    businessName: "",
-    selectSector: "",
+    first_name: "",
+    last_name: "",
+    phone: "",
+    email: "",
+    business_name: "",
+    business_sector_id: "",
     address: "",
-    selectInterest: "",
-    getNotified: "",
+    select_interest: "",
+    notification: 1,
     registration_type_id: 1,
 
     // Add other form fields here
@@ -34,20 +36,20 @@ const RegistrationForm = () => {
     let errors = {};
 
     // Validate each form field
-    if (!formData.firstName) {
-      errors.firstName = "Please provide your first name to continue.";
+    if (!formData.first_name) {
+      errors.first_name = "Please provide your first name to continue.";
     }
 
-    if (!formData.lastName) {
-      errors.lastName = "Please provide your last name to continue.";
+    if (!formData.last_name) {
+      errors.last_name = "Please provide your last name to continue.";
     }
 
-    if (!formData.phoneNumber) {
-      errors.phoneNumber = "Please provide your phone number to continue.";
+    if (!formData.phone) {
+      errors.phone = "Please provide your phone number to continue.";
     }
 
-    if (!formData.emailAddress) {
-      errors.emailAddress = "Please provide your email address to continue.";
+    if (!formData.email) {
+      errors.email = "Please provide your email address to continue.";
     }
 
     // Set the form errors state
@@ -69,22 +71,23 @@ const RegistrationForm = () => {
 
       // Reset form data and errors
       setFormData({
-        firstName: "",
-        lastName: "",
-        phoneNumber: "",
-        emailAddress: "",
-        businessName: "",
-        selectSector: "",
+        first_name: "",
+        last_name: "",
+        phone: "",
+        email: "",
+        business_name: "",
+        business_sector_id: "",
         address: "",
-        selectInterest: "",
-        getNotified: "",
+        select_interest: "",
+        notification: "",
+        registration_type_id: 1,
       });
 
       setFormErrors({});
     } else {
       // Form is invalid, display error messages
       toast.error("Form is invalid. Please fix errors.");
-    //   console.log("Form is invalid. Please fix errors.");
+      //   console.log("Form is invalid. Please fix errors.");
     }
   };
 
@@ -92,237 +95,101 @@ const RegistrationForm = () => {
     <form action="" method="post" onSubmit={handleSubmit}>
       <div className="md:flex md:gap-4">
         {/* First Name Input */}
-        <div className="flex flex-col gap-2 mb-3 w-full">
-          <label
-            htmlFor="firstName"
-            className="text-[#153148] text-[14px] font-[700] dark:text-slate-100"
-          >
-            First Name
-          </label>
-          <input
-            type="text"
-            name="firstName"
-            id="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            className="bg-[#dbe8f4] border-none rounded-lg py-4 px-3 text-[#153148] dark:text-[#431b7e] focus:outline-none focus:ring-2 focus:ring-[#153148] dark:focus:ring-[#431b7e]"
-          />
-          {formErrors.firstName && (
-            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
-              <FaExclamationTriangle />
-              {formErrors.firstName}
-            </p>
-          )}
-        </div>
+        <FormInputText
+          label="First Name"
+          name="first_name"
+          value={formData.first_name}
+          onChange={handleChange}
+          error={formErrors.first_name}
+        />
 
         {/* Last Name Input */}
-        <div className="flex flex-col gap-2 mb-3 w-full">
-          <label
-            htmlFor="lastName"
-            className="text-[#153148] text-[14px] font-[700] dark:text-slate-100"
-          >
-            Last Name
-          </label>
-          <input
-            type="text"
-            name="lastName"
-            id="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            className="bg-[#dbe8f4] border-none rounded-lg py-4 px-3 text-[#153148] dark:text-[#431b7e] focus:outline-none focus:ring-2 focus:ring-[#153148] dark:focus:ring-[#431b7e]"
-          />
-          {formErrors.lastName && (
-            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
-              <FaExclamationTriangle />
-              {formErrors.lastName}
-            </p>
-          )}
-        </div>
+        <FormInputText
+          label="Last Name"
+          name="last_name"
+          value={formData.last_name}
+          onChange={handleChange}
+          error={formErrors.last_name}
+        />
       </div>
 
       <div className="md:flex md:gap-4">
         {/* Phone Number Input */}
-        <div className="flex flex-col gap-2 mb-3 w-full">
-          <label
-            htmlFor="phoneNumber"
-            className="text-[#153148] text-[14px] font-[700] dark:text-slate-100"
-          >
-            Phone Number
-          </label>
-          <input
-            type="text"
-            name="phoneNumber"
-            id="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            className="bg-[#dbe8f4] border-none rounded-lg py-4 px-3 text-[#153148] dark:text-[#431b7e] focus:outline-none focus:ring-2 focus:ring-[#153148] dark:focus:ring-[#431b7e]"
-          />
-          {formErrors.phoneNumber && (
-            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
-              <FaExclamationTriangle />
-              {formErrors.phoneNumber}
-            </p>
-          )}
-        </div>
+        <FormInputText
+          label="Phone Number"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          error={formErrors.phone}
+        />
 
         {/* Email Address Input */}
-        <div className="flex flex-col gap-2 mb-3 w-full">
-          <label
-            htmlFor="emailAddress"
-            className="text-[#153148] text-[14px] font-[700] dark:text-slate-100"
-          >
-            Email Address
-          </label>
-          <input
-            type="email"
-            name="emailAddress"
-            id="emailAddress"
-            value={formData.emailAddress}
-            onChange={handleChange}
-            className="bg-[#dbe8f4] border-none rounded-lg py-4 px-3 text-[#153148] dark:text-[#431b7e] focus:outline-none focus:ring-2 focus:ring-[#153148] dark:focus:ring-[#431b7e]"
-          />
-          {formErrors.emailAddress && (
-            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
-              <FaExclamationTriangle />
-              {formErrors.emailAddress}
-            </p>
-          )}
-        </div>
+        <FormInputText
+          label="Email Address"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          error={formErrors.email}
+        />
+
+        {/* Bussiness Name */}
+        <FormInputText
+          label="Business Name (Optional)"
+          name="business_name"
+          value={formData.business_name}
+          onChange={handleChange}
+          error={formErrors.business_name}
+        />
       </div>
 
       <div className="md:flex md:gap-4">
-        {/* Bussiness Name */}
-        <div className="flex flex-col gap-2 mb-3 w-full">
-          <label
-            htmlFor="businessName"
-            className="text-[#153148] text-[14px] font-[700] dark:text-slate-100"
-          >
-            Business Name
-          </label>
-          <input
-            type="text"
-            name="businessName"
-            id="businessName"
-            value={formData.businessName}
-            onChange={handleChange}
-            className="bg-[#dbe8f4] border-none rounded-lg py-4 px-3 text-[#153148] dark:text-[#431b7e] focus:outline-none focus:ring-2 focus:ring-[#153148] dark:focus:ring-[#431b7e]"
-          />
-          {formErrors.businessName && (
-            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
-              <FaExclamationTriangle />
-              {formErrors.businessName}
-            </p>
-          )}
-        </div>
-
         {/* Sector Inputs */}
-        <div className="flex flex-col gap-2 mb-3 w-full">
-          <label
-            htmlFor="selectSector"
-            className="text-[#153148] text-[14px] font-[700] dark:text-slate-100"
-          >
-            Select Sector
-          </label>
-          <select
-            name="selectSector"
-            id="selectSector"
-            value={formData.selectSector}
-            onChange={handleChange}
-            className="bg-[#dbe8f4] border-none rounded-lg py-4 px-3 text-[#153148] dark:text-[#431b7e] focus:outline-none focus:ring-2 focus:ring-[#153148] dark:focus:ring-[#431b7e]"
-          >
-            <option value="">-- Select Sector --</option>
-            <option value="sector1">Sector 1</option>
-            <option value="sector2">Sector 2</option>
-          </select>
-          {formErrors.selectSector && (
-            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
-              <FaExclamationTriangle />
-              {formErrors.selectSector}
-            </p>
-          )}
-        </div>
+        <SelectInput
+          label="Sector"
+          name="business_sector_id"
+          value={formData.business_sector_id}
+          onChange={handleChange}
+          options={[
+            { value: "sector1", label: "Sector 1" },
+            { value: "sector2", label: "Sector 2" },
+          ]}
+          error={formErrors.business_sector_id}
+        />
       </div>
 
       <div className="md:flex md:gap-4">
         {/* Address Inputs */}
-        <div className="flex flex-col gap-2 mb-3 w-full">
-          <label
-            htmlFor="address"
-            className="text-[#153148] text-[14px] font-[700] dark:text-slate-100"
-          >
-            Address
-          </label>
-          <input
-            value={formData.address}
-            onChange={handleChange}
-            type="text"
-            name="address"
-            id="address"
-            className="bg-[#dbe8f4] border-none rounded-lg py-4 px-3 text-[#153148] dark:text-[#431b7e] focus:outline-none focus:ring-2 focus:ring-[#153148] dark:focus:ring-[#431b7e]"
-          />
-          {formErrors.address && (
-            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
-              <FaExclamationTriangle />
-              {formErrors.address}
-            </p>
-          )}
-        </div>
+        <FormInputText
+          label="Address (Optional)"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          error={formErrors.address}
+        />
 
         {/* Select Interest Input */}
-        <div className="flex flex-col gap-2 mb-3 w-full">
-          <label
-            htmlFor="selectInterest"
-            className="text-[#153148] text-[14px] font-[700] dark:text-slate-100"
-          >
-            Select Interest
-          </label>
-          <select
-            onChange={handleChange}
-            value={formData.selectInterest}
-            name="selectInterest"
-            id="selectInterest"
-            className="bg-[#dbe8f4] border-none rounded-lg py-4 px-3 text-[#153148] dark:text-[#431b7e] focus:outline-none focus:ring-2 focus:ring-[#153148] dark:focus:ring-[#431b7e]"
-          >
-            <option value="">-- Select Interest --</option>
-            <option value="interest1">Interest 1</option>
-            <option value="interest2">Interest 2</option>
-          </select>
-          {formErrors.selectInterest && (
-            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
-              <FaExclamationTriangle />
-              {formErrors.selectInterest}
-            </p>
-          )}
-        </div>
+        <SelectInput
+          label="Select Interest"
+          name="select_interest"
+          onChange={handleChange}
+          value={formData.select_interest}
+          options={[
+            { value: "interest1", label: "Interest 1" },
+            { value: "interest2", label: "Interest 2" },
+          ]}
+          error={formErrors.select_interest}
+        />
       </div>
 
       <div className="md:flex md:gap-4 mb-3">
         {/* Get Notification Input */}
-        <div className="col-span-2">
-          <div className="flex items-center">
-            <input
-              onChange={handleChange}
-              value={formData.getNotified}
-              type="checkbox"
-              name="getNotified"
-              id="getNotified"
-              className="hidden"
-            />
-            <label
-              htmlFor="getNotified"
-              className="flex items-center cursor-pointer text-[#153148] text-[14px] font-[700] dark:text-slate-100"
-            >
-              <div className="checkbox"></div>
-              <span>Get notified 1 day before the event</span>
-            </label>
-            {formErrors.getNotified && (
-              <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
-                <FaExclamationTriangle />
-                {formErrors.getNotified}
-              </p>
-            )}
-          </div>
-        </div>
+        <CheckboxInput
+          label="Get notified 1 day before the event"
+          name="notification"
+          checked={formData.notification}
+          onChange={handleChange}
+          error={formErrors.notification}
+        />
       </div>
 
       {/* Registration Button Input */}

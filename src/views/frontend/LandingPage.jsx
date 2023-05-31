@@ -7,7 +7,6 @@ import {
   AboutEvent,
   Hosts,
   Footer,
-  Countdown,
 } from "../../components";
 
 const LandingPage = () => {

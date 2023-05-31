@@ -8,6 +8,9 @@ import Hosts from "./Hosts";
 import Footer from "./Footer";
 import Countdown from "./Countdown";
 import RegistrationForm from "./RegistrationForm";
+import CheckboxInput from "./CheckBoxInput";
+import SelectInput from "./SelectInput";
+import FormInputText from "./FormInputText";
 
 export {
   SiteNav,
@@ -20,4 +23,7 @@ export {
   Footer,
   Countdown,
   RegistrationForm,
+  CheckboxInput,
+  FormInputText,
+  SelectInput,
 };

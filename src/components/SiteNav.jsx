@@ -1,11 +1,14 @@
 import React from "react";
+import Logo from "../../public/imgs/logo.png";
 
 const SiteNav = () => {
   return (
-    <div className="items-center bg-[#194d77] text-slate-300 p-2 md:p-3 dark:bg-[#634197] dark:text-white">
-      <div className="container mx-auto flex justify-between">
+    <div className="items-center bg-[#194d77] text-slate-300 p-2 md:p-3 dark:bg-[#844adc] dark:text-white sticky top-0 z-10 shadow-lg">
+      <div className="container mx-auto flex justify-between items-center">
         {/* Site header */}
-        <div className="">Logo here</div>
+        <div className="">
+          <img src={Logo} alt="" style={{ width: "100px" }} />
+        </div>
 
         {/* Nav Links */}
         <div className="">
@@ -13,7 +16,7 @@ const SiteNav = () => {
             <li className="mx-2 hover:text-slate-300 hidden md:block">
               Contact Us
             </li>
-            <li className="mx-2 px-3 py-1 bg-gray-600 text-white rounded-2xl hover:text-slate-300 hover:bg-gray-400">
+            <li className="mx-2 px-3 py-1 bg-[#dbe8f4] text-slate-700 rounded-2xl hover:text-slate-300 hover:bg-gray-400 shadow-md">
               Sign In
             </li>
           </ul>
