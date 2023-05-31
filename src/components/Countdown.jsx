@@ -30,7 +30,7 @@ const Countdown = () => {
   return (
     <div className="text-center mr-5">
       {timeLeft.days > 0 && (
-        <h1 className="text-3xl font-bold mb-2 uppercase text-[#153148] dark:text-slate-200 border rounded-3xl">
+        <h1 className="text-3xl font-[400] mb-2 uppercase text-[#153148] dark:text-slate-200 border rounded-3xl">
           {timeLeft.days} Days
         </h1>
       )}
