@@ -7,6 +7,7 @@ import {
   AboutEvent,
   Hosts,
   Footer,
+  Countdown,
 } from "../../components";
 
 const LandingPage = () => {
@@ -24,32 +25,35 @@ const LandingPage = () => {
       </div>
 
       {/* Registration Section */}
-      <div className="flex-col container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 flex gap-4 md:flex-row">
-        <div className="bg-[#fff] w-full p-5 dark:bg-[#8449dc] dark:text-white h-auto mt-3 rounded-2xl">
+      <div className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 mt-3">
+        <div className="bg-[#fff] p-5 dark:bg-[#8449dc] dark:text-white rounded-2xl">
           {/* Registration Component */}
           <Registration />
         </div>
+      </div>
 
-        <div className="bg-[#fff] w-full p-5 m-0 md:mt-3 dark:bg-[#8449dc] dark:text-white rounded-2xl">
+      {/* Location Section */}
+      <div className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 mt-3">
+        <div className="bg-[#fff] p-5 dark:bg-[#8449dc] dark:text-white rounded-2xl">
           {/* Location Component */}
           <Location />
         </div>
       </div>
 
       {/* About Event & Hosts */}
-      <div className="flex-col container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 flex gap-4 md:flex-row mb-10">
-        <div className="bg-[#fff] w-full p-5 dark:bg-[#8449dc] dark:text-white h-auto mt-3 rounded-2xl">
+      <div className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 flex flex-col md:flex-row mt-3 gap-4">
+        <div className="bg-[#fff] p-5 dark:bg-[#8449dc] dark:text-white rounded-2xl flex-1">
           {/* About Event Component */}
           <AboutEvent />
         </div>
 
-        <div className="bg-[#fff] w-full p-5 m-0 md:mt-3 dark:bg-[#8449dc] dark:text-white h-auto rounded-2xl">
+        <div className="bg-[#fff] p-5 dark:bg-[#8449dc] dark:text-white rounded-2xl">
           {/* Hosts Component */}
           <Hosts />
         </div>
       </div>
 
-      <hr className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0" />
+      <hr className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 mt-10" />
 
       {/* Footer Section */}
       <div className="px-2">

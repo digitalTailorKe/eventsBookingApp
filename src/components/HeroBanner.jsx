@@ -1,6 +1,6 @@
 import React from "react";
 import bannerImg from "../../public/imgs/expoimage.png";
-import { WelcomeText } from "../components";
+import { WelcomeText, Countdown } from "../components";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 const HeroBanner = () => {
@@ -21,51 +21,26 @@ const HeroBanner = () => {
 
       {/* Banner Info */}
       <div className="mt-8 md:mt-10 px-1 md:px-5">
-        <div className="flex justify-between items-baseline">
+        <div className="flex justify-between items-center">
           <div className="flex-1">
-            <h3 className="text-[#153148] mb-2 text-[18px] md:px-3 font-[700] md:text-[28px] dark:text-slate-100">
+            <h3 className="text-[#153148] mb-2 text-[22px] md:pl-0 font-[700] md:text-[38px] dark:text-slate-100">
               INDO EAST AFRICA TRADE EXPO
             </h3>
-            <p className="text-[12px] md:px-3 md:text-[21px] font-[400] text-[#153148] dark:text-slate-100">
+            {/* <p className="text-[12px] md:px-3 md:text-[21px] font-[400] text-[#153148] dark:text-slate-100">
               Hosted by Starknet Africa, Louis Guthmann & Dickens Otieno{" "}
-            </p>
+            </p> */}
           </div>
 
           {/* Date Area */}
-          <div className="hidden md:flex md:gap-4">
-            <div className="flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
-              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
-                July
-              </div>
-              <div className="text-[14px] py-3 px-5 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
-                <p className="">05</p>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
-              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
-                July
-              </div>
-              <div className="text-[14px] py-3 px-5 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
-                <p className="">06</p>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
-              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
-                July
-              </div>
-              <div className="text-[14px] py-3 px-5 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
-                <p className="">07</p>
-              </div>
-            </div>
+          <div className="hidden md:block">
+            <Countdown />
           </div>
         </div>
       </div>
 
       {/* Hero Date & Location */}
       <div className="mt-3 flex-col items-start flex md:justify-between md:items-center px-1 md:flex-row md:px-5">
-        <div className="flex gap-4">
+        <div className="hidden md:flex gap-4">
           <div className="hidden md:flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
             <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
               July
@@ -106,12 +81,16 @@ const HeroBanner = () => {
 
           <div className="my-auto">
             <h4 className="text-[#153148] text-[16px] md:text-[25px] font-[400] dark:text-slate-100">
-              Saturday, 20 May
+              Wednesday, 05 July 2023
             </h4>
             <p className="text-[12px] md:text-[18px] font-[400] text-[#153148] dark:text-slate-100">
               9:00 AM - 7:00 PM
             </p>
           </div>
+        </div>
+
+        <div className="block mx-auto mb-3 md:hidden">
+          <Countdown />
         </div>
 
         <div className="dark:text-[#431b7e] text-[#153148] mt-3 md:mt-0 flex gap-4 items-center">

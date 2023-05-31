@@ -6,6 +6,8 @@ import Location from "./Location";
 import AboutEvent from "./AboutEvent";
 import Hosts from "./Hosts";
 import Footer from "./Footer";
+import Countdown from "./Countdown";
+import RegistrationForm from "./RegistrationForm";
 
 export {
   SiteNav,
@@ -16,4 +18,6 @@ export {
   AboutEvent,
   Hosts,
   Footer,
+  Countdown,
+  RegistrationForm,
 };
