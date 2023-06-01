@@ -2,6 +2,8 @@ import React from "react";
 import { SocialIcon } from "react-social-icons";
 
 const Footer = () => {
+  const isDarkMode = true;
+
   return (
     <div className="pb-3">
       <div className="flex-col flex md:flex-row justify-between items-center">
@@ -30,21 +32,20 @@ const Footer = () => {
         <div className="my-3 flex gap-4">
           <SocialIcon
             url="https://twitter.com/IndoEastAfrica"
-            bgColor="#8449dc"
+            bgColor={isDarkMode ? "#ffffff" : "#153148"} // Change color based on mode
           />
           <SocialIcon
             url="https://www.instagram.com/indoeastafrica/"
-            bgColor="#8449dc"
+            bgColor={isDarkMode ? "#ffffff" : "#153148"} // Change color based on mode
           />
           <SocialIcon
             url="https://www.linkedin.com/company/indoaastafrica/"
-            bgColor="#8449dc"
+            bgColor={isDarkMode ? "#ffffff" : "#153148"} // Change color based on mode
           />
           <SocialIcon
             url="https://www.facebook.com/IndoEastAfrica"
-            bgColor="#8449dc"
+            bgColor={isDarkMode ? "#ffffff" : "#153148"} // Change color based on mode
           />
-          {/* <SocialIcon url="https://www.instagram.com/" bgColor="#8449dc" /> */}
         </div>
       </div>
 
@@ -53,7 +54,7 @@ const Footer = () => {
         <p>
           Marketed By{" "}
           <a href="https://dta.co.ke" className="text-blue-500 hover:underline">
-            Digital Tailor Kenya
+            Digital Tailor Agency, Kenya
           </a>{" "}
           &copy; 2023
         </p>
