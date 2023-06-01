@@ -50,7 +50,13 @@ const Footer = () => {
 
       <hr />
       <div className="flex justify-center my-4">
-        <p>Marketed By Digital Tailor Kenya &copy; 2023</p>
+        <p>
+          Marketed By{" "}
+          <a href="https://dta.co.ke" className="text-blue-500 hover:underline">
+            Digital Tailor Kenya
+          </a>{" "}
+          &copy; 2023
+        </p>
       </div>
     </div>
   );

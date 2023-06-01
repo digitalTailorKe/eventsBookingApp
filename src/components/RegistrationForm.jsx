@@ -6,7 +6,7 @@ import SelectInput from "./SelectInput";
 import axios from "axios";
 
 const RegistrationForm = () => {
-  const localEndpoint = "http://127.0.0.1:8000/api/attendees/";
+  const storeAtendeeLocalEndpoint = "http://127.0.0.1:8000/api/attendees/";
   const getSectorsLocalEndpoint = "http://127.0.0.1:8000/api/sectors/";
 
   const [sectors, setSectors] = useState([]);
@@ -89,7 +89,7 @@ const RegistrationForm = () => {
     if (validateForm()) {
       // Form is valid, perform form submission logic here
       console.log("Form is valid. Submitting...");
-
+      // Initializing new form data details
       const newRequestData = {
         full_name: formData.first_name + " " + formData.last_name,
         phone: formData.phone,
@@ -104,7 +104,7 @@ const RegistrationForm = () => {
 
       // Send data to the server.
       axios
-        .post(localEndpoint, newRequestData)
+        .post(storeAtendeeLocalEndpoint, newRequestData)
         .then(() => {
           clearFormFields();
           toast.success(
@@ -119,7 +119,9 @@ const RegistrationForm = () => {
         });
     } else {
       // Form is invalid, display error messages
-      toast.error("Form is invalid. Please fix errors.");
+      toast.error(
+        "Form is invalid. Please enter required field values and try again."
+      );
       //   console.log("Form is invalid. Please fix errors.");
     }
   };
