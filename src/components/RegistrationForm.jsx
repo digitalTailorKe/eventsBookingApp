@@ -264,9 +264,11 @@ const RegistrationForm = () => {
       </div>
 
       {/* Registration Button Input */}
-      <button className="w-full dark:bg-[#360f70] bg-[#153148] text-slate-200 hover:bg-slate-200 hover:text-[#153148] md:w-[200px] py-3 rounded-xl dark:text-[#a892c9] dark:hover:bg-[#431b7e] dark:hover:text-slate-200">
-        Register
-      </button>
+      <div className="md:flex md:justify-end">
+        <button className="w-full dark:bg-[#360f70] bg-[#153148] text-slate-200 hover:bg-slate-200 hover:text-[#153148] md:w-[200px] py-3 rounded-xl dark:text-[#a892c9] dark:hover:bg-[#431b7e] dark:hover:text-slate-200">
+          Register
+        </button>
+      </div>
       <ToastContainer />
     </form>
   );
