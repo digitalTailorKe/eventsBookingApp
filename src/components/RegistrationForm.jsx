@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FormInputText from "./FormInputText";
 import SelectInput from "./SelectInput";
-import CheckboxInput from "./CheckBoxInput";
+import axios from "axios";
 
 const RegistrationForm = () => {
+  const localEndpoint = "http://127.0.0.1:8000/api/attendees/";
+  const getSectorsLocalEndpoint = "http://127.0.0.1:8000/api/sectors/";
+
+  const [sectors, setSectors] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(getSectorsLocalEndpoint)
+      .then((response) => {
+        setSectors(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -25,10 +41,17 @@ const RegistrationForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    if (name === "business_sector_id") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: parseInt(value), // Convert the value to an integer
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   // Handle form input validation
@@ -67,28 +90,55 @@ const RegistrationForm = () => {
       // Form is valid, perform form submission logic here
       console.log("Form is valid. Submitting...");
 
-      console.log(formData);
+      const newRequestData = {
+        full_name: formData.first_name + " " + formData.last_name,
+        phone: formData.phone,
+        email: formData.email,
+        business_name: formData.business_name,
+        business_sector_id: formData.business_sector_id,
+        address: formData.address,
+        select_interest: formData.select_interest,
+        notification: formData.notification,
+        registration_type_id: formData.registration_type_id,
+      };
 
-      // Reset form data and errors
-      setFormData({
-        first_name: "",
-        last_name: "",
-        phone: "",
-        email: "",
-        business_name: "",
-        business_sector_id: "",
-        address: "",
-        select_interest: "",
-        notification: "",
-        registration_type_id: 1,
-      });
-
-      setFormErrors({});
+      // Send data to the server.
+      axios
+        .post(localEndpoint, newRequestData)
+        .then(() => {
+          clearFormFields();
+          toast.success(
+            "Registration was successful check your email for link to your event resipt."
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error(
+            "Something went wrong while trying to register for event. Please try again."
+          );
+        });
     } else {
       // Form is invalid, display error messages
       toast.error("Form is invalid. Please fix errors.");
       //   console.log("Form is invalid. Please fix errors.");
     }
+  };
+
+  const clearFormFields = () => {
+    // Reset form data and errors
+    setFormData({
+      first_name: "",
+      last_name: "",
+      phone: "",
+      email: "",
+      business_name: "",
+      business_sector_id: "",
+      address: "",
+      select_interest: "",
+      notification: "",
+      registration_type_id: 1,
+    });
+    setFormErrors({});
   };
 
   return (
@@ -149,10 +199,10 @@ const RegistrationForm = () => {
           name="business_sector_id"
           value={formData.business_sector_id}
           onChange={handleChange}
-          options={[
-            { value: "sector1", label: "Sector 1" },
-            { value: "sector2", label: "Sector 2" },
-          ]}
+          options={sectors.map((sector) => ({
+            value: sector.id,
+            label: sector.name,
+          }))}
           error={formErrors.business_sector_id}
         />
       </div>
@@ -173,23 +223,42 @@ const RegistrationForm = () => {
           name="select_interest"
           onChange={handleChange}
           value={formData.select_interest}
-          options={[
-            { value: "interest1", label: "Interest 1" },
-            { value: "interest2", label: "Interest 2" },
-          ]}
+          options={sectors.map((sector) => ({
+            value: sector.id,
+            label: sector.name,
+          }))}
           error={formErrors.select_interest}
         />
       </div>
 
       <div className="md:flex md:gap-4 mb-3">
         {/* Get Notification Input */}
-        <CheckboxInput
-          label="Get notified 1 day before the event"
-          name="notification"
-          checked={formData.notification}
-          onChange={handleChange}
-          error={formErrors.notification}
-        />
+        <div className="col-span-2">
+          <div className="flex items-center">
+            <input
+              onChange={handleChange}
+              value={formData.notification}
+              type="checkbox"
+              name="notification"
+              id="notification"
+              className="hidden"
+              checked
+            />
+            <label
+              htmlFor="notification"
+              className="flex items-center cursor-pointer text-[#153148] text-[14px] font-[700] dark:text-slate-100"
+            >
+              <div className="checkbox"></div>
+              <span>Get notified before the event</span>
+            </label>
+            {formErrors.notification && (
+              <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
+                <FaExclamationTriangle />
+                {formErrors.notification}
+              </p>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Registration Button Input */}

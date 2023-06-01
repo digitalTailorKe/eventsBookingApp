@@ -1,5 +1,4 @@
 import React from "react";
-import Logo from "../../public/imgs/logo.png";
 
 const SiteNav = () => {
   return (
@@ -7,7 +6,7 @@ const SiteNav = () => {
       <div className="container mx-auto flex justify-between items-center">
         {/* Site header */}
         <div className="">
-          <img src={Logo} alt="" style={{ width: "100px" }} />
+          <img src="/imgs/logo.png" alt="" style={{ width: "100px" }} />
         </div>
 
         {/* Nav Links */}

@@ -29,16 +29,22 @@ const Footer = () => {
         {/* Social Media Icons */}
         <div className="my-3 flex gap-4">
           <SocialIcon
-            url="https://www.linkedin.com/in/dennis-otieno-908b07aa/"
+            url="https://twitter.com/IndoEastAfrica"
             bgColor="#8449dc"
           />
           <SocialIcon
-            url="https://www.facebook.com/mohanezz/"
+            url="https://www.instagram.com/indoeastafrica/"
             bgColor="#8449dc"
           />
-          <SocialIcon url="https://web.whatsapp.com/" bgColor="#8449dc" />
-          <SocialIcon url="https://www.youtube.com/" bgColor="#8449dc" />
-          <SocialIcon url="https://www.instagram.com/" bgColor="#8449dc" />
+          <SocialIcon
+            url="https://www.linkedin.com/company/indoaastafrica/"
+            bgColor="#8449dc"
+          />
+          <SocialIcon
+            url="https://www.facebook.com/IndoEastAfrica"
+            bgColor="#8449dc"
+          />
+          {/* <SocialIcon url="https://www.instagram.com/" bgColor="#8449dc" /> */}
         </div>
       </div>
 

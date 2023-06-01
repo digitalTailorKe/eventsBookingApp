@@ -1,5 +1,4 @@
 import React from "react";
-import bannerImg from "../../public/imgs/expoimage.png";
 import { WelcomeText, Countdown } from "../components";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
@@ -10,7 +9,7 @@ const HeroBanner = () => {
         <div className="w-full">
           <img
             className="w-full h-full object-cover rounded-2xl shadow"
-            src={bannerImg}
+            src="/imgs/expoimage.png"
             alt=""
           />
         </div>
