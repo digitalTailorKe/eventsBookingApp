@@ -62,19 +62,21 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
     // Validate each form field
     if (!formData.first_name) {
-      errors.first_name = "Please provide your first name to continue.";
+      errors.first_name = "Please provide your first name.";
     }
 
     if (!formData.last_name) {
-      errors.last_name = "Please provide your last name to continue.";
+      errors.last_name = "Please provide your last name.";
     }
 
     if (!formData.phone) {
-      errors.phone = "Please provide your phone number to continue.";
+      errors.phone = "Please provide your phone number.";
+    } else if (!/^\d{10}$/.test(formData.phone)) {
+      errors.phone = "Phone number should be 10 digits.";
     }
 
     if (!formData.email) {
-      errors.email = "Please provide your email address to continue.";
+      errors.email = "Please provide your email address.";
     } else if (!isValidEmail(formData.email)) {
       errors.email = "Please provide a valid email address.";
     }
