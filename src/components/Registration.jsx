@@ -52,10 +52,10 @@ const Registration = () => {
                 <div className="flex gap-4 items-center text-green-500">
                   <BiCheckCircle style={{ fontSize: "44px" }} />
                   <div className="">
-                    <h4 className="text-green-600 text-[21px] font-bold">
+                    <h4 className="text-[16px] text-green-600 md:text-[21px] font-bold">
                       Registration Successful!
                     </h4>
-                    <p className="text-[18px] text-green-500">
+                    <p className="text-[14px] md:text-[18px] text-green-500">
                       Thank you for registering. We look forward to seeing you
                       at the event.
                     </p>
