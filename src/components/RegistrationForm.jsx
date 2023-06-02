@@ -7,8 +7,9 @@ import axios from "axios";
 
 const RegistrationForm = () => {
   const storeAtendeeLocalEndpoint =
-    "admin.indoeastafricaexpo.org/api/attendees/";
-  const getSectorsLocalEndpoint = "admin.indoeastafricaexpo.org/api/sectors/";
+    "https://admin.indoeastafricaexpo.org/api/attendees";
+  const getSectorsLocalEndpoint =
+    "https://admin.indoeastafricaexpo.org/api/sectors";
 
   const [sectors, setSectors] = useState([]);
 
