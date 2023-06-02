@@ -11,13 +11,13 @@ import {
 
 const LandingPage = () => {
   return (
-    <div className="bg-slate-300 dark:bg-[#421c7a] dark:text-white min-h-screen">
+    <div className="bg-slate-300 min-h-screen">
       {/* Site Nav Component */}
       <SiteNav />
 
       {/* Container Section */}
       <div className="px-2">
-        <div className="container bg-[#fff] w-full lg:max-w-screen-lg lg:mx-auto px-2 dark:bg-[#8449dc] dark:text-white min-h-full mt-3 rounded-2xl">
+        <div className="container bg-[#fff] w-full lg:max-w-screen-lg lg:mx-auto px-2 min-h-full mt-3 rounded-2xl">
           {/* Hero Banner Component */}
           <HeroBanner />
         </div>
@@ -25,7 +25,7 @@ const LandingPage = () => {
 
       {/* Registration Section */}
       <div className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 mt-3">
-        <div className="bg-[#fff] p-5 dark:bg-[#8449dc] dark:text-white rounded-2xl">
+        <div className="bg-[#fff] p-5 rounded-2xl">
           {/* Registration Component */}
           <Registration />
         </div>
@@ -33,7 +33,7 @@ const LandingPage = () => {
 
       {/* Location Section */}
       <div className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 mt-3">
-        <div className="bg-[#fff] p-5 dark:bg-[#8449dc] dark:text-white rounded-2xl">
+        <div className="bg-[#fff] p-5 rounded-2xl">
           {/* Location Component */}
           <Location />
         </div>
@@ -41,7 +41,7 @@ const LandingPage = () => {
 
       {/* About Event & Hosts */}
       <div className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 flex flex-col md:flex-row mt-3 gap-4">
-        <div className="bg-[#fff] p-5 dark:bg-[#8449dc] dark:text-white rounded-2xl flex-1">
+        <div className="bg-[#fff] p-5 rounded-2xl flex-1">
           {/* About Event Component */}
           <AboutEvent />
         </div>

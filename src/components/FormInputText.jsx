@@ -6,7 +6,7 @@ const FormInputText = ({ label, name, value, onChange, error }) => {
     <div className="flex flex-col gap-2 mb-3 w-full">
       <label
         htmlFor={name}
-        className="text-[#153148] text-[14px] font-[700] dark:text-slate-100"
+        className="text-[#153148] text-[14px] font-[700]"
       >
         {label}
       </label>
@@ -16,7 +16,7 @@ const FormInputText = ({ label, name, value, onChange, error }) => {
         id={name}
         value={value}
         onChange={onChange}
-        className="bg-[#dbe8f4] border-none rounded-lg py-3 md:py-4 px-3 text-[#153148] dark:text-[#431b7e] focus:outline-none focus:ring-2 focus:ring-[#153148] dark:focus:ring-[#431b7e]"
+        className="bg-[#dbe8f4] border-none rounded-lg py-3 md:py-4 px-3 text-[#153148] focus:outline-none focus:ring-2 focus:ring-[#153148]"
       />
       {error && (
         <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">

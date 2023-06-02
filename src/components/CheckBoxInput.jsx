@@ -14,7 +14,7 @@ const CheckboxInput = ({ label, name, checked, onChange, error }) => {
         />
         <label
           htmlFor={name}
-          className="flex items-center cursor-pointer text-[#153148] text-[14px] font-[700] dark:text-slate-100"
+          className="flex items-center cursor-pointer text-[#153148] text-[14px] font-[700]"
         >
           <div className="checkbox">
             {checked && <span className="checkmark">&#x2713;</span>}

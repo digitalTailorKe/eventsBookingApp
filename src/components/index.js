@@ -11,6 +11,7 @@ import RegistrationForm from "./RegistrationForm";
 import CheckboxInput from "./CheckBoxInput";
 import SelectInput from "./SelectInput";
 import FormInputText from "./FormInputText";
+import CountdownDays from "./CountdownDays";
 
 export {
   SiteNav,
@@ -26,4 +27,5 @@ export {
   CheckboxInput,
   FormInputText,
   SelectInput,
+  CountdownDays,
 };

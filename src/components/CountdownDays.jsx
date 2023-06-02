@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import CountdownDays from "./CountdownDays";
 
-const Countdown = () => {
+const CountdownDays = () => {
   const calculateTimeLeft = () => {
     const difference = +new Date("2023-07-05") - +new Date();
     let timeLeft = {};
@@ -30,21 +29,9 @@ const Countdown = () => {
 
   return (
     <div className="text-center mr-5">
-      {timeLeft.days > 0 && (
-        <h1 className="hidden text-3xl font-[400] mb-2 uppercase text-[#153148] border rounded-3xl">
-          {timeLeft.days} Days Ago
-        </h1>
-      )}
-      <div className="flex justify-center text-[#153148]">
+      {timeLeft.days > 0 && <h1 className="">{timeLeft.days}</h1>}
+      {/* <div className="flex justify-center text-[#153148]">
         <div className="flex items-center">
-          <div className="bg-[#dbe8f4] rounded-full h-[50px] w-[50px] m-2">
-            <div className="mt-2">
-              <div className="text-2xl font-bold mb-2 ml-2 text-[#153148]">
-                <CountdownDays />
-              </div>
-              <div className="text-gray-500">Days</div>
-            </div>
-          </div>
           <div className="bg-[#dbe8f4] rounded-full h-[50px] w-[50px] m-2">
             <div className="mt-2">
               <div className="text-2xl font-bold mb-2 text-[#153148]">
@@ -68,9 +55,9 @@ const Countdown = () => {
             <div className="text-gray-500">Seconds</div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
 
-export default Countdown;
+export default CountdownDays;

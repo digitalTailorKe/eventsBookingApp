@@ -10,7 +10,7 @@ const Footer = () => {
         {/* Footer Links */}
         <div className="mt-3">
           <ul className="flex gap-4 items-center">
-            <li className="text-[#153148] text-[14px] font-[400] mb-2 md:text-[21px] dark:text-slate-100">
+            <li className="text-[#153148] text-[14px] font-[400] mb-2 md:text-[21px]">
               <a className="text-[18px]" href="#">
                 For more info contact{" "}
                 <a
@@ -49,11 +49,7 @@ const Footer = () => {
       <hr />
       <div className="flex justify-center my-4">
         <p>
-          Marketed By{" "}
-          <a href="https://dta.co.ke" className="text-blue-500 hover:underline">
-            Digital Tailor Agency, Kenya
-          </a>{" "}
-          &copy; 2023
+          Copyright: &copy;2023 All rights reserved. Brought you by RAK & FORTI
         </p>
       </div>
     </div>

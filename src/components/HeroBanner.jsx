@@ -22,7 +22,7 @@ const HeroBanner = () => {
       <div className="mt-8 md:mt-10 px-1 md:px-5">
         <div className="flex justify-between items-center">
           <div className="flex-1">
-            <h3 className="text-[#153148] mb-2 text-[22px] md:pl-0 font-[700] md:text-[38px] dark:text-slate-100">
+            <h3 className="text-[#153148] mb-2 text-[22px] md:pl-0 font-[700] md:text-[38px]">
               INDO EAST AFRICA TRADE EXPO
             </h3>
             {/* <p className="text-[12px] md:px-3 md:text-[21px] font-[400] text-[#153148] dark:text-slate-100">
@@ -32,7 +32,7 @@ const HeroBanner = () => {
 
           {/* Date Area */}
           {/* <div className="hidden md:block">
-            <Countdown />
+            <CountdownDays />
           </div> */}
         </div>
       </div>
@@ -40,39 +40,40 @@ const HeroBanner = () => {
       {/* Hero Date & Location */}
       <div className="mt-3 flex-col items-start flex md:justify-between md:items-center px-1 md:flex-row md:px-5">
         <div className="hidden md:flex gap-4">
-          <div className="hidden md:flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
-            <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
+          <div className="hidden md:flex flex-col items-center border border-[#153148] rounded-lg">
+            <div className="text-[14px] py-1 font-normal md:text-[16px] text-[#153148]">
               July <br /> 2023
             </div>
-            <div className="text-[14px] p-3 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
+            <div className="text-[14px] p-2 bg-[#153148] text-slate-100 rounded-b-lg md:text-[16px] flex-grow">
               <p className="">05 - 07</p>
             </div>
           </div>
 
+          {/* For Mobile */}
           <div className="flex md:gap-2 md:hidden">
-            <div className="flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
-              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
+            <div className="flex flex-col items-center border border-[#153148] rounded-lg">
+              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148]">
                 July
               </div>
-              <div className="text-[14px] py-3 px-5 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
+              <div className="text-[14px] py-3 px-5 bg-[#153148] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
                 <p className="">05</p>
               </div>
             </div>
 
-            <div className="flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
-              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
+            <div className="flex flex-col items-center border border-[#153148] rounded-lg">
+              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148]">
                 July
               </div>
-              <div className="text-[14px] py-3 px-5 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
+              <div className="text-[14px] py-3 px-5 bg-[#153148] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
                 <p className="">06</p>
               </div>
             </div>
 
-            <div className="flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
-              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
+            <div className="flex flex-col items-center border border-[#153148] rounded-lg">
+              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148]">
                 July 2023
               </div>
-              <div className="text-[14px] py-3 px-5 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
+              <div className="text-[14px] py-3 px-5 bg-[#153148] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
                 <p className="">07</p>
               </div>
             </div>
@@ -86,17 +87,18 @@ const HeroBanner = () => {
               9:00 AM - 7:00 PM
             </p>
           </div> */}
-          <div className="hidden md:block">
-            <Countdown />
-          </div>
+        </div>
+
+        <div className="hidden md:block">
+          <Countdown />
         </div>
 
         <div className="block mx-auto mb-3 md:hidden">
           <Countdown />
         </div>
 
-        <div className="dark:text-[#431b7e] text-[#153148] mt-3 md:mt-0 flex gap-4 items-center">
-          <div className="border border-[#153148] rounded-full p-3 dark:border-slate-200">
+        <div className="text-[#153148] mt-3 md:mt-0 flex gap-4 items-center">
+          <div className="border border-[#153148] rounded-full p-3">
             <FaMapMarkerAlt
               style={{
                 fontSize: "21px",
@@ -106,7 +108,7 @@ const HeroBanner = () => {
 
           <div className="">
             <a href="https://goo.gl/maps/sCdbZyrHVNNE8BYz7">
-              <p className="text-[#153148] text-[16px] md:text-[22px] font-[400] dark:text-slate-100">
+              <p className="text-[#153148] text-[16px] md:text-[22px] font-[400]">
                 The KICC, Nairobi Kenya...
               </p>
             </a>

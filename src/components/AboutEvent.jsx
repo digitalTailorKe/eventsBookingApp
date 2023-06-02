@@ -4,7 +4,7 @@ import { FaRegCalendarAlt, FaUserTie } from "react-icons/fa";
 const AboutEvent = () => {
   return (
     <div className="">
-      <h4 className="flex gap-4 items-center text-[#153148] text-[20px] md:text-[22px] font-[400] dark:text-slate-100 pb-2">
+      <h4 className="flex gap-4 items-center text-[#153148] text-[20px] md:text-[22px] font-[400] pb-2">
         <FaRegCalendarAlt style={{ fontSize: "21px" }} /> About Event
       </h4>
 
@@ -12,33 +12,38 @@ const AboutEvent = () => {
 
       <div className="">
         <p className="mb-3 text-[18px]">
-          RAJASTHAN ASSOCIATION OF KENYA (RAK) Rajasthan Association of kenya
-          was established in the year 2016 as a non-profit organization. Keeping
-          Rajasthani Culture & tradition alive in Africa by bringing All NRI's
-          together on one platform.
+          Forge Lasting Alliances for a Flourishing Future
         </p>
         <p className="mb-3 text-[18px]">
-          Serving the local community by doing charity work, various social
-          activities and connecting businesses locally and globally in different
-          sectors: trade, manufacturing, investment, export & import.
+          <b>Our mission</b> is to bring together the vibrant economies of India
+          and East Africa, fostering a collaborative environment where
+          businesses and entrepreneurs thrive.
         </p>
         <p className="mb-3 text-[18px]">
-          Rajasthan Association of kenya is the key partner to organize INDO
-          EAST AFRICA TRADE EXPO 2023.
+          <b>Unleash the Potential of International Commerce:</b> India's global
+          economic prowess and East Africa's strategic location provide the
+          perfect foundation for mutually beneficial trade opportunities.
         </p>
         <p className="mb-3 text-[18px]">
-          It is a registered body with the registrar of Non trading companies.
-          It has a membership of more than 15,000+ direct members and 200,000+
-          indirect members which include trading & industry establishments,
-          industry specific associations, institutions beside individuals and
-          companies, wide spectrum of industries & trade in all the sectors of
-          the economy.
+          <b>Celebrating Our Shared Heritage and Connection:</b> India and East
+          Africa share a remarkable cultural and historical bond that dates back
+          centuries. Through the ancient trade routes of the Indian Ocean and
+          the Swahili Coast, our regions have interwoven their identities,
+          languages, and traditions.
         </p>
-
         <p className="mb-3 text-[18px]">
-          FORTI is now creating an opportunityfor all the businesses here to
-          promote themselves in the East African Market and thus promoting make
-          in Rajasthan to the Global level.
+          This deep-rooted connection and affinity create a unique foundation
+          for understanding,trust, and collaboration. By fortifying trade
+          relations, we honor our shared heritage and leverage our cultural ties
+          to strengther business relationships for a prosperous future.
+        </p>
+        <p className="mb-3 text-[18px]">
+          Are you ready to tap into the immense potential of trade between India
+          and East Africa? Join us on this transformative journey of growth,
+          partnership, and opportunity. Together, we can fortify trade
+          relations, unlock new markets, and shape a future of shared
+          prosperity. Connect with us today and be a part of this exciting
+          endeavor.
         </p>
       </div>
     </div>

@@ -11,7 +11,7 @@ const Registration = () => {
 
   return (
     <div className="">
-      <h4 className="flex gap-4 items-center text-[#153148] text-[20px] md:text-[22px] font-[400] dark:text-slate-100 pb-2">
+      <h4 className="flex gap-4 items-center text-[#153148] text-[20px] md:text-[22px] font-[400] pb-2">
         <FaUnlockAlt style={{ fontSize: "21px" }} /> Registration
       </h4>
 
@@ -30,7 +30,7 @@ const Registration = () => {
             </p>
 
             <button
-              className="dark:bg-slate-200 bg-[#153148] text-slate-200 hover:bg-slate-200 hover:text-[#153148] w-[200px] py-3 rounded-xl dark:text-[#431b7e] dark:hover:bg-[#431b7e] dark:hover:text-slate-200"
+              className="bg-[#153148] text-slate-200 hover:bg-slate-200 hover:text-[#153148] w-[200px] py-3 rounded-xl"
               onClick={handleRegisterClick}
             >
               Register Now

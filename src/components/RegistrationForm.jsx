@@ -75,6 +75,8 @@ const RegistrationForm = () => {
 
     if (!formData.email) {
       errors.email = "Please provide your email address to continue.";
+    } else if (!isValidEmail(formData.email)) {
+      errors.email = "Please provide a valid email address.";
     }
 
     // Set the form errors state
@@ -82,6 +84,13 @@ const RegistrationForm = () => {
 
     // Return true if there are no errors
     return Object.keys(errors).length === 0;
+  };
+
+  // Function to validate email format
+  const isValidEmail = (email) => {
+    // Basic email format validation using regular expression
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
   // Submit the attendee registration form data to the server
@@ -109,9 +118,7 @@ const RegistrationForm = () => {
         .post(storeAtendeeLocalEndpoint, newRequestData)
         .then(() => {
           clearFormFields();
-          toast.success(
-            "Registration was successful check your email for link to your event resipt."
-          );
+          toast.success("Congratulations! your registration was successful.");
         })
         .catch((error) => {
           console.log(error);
@@ -250,7 +257,7 @@ const RegistrationForm = () => {
             />
             <label
               htmlFor="notification"
-              className="flex items-center cursor-pointer text-[#153148] text-[14px] font-[700] dark:text-slate-100"
+              className="flex items-center cursor-pointer text-[#153148] text-[14px] font-[700]"
             >
               <div className="checkbox"></div>
               <span>Get notified before the event</span>
@@ -267,7 +274,7 @@ const RegistrationForm = () => {
 
       {/* Registration Button Input */}
       <div className="md:flex md:justify-end">
-        <button className="w-full dark:bg-[#360f70] bg-[#153148] text-slate-200 hover:bg-slate-200 hover:text-[#153148] md:w-[200px] py-3 rounded-xl dark:text-[#a892c9] dark:hover:bg-[#431b7e] dark:hover:text-slate-200">
+        <button className="w-full bg-[#153148] text-slate-200 hover:bg-slate-200 hover:text-[#153148] md:w-[200px] py-3 rounded-xl">
           Register
         </button>
       </div>
