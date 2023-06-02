@@ -5,9 +5,9 @@ const SiteNav = () => {
     <div className="items-center bg-[#194d77] text-slate-300 p-2 md:p-3 dark:bg-[#844adc] dark:text-white sticky top-0 z-10 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
         {/* Site header */}
-        <div className="">
+        <a href="/home" className="">
           <img src="/imgs/logo.png" alt="" style={{ width: "100px" }} />
-        </div>
+        </a>
 
         {/* Nav Links */}
         <div className="">

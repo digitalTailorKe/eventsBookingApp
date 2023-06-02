@@ -46,10 +46,10 @@ const LandingPage = () => {
           <AboutEvent />
         </div>
 
-        <div className="bg-[#fff] p-5 dark:bg-[#8449dc] dark:text-white rounded-2xl">
+        {/* <div className="bg-[#fff] p-5 dark:bg-[#8449dc] dark:text-white rounded-2xl"> */}
           {/* Hosts Component */}
-          <Hosts />
-        </div>
+          {/* <Hosts /> */}
+        {/* </div> */}
       </div>
 
       <hr className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 mt-10" />

@@ -10,19 +10,16 @@ const Footer = () => {
         {/* Footer Links */}
         <div className="mt-3">
           <ul className="flex gap-4 items-center">
-            <li className="text-[#153148] text-[14px] font-[400] mb-2 md:text-[21px] dark:text-slate-100 hover:underline">
+            <li className="text-[#153148] text-[14px] font-[400] mb-2 md:text-[21px] dark:text-slate-100">
               <a className="text-[18px]" href="#">
-                Events
-              </a>
-            </li>
-            <li className="text-[#153148] text-[14px] font-[400] mb-2 md:text-[21px] dark:text-slate-100 hover:underline">
-              <a className="text-[18px]" href="#">
-                Help
-              </a>
-            </li>
-            <li className="text-[#153148] text-[14px] font-[400] mb-2 md:text-[21px] dark:text-slate-100 hover:underline">
-              <a className="text-[18px]" href="#">
-                Pricing
+                For more info contact{" "}
+                <a
+                  href="info@indoeastafricaexpo.org"
+                  target="_blank"
+                  className="text-blue-500 hover:underline"
+                >
+                  info@indoeastafricaexpo.org
+                </a>
               </a>
             </li>
           </ul>
@@ -32,19 +29,19 @@ const Footer = () => {
         <div className="my-3 flex gap-4">
           <SocialIcon
             url="https://twitter.com/IndoEastAfrica"
-            bgColor={isDarkMode ? "#ffffff" : "#153148"} // Change color based on mode
+            // bgColor={isDarkMode ? "#ffffff" : "#153148"} // Change color based on mode
           />
           <SocialIcon
             url="https://www.instagram.com/indoeastafrica/"
-            bgColor={isDarkMode ? "#ffffff" : "#153148"} // Change color based on mode
+            // bgColor={isDarkMode ? "#ffffff" : "#153148"} // Change color based on mode
           />
           <SocialIcon
             url="https://www.linkedin.com/company/indoaastafrica/"
-            bgColor={isDarkMode ? "#ffffff" : "#153148"} // Change color based on mode
+            // bgColor={isDarkMode ? "#ffffff" : "#153148"} // Change color based on mode
           />
           <SocialIcon
             url="https://www.facebook.com/IndoEastAfrica"
-            bgColor={isDarkMode ? "#ffffff" : "#153148"} // Change color based on mode
+            // bgColor={isDarkMode ? "#ffffff" : "#153148"} // Change color based on mode
           />
         </div>
       </div>

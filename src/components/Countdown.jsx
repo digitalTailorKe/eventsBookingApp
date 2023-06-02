@@ -29,11 +29,11 @@ const Countdown = () => {
 
   return (
     <div className="text-center mr-5">
-      {timeLeft.days > 0 && (
+      {/* {timeLeft.days > 0 && (
         <h1 className="text-3xl font-[400] mb-2 uppercase text-[#153148] dark:text-slate-200 border rounded-3xl">
-          {timeLeft.days} Days
+          {timeLeft.days} Days Ago
         </h1>
-      )}
+      )} */}
       <div className="flex justify-center text-[#153148] dark:text-[#431b7e]">
         <div className="flex items-center">
           <div className="bg-[#dbe8f4] rounded-full h-[50px] w-[50px] m-2">

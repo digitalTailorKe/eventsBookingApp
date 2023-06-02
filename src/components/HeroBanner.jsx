@@ -31,9 +31,9 @@ const HeroBanner = () => {
           </div>
 
           {/* Date Area */}
-          <div className="hidden md:block">
+          {/* <div className="hidden md:block">
             <Countdown />
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -42,7 +42,7 @@ const HeroBanner = () => {
         <div className="hidden md:flex gap-4">
           <div className="hidden md:flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
             <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
-              July
+              July <br /> 2023
             </div>
             <div className="text-[14px] p-3 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
               <p className="">05 - 07</p>
@@ -70,7 +70,7 @@ const HeroBanner = () => {
 
             <div className="flex flex-col items-center border border-[#153148] dark:border-[#431b7e] rounded-lg">
               <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148] dark:text-[#431b7e]">
-                July
+                July 2023
               </div>
               <div className="text-[14px] py-3 px-5 bg-[#153148] dark:bg-[#431b7e] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
                 <p className="">07</p>
@@ -78,13 +78,16 @@ const HeroBanner = () => {
             </div>
           </div>
 
-          <div className="my-auto">
+          {/* <div className="my-auto">
             <h4 className="text-[#153148] text-[16px] md:text-[25px] font-[400] dark:text-slate-100">
               Wednesday, 05 July 2023
             </h4>
             <p className="text-[12px] md:text-[18px] font-[400] text-[#153148] dark:text-slate-100">
               9:00 AM - 7:00 PM
             </p>
+          </div> */}
+          <div className="hidden md:block">
+            <Countdown />
           </div>
         </div>
 
