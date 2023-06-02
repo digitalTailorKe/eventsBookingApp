@@ -6,8 +6,9 @@ import SelectInput from "./SelectInput";
 import axios from "axios";
 
 const RegistrationForm = () => {
-  const storeAtendeeLocalEndpoint = "http://127.0.0.1:8000/api/attendees/";
-  const getSectorsLocalEndpoint = "http://127.0.0.1:8000/api/sectors/";
+  const storeAtendeeLocalEndpoint =
+    "admin.indoeastafricaexpo.org/api/attendees/";
+  const getSectorsLocalEndpoint = "admin.indoeastafricaexpo.org/api/sectors/";
 
   const [sectors, setSectors] = useState([]);
 
