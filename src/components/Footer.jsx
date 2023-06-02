@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="mt-3">
           <ul className="flex gap-4 items-center">
             <li className="text-[#153148] text-[14px] font-[400] mb-2 md:text-[21px]">
-              <a className="text-[18px]" href="#">
+              <span className="text-[18px]" href="#">
                 For more info contact{" "}
                 <a
                   href="info@indoeastafricaexpo.org"
@@ -20,7 +20,7 @@ const Footer = () => {
                 >
                   info@indoeastafricaexpo.org
                 </a>
-              </a>
+              </span>
             </li>
           </ul>
         </div>

@@ -5,7 +5,7 @@ import FormInputText from "./FormInputText";
 import SelectInput from "./SelectInput";
 import axios from "axios";
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ onRegistrationSuccess }) => {
   const storeAtendeeLocalEndpoint =
     "https://admin.indoeastafricaexpo.org/api/attendees";
   const getSectorsLocalEndpoint =
@@ -119,6 +119,7 @@ const RegistrationForm = () => {
         .then(() => {
           clearFormFields();
           toast.success("Congratulations! your registration was successful.");
+          onRegistrationSuccess();
         })
         .catch((error) => {
           console.log(error);

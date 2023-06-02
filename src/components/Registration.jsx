@@ -1,12 +1,21 @@
 import React, { useState } from "react";
-import { FaUserLock, FaUnlockAlt } from "react-icons/fa";
+import { FaUnlockAlt, FaCheckCircle } from "react-icons/fa";
+import { BiCheckCircle } from "react-icons/bi";
 import RegistrationForm from "./RegistrationForm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Registration = () => {
   const [showForm, setShowForm] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const handleRegisterClick = () => {
     setShowForm(true);
+  };
+
+  const handleRegistrationSuccess = () => {
+    setIsRegistered(true);
+    // toast.success("Congratulations! your registration was successful.");
   };
 
   return (
@@ -38,11 +47,30 @@ const Registration = () => {
           </div>
         ) : (
           <div className="mt-5">
-            {/* Registration Form */}
-            <RegistrationForm />
+            {isRegistered ? (
+              <div className="flex flex-col gap-4 bg-green-100 p-5 rounded-2xl">
+                <div className="flex gap-4 items-center text-green-500">
+                  <BiCheckCircle style={{ fontSize: "44px" }} />
+                  <div className="">
+                    <h4 className="text-green-600 text-[21px] font-bold">
+                      Registration Successful!
+                    </h4>
+                    <p className="text-[18px] text-green-500">
+                      Thank you for registering. We look forward to seeing you
+                      at the event.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <RegistrationForm
+                onRegistrationSuccess={handleRegistrationSuccess}
+              />
+            )}
           </div>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };
