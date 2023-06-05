@@ -28,47 +28,28 @@ const Registration = () => {
 
       {/* Registration Body */}
       <div className="mt-5">
-        {!showForm ? (
-          <div className="flex flex-col gap-4">
-            <h4 className="text-[21px] font-bold">Registration Ongoing...</h4>
-            <p className="text-[18px]">
-              Don't miss out on this exciting event. By registering, you'll
-              ensure that you have a ticket reserved and ready for the event
-              day. Secure your spot now and join us for an unforgettable
-              experience.{" "}
-            </p>
-
-            <button
-              className="bg-[#153148] text-slate-200 hover:bg-slate-200 hover:text-[#153148] w-[200px] py-3 rounded-xl"
-              onClick={handleRegisterClick}
-            >
-              Register Now
-            </button>
-          </div>
-        ) : (
-          <div className="mt-5">
-            {isRegistered ? (
-              <div className="flex flex-col gap-4 bg-green-100 p-5 rounded-2xl">
-                <div className="flex gap-4 items-center text-green-500">
-                  <BiCheckCircle style={{ fontSize: "44px" }} />
-                  <div className="">
-                    <h4 className="text-[16px] text-green-600 md:text-[21px] font-bold">
-                      Registration Successful!
-                    </h4>
-                    <p className="text-[14px] md:text-[18px] text-green-500">
-                      Thank you for registering. We look forward to seeing you
-                      at the event.
-                    </p>
-                  </div>
+        <div className="mt-5">
+          {isRegistered ? (
+            <div className="flex flex-col gap-4 bg-green-100 p-5 rounded-2xl">
+              <div className="flex gap-4 items-center text-green-500">
+                <BiCheckCircle style={{ fontSize: "44px" }} />
+                <div className="">
+                  <h4 className="text-[16px] text-green-600 md:text-[21px] font-bold">
+                    Registration Successful!
+                  </h4>
+                  <p className="text-[14px] md:text-[18px] text-green-500">
+                    Thank you for registering. We look forward to seeing you at
+                    the event.
+                  </p>
                 </div>
               </div>
-            ) : (
-              <RegistrationForm
-                onRegistrationSuccess={handleRegistrationSuccess}
-              />
-            )}
-          </div>
-        )}
+            </div>
+          ) : (
+            <RegistrationForm
+              onRegistrationSuccess={handleRegistrationSuccess}
+            />
+          )}
+        </div>
       </div>
       <ToastContainer />
     </div>

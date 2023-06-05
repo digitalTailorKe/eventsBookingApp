@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   SiteNav,
   HeroBanner,
@@ -7,6 +8,8 @@ import {
   AboutEvent,
   Hosts,
   Footer,
+  Organizers,
+  Partners,
 } from "../../components";
 
 const LandingPage = () => {
@@ -47,9 +50,25 @@ const LandingPage = () => {
         </div>
 
         {/* <div className="bg-[#fff] p-5 dark:bg-[#8449dc] dark:text-white rounded-2xl"> */}
-          {/* Hosts Component */}
-          {/* <Hosts /> */}
+        {/* Hosts Component */}
+        {/* <Hosts /> */}
         {/* </div> */}
+      </div>
+
+      {/* Organizers of the Event */}
+      <div className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 flex flex-col md:flex-row mt-3 gap-4">
+        <div className="bg-[#fff] p-5 rounded-2xl flex-1">
+          {/* Organizers Component */}
+          <Organizers />
+        </div>
+      </div>
+
+      {/* Event Partners */}
+      <div className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 flex flex-col md:flex-row mt-3 gap-4">
+        <div className="bg-[#fff] p-5 rounded-2xl flex-1">
+          {/* Partners Component */}
+          <Partners />
+        </div>
       </div>
 
       <hr className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 mt-10" />

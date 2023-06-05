@@ -35,3 +35,19 @@ body {
 input[type="checkbox"]:checked + label .checkbox::after {
   display: block;
 }
+
+.css-13cymwt-control {
+  padding: 8px !important;
+  background: #dbe8f4 !important;
+  border: none !important;
+}
+
+.css-1y7rh0y-MultiValueGeneric2 {
+  color: #fbfbfb !important;
+  background: #153148 !important;
+}
+
+.css-12a83d4-MultiValueRemove {
+  background: #f53b04 !important;
+  color: #fff !important;
+}

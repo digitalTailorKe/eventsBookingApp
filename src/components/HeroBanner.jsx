@@ -9,7 +9,7 @@ const HeroBanner = () => {
         <div className="w-full">
           <img
             className="w-full h-full object-cover rounded-2xl shadow"
-            src="/imgs/expoimage.png"
+            src="/imgs/banner1.jpg"
             alt=""
           />
         </div>
@@ -87,10 +87,10 @@ const HeroBanner = () => {
               9:00 AM - 7:00 PM
             </p>
           </div> */}
-        </div>
 
-        <div className="hidden md:block">
-          <Countdown />
+          <div className="hidden md:block">
+            <Countdown />
+          </div>
         </div>
 
         <div className="block mx-auto mb-3 md:hidden">
@@ -109,7 +109,7 @@ const HeroBanner = () => {
           <div className="">
             <a href="https://goo.gl/maps/sCdbZyrHVNNE8BYz7">
               <p className="text-[#153148] text-[16px] md:text-[22px] font-[400]">
-                The KICC, Nairobi Kenya...
+                The KICC, Nairobi Kenya
               </p>
             </a>
           </div>

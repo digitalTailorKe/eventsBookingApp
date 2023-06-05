@@ -1,10 +1,10 @@
 import React from "react";
 
-const SelectInput = ({ label, name, value, onChange, options, error }) => {
+const SelectInput = ({ label, name, value, onChange, options, error, required=true }) => {
   return (
     <div className="flex flex-col gap-2 mb-3 w-full">
       <label htmlFor={name} className="text-[#153148] text-[14px] font-[700]">
-        {label}
+        {label} {required && <span className="text-red-500">*</span>}
       </label>
       <select
         name={name}

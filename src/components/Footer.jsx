@@ -49,7 +49,8 @@ const Footer = () => {
       <hr />
       <div className="flex justify-center my-4">
         <p>
-          Copyright: &copy;2023 All rights reserved. Brought you by RAK & FORTI
+          Copyright: &copy;2023 All rights reserved.{" "}
+          <a href="https://dta.co.ke">Marketed By Digital Tailor Agency.</a>
         </p>
       </div>
     </div>
