@@ -16,6 +16,7 @@ import TelephoneInput from "./TelephoneInput";
 import Organizers from "./Organizers";
 import Partners from "./Partners";
 import MarketingPartner from "./MarketingPartner";
+import WhyImportFromIndia from "./WhyImportFromIndia";
 
 export {
   SiteNav,
@@ -36,4 +37,5 @@ export {
   Organizers,
   Partners,
   MarketingPartner,
+  WhyImportFromIndia,
 };

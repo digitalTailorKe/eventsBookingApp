@@ -49,8 +49,7 @@ const Footer = () => {
       <hr />
       <div className="flex justify-center my-4">
         <p>
-          Copyright: &copy;2023 All rights reserved.{" "}
-          <a href="https://dta.co.ke" target="_blank">Marketed By Digital Tailor Agency Limited.</a>
+          Copyright: &copy;2023 All rights reserved.
         </p>
       </div>
     </div>

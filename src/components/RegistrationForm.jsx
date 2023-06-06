@@ -11,6 +11,8 @@ import { FaExclamationTriangle } from "react-icons/fa";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { isValidPhoneNumber } from "react-phone-input-2";
+import { Component } from "react";
+import Switch from "react-switch";
 
 const RegistrationForm = ({ onRegistrationSuccess }) => {
   const storeAtendeeLocalEndpoint =
@@ -33,7 +35,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
   const sortedSectors = sectors.sort((a, b) => a.name.localeCompare(b.name));
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [validationerror, setValidationError] = useState([]);
+  // const [validationerror, setValidationError] = useState([]);
 
   const handleSelectChange = (selectedOption) => {
     setSelectedNationality(selectedOption);
@@ -81,6 +83,8 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     setPhoneNumber(value);
   };
 
+  const handleSwitchChange = (value) => {};
+
   useEffect(() => {
     axios
       .get(getSectorsLocalEndpoint)
@@ -118,7 +122,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     business_name: "",
     business_sector_id: "",
     national_id: "",
-    region_id: "",
+    business_address: "",
     interest: "",
     notification: 1,
     registration_type_id: 1,
@@ -127,55 +131,40 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
   const [formErrors, setFormErrors] = useState({});
 
-  const handleChange = (e, valued) => {
-    if (valued) {
-      console.log(valued);
-    } else {
-      const { name, value } = e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-      if (name === "sectors") {
-        setFormData((prevData) => ({
-          ...prevData,
-          business_sector_id: value,
-        }));
-      } else if (name === "nationality") {
-        setFormData((prevData) => ({
-          ...prevData,
-          nationality: value,
-        }));
-      } else if (name === "select_interest") {
-        const selectedOptions = value.map((option) => option.value);
-        setFormData((prevData) => ({
-          ...prevData,
-          interest: selectedOptions,
-        }));
-      } else if (name === "notification") {
-        setFormData((prevData) => ({
-          ...prevData,
-          notification: parseInt(value),
-        }));
-      } else if (name === "region_id") {
-        setFormData((prevData) => ({
-          ...prevData,
-          region_id: parseInt(value),
-        }));
-      } else if (valued) {
-        // setFormData((prevErrors) => ({
-        //   ...prevErrors,
-        //   phone: isValidPhoneNumber(value)
-        //     ? ""
-        //     : "Please provide a valid phone number.",
-        // }));
-        // setFormData((prevData) => ({
-        //   ...prevData,
-        //   phone: value,
-        // }));
-      } else {
-        setFormData((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
-      }
+    if (name === "sectors") {
+      setFormData((prevData) => ({
+        ...prevData,
+        business_sector_id: value,
+      }));
+    } else if (name === "nationality") {
+      setFormData((prevData) => ({
+        ...prevData,
+        nationality: value,
+      }));
+    } else if (name === "select_interest") {
+      const selectedOptions = value.map((option) => option.value);
+      setFormData((prevData) => ({
+        ...prevData,
+        interest: selectedOptions,
+      }));
+    } else if (name === "notification") {
+      setFormData((prevData) => ({
+        ...prevData,
+        notification: parseInt(value),
+      }));
+    } else if (name === "region_id") {
+      setFormData((prevData) => ({
+        ...prevData,
+        region_id: parseInt(value),
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
     }
   };
 
@@ -192,18 +181,10 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       errors.last_name = "Please provide your last name.";
     }
 
-    if (!formData.phone) {
-      errors.phone = "Please provide your phone number.";
-    }
-
     if (!formData.email) {
       errors.email = "Please provide your email address.";
     } else if (!isValidEmail(formData.email)) {
       errors.email = "Please provide a valid email address.";
-    }
-
-    if (!formData.country_code) {
-      errors.country_code = "Please provide your country code.";
     }
 
     if (!formData.national_id) {
@@ -218,8 +199,8 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       errors.job_title = "Please provide your job title.";
     }
 
-    if (!formData.region_id) {
-      errors.region_id = "Please provide your business address.";
+    if (!formData.business_address) {
+      errors.business_address = "Please provide your business address.";
     }
     // Set the form errors state
     setFormErrors(errors);
@@ -241,37 +222,26 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
     if (validateForm()) {
       // Form is valid, perform form submission logic here
-      if (!isValidPhoneNumber(formData.phone)) {
-        setFormErrors((prevErrors) => ({
-          ...prevErrors,
-          phone: "Please provide a valid phone number.",
-        }));
-        toast.error(
-          "Form is invalid. Please enter required field values and try again."
-        );
-        return;
-      }
-      // Form is valid, perform form submission logic here
       console.log("Form is valid. Submitting...");
 
       // Initializing new form data details
       const newRequestData = {
         full_name: formData.first_name + " " + formData.last_name,
-        phone: formData.phone,
+        phone: phoneNumber,
         email: formData.email,
-        business_name: formData.business_name,
-        business_sector_id: selectedSector.value,
-        region_id: formData.region_id,
-        notification: formData.notification,
-        registration_type_id: formData.registration_type_id,
-        nationality_id: selectedNationality.value,
         id_number: formData.national_id,
         job_title: formData.job_title,
+        business_name: formData.business_name,
+        address: formData.business_address,
+        notification: formData.notification,
+        region_id: selectedCountry.value,
+        nationality_id: selectedNationality.value,
+        business_sector_id: selectedSector.value,
+        registration_type_id: formData.registration_type_id,
+
         sectors: formData.interest,
         country_code: selectedCountry.value,
       };
-
-      console.log(newRequestData);
 
       // Send data to the server.
       axios
@@ -292,7 +262,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
                 );
                 if (values.length > 0) {
                   toast.error(`${values.join(", ")}`);
-                  setValidationError(values.join(", "));
+                  // setValidationError(values.join(", "));
                 }
               }
             }
@@ -307,7 +277,6 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       toast.error(
         "Form is invalid. Please enter required field values and try again."
       );
-      //   console.log("Form is invalid. Please fix errors.");
     }
   };
 
@@ -324,7 +293,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       business_name: "",
       business_sector_id: "",
       national_id: "",
-      region_id: "",
+      business_address: "",
       select_interest: "",
       notification: 1,
       registration_type_id: 1,
@@ -335,6 +304,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
   return (
     <form action="" method="post" onSubmit={handleSubmit}>
+      {/* First Name & Last Name */}
       <div className="md:flex md:gap-4">
         {/* First Name Input */}
         <FormInputText
@@ -359,6 +329,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         />
       </div>
 
+      {/* ID/Passport & Nationality */}
       <div className="md:flex md:gap-4 w-full">
         <div className="md:w-1/2">
           {/* National Id Input */}
@@ -410,10 +381,11 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         </div>
       </div>
 
+      {/* Country/Region & PhoneNumber */}
       <div className="md:flex md:gap-4 w-full">
         <div className="md:w-1/2">
           <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
-            Country/Region <span className="text-red-500">*</span>
+            Country/Region of Business <span className="text-red-500">*</span>
           </label>
           <div className="m-2"></div>
           {/* Country Region Input */}
@@ -510,6 +482,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         </div>
       </div>
 
+      {/* Email Address & Business Name */}
       <div className="md:flex md:gap-4">
         {/* Email Address Input */}
         <FormInputText
@@ -534,6 +507,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         />
       </div>
 
+      {/* JobTitle & BusinessAddress */}
       <div className="md:flex md:gap-4">
         <div className="flex-1">
           {/* Job Title Input */}
@@ -553,25 +527,21 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
           <FormInputText
             required={true}
             label="Business Address"
-            name="region_id"
-            value={formData.region_id}
+            name="business_address"
+            value={formData.business_address}
             onChange={handleChange}
-            error={formErrors.region_id}
+            error={formErrors.business_address}
             placeholder="Provide your business address (00-100)"
           />
-          {formErrors.region_id && (
-            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
-              <FaExclamationTriangle />
-              {formErrors.region_id}
-            </p>
-          )}
         </div>
       </div>
 
+      {/* Sectors & Interests */}
       <div className="mb-3">
         {/* Sector Inputs */}
         <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
-          Sector <span className="text-red-500">*</span>
+          Interested in meeting with the following sectors.{" "}
+          <span className="text-red-500">*</span>
         </label>
         <div className="m-2"></div>
         <Select
@@ -605,30 +575,35 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       </div>
 
       {/* Select Interest Input */}
-      <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
-        Select Interest <span className="text-red-500">*</span>
-      </label>
-      <Select
-        isMulti // Add isMulti prop to allow selecting multiple options
-        name="select_interest"
-        value={selectedInterest}
-        onChange={handleInterestChange}
-        options={sortedSectors.map((interest) => ({
-          value: interest.id,
-          label: interest.name,
-        }))}
-        placeholder="Select Your Interests or search..."
-        styles={{
-          control: (baseStyles, state) => ({
-            ...baseStyles,
-            background: "#dbe8f4",
-            color: "#153148",
-            padding: "0.5rem 0",
-            border: "none",
-          }),
-        }}
-      />
+      <div className="w-full">
+        <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
+          Select Interest (Select Multiple){" "}
+          <span className="text-red-500">*</span>
+        </label>
+        <div className="m-2"></div>
+        <Select
+          isMulti // Add isMulti prop to allow selecting multiple options
+          name="select_interest"
+          value={selectedInterest}
+          onChange={handleInterestChange}
+          options={sortedSectors.map((interest) => ({
+            value: interest.id,
+            label: interest.name,
+          }))}
+          placeholder="Select Your Interests or search..."
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              background: "#dbe8f4",
+              color: "#153148",
+              padding: "0.5rem 0",
+              border: "none",
+            }),
+          }}
+        />
+      </div>
 
+      {/* Get Notification & Submit Button */}
       <div className="md:flex md:gap-4 my-3">
         {/* Get Notification Input */}
         <div className="col-span-2">
@@ -646,7 +621,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
               className="flex items-center cursor-pointer text-[#153148] text-[14px] font-[700]"
             >
               <div className="checkbox"></div>
-              <span>Get invite for the above B2B Seminar.</span>
+              <span>Get invited to seminars specific to sectors above.</span>
             </label>
             {formErrors.getNotified && (
               <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
@@ -658,9 +633,13 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         </div>
       </div>
 
-      <div className="text-red-600 flex flex-col justify-center items-center">
-        {validationerror}
+      <div className="flex justify-start items-center my-3">
+        <Switch onChange={handleSwitchChange} checked={"checked"} /> Yes
       </div>
+
+      {/* <div className="text-red-600 flex flex-col justify-center items-center">
+        {validationerror}
+      </div> */}
 
       {/* Registration Button Input */}
       <div className="md:flex md:justify-center w-[100%] mx-auto">

@@ -3,48 +3,78 @@ import { FaRegCalendarAlt, FaUserTie } from "react-icons/fa";
 
 const AboutEvent = () => {
   return (
-    <div className="">
-      <h4 className="flex gap-4 items-center text-[#153148] text-[20px] md:text-[22px] font-[400] pb-2">
-        <FaRegCalendarAlt style={{ fontSize: "21px" }} /> About Event
+    <div className="text-[16px]">
+      <h4 className="flex gap-4 items-center text-[#153148] text-[16px] md:text-[22px] font-[400] pb-2 uppercase">
+        <FaRegCalendarAlt style={{ fontSize: "21px" }} /> Why you can't afford
+        to miss out!{" "}
       </h4>
 
       <hr className="mb-3" />
 
       <div className="">
-        <p className="mb-3 text-[18px]">
-          Forge Lasting Alliances for a Flourishing Future
-        </p>
-        <p className="mb-3 text-[18px]">
-          <b>Our mission</b> is to bring together the vibrant economies of India
-          and East Africa, fostering a collaborative environment where
-          businesses and entrepreneurs thrive.
-        </p>
-        <p className="mb-3 text-[18px]">
-          <b>Unleash the Potential of International Commerce:</b> India's global
-          economic prowess and East Africa's strategic location provide the
-          perfect foundation for mutually beneficial trade opportunities.
-        </p>
-        <p className="mb-3 text-[18px]">
-          <b>Celebrating Our Shared Heritage and Connection:</b> India and East
-          Africa share a remarkable cultural and historical bond that dates back
-          centuries. Through the ancient trade routes of the Indian Ocean and
-          the Swahili Coast, our regions have interwoven their identities,
-          languages, and traditions.
-        </p>
-        <p className="mb-3 text-[18px]">
-          This deep-rooted connection and affinity create a unique foundation
-          for understanding,trust, and collaboration. By fortifying trade
-          relations, we honor our shared heritage and leverage our cultural ties
-          to strengther business relationships for a prosperous future.
-        </p>
-        <p className="mb-3 text-[18px]">
-          Are you ready to tap into the immense potential of trade between India
-          and East Africa? Join us on this transformative journey of growth,
-          partnership, and opportunity. Together, we can fortify trade
-          relations, unlock new markets, and shape a future of shared
-          prosperity. Connect with us today and be a part of this exciting
-          endeavor.
-        </p>
+        <div className="my-3">
+          <p className="mb-3 text-[16px] md:text-[18px]">
+            <span className="font-bold">Expand Your Reach:</span> Unleash the
+            potential of the Indian market with a lineup of 200 Indian
+            exhibitors ready to wow you with their innovative products and
+            game-changing technologies. Forge partnerships that transcend
+            borders and embrace new avenues for growth.
+          </p>
+          <p className="mb-3 text-[16px] md:text-[18px]">
+            <span className="font-bold">Connect, Collaborate, Conquer:</span>{" "}
+            Rub shoulders with the crème de la crème of East Africa and India's
+            business communities. Network like a pro, exchange ideas, and
+            explore collaboration possibilities that will propel your business
+            to new heights. Success favors those who seize opportunities!
+          </p>
+          <p className="mb-3 text-[16px] md:text-[18px]">
+            <span className="font-bold">
+              Knowledge to Power-up Your Strategies:{" "}
+            </span>{" "}
+            Stay ahead of the curve with industry champions sharing their wisdom
+            on emerging trends, disruptive technologies, and winning strategies.
+            Sharpen your business acumen and outshine the competition.
+          </p>
+          <p className="mb-3 text-[16px] md:text-[18px]">
+            <span className="font-bold">
+              Explore a Diverse Range of Sectors:
+            </span>{" "}
+            The Indo-East Africa Trade Expo caters to various industries,
+            ensuring you'll find opportunities relevant to your business and
+            sector.
+          </p>
+        </div>
+
+        {/* Sectors Section */}
+        <div className="my-5">
+          <h4 className="text-lg md:text-2xl font-bold">Sectors that will be present</h4>
+          <div className="ml-5">
+            <ul className="list-disc text-[16px] md:text-[18px]">
+              <li className="list-item">FCMG & Food Processing</li>
+              <li className="list-item">
+                Textile, Leather, Footwear & Handicrafts
+              </li>
+              <li className="list-item">
+                Automotive, Motor Parts & Machinery & Tools
+              </li>
+              <li className="list-item">
+                Artificial Jewelry, Beauty & Cosmetics
+              </li>
+              <li className="list-item">Agriculture</li>
+              <li className="list-item">Technology</li>
+              <li className="list-item">Hardware Manufacturers</li>
+              <li className="list-item">Education Sector: Universities</li>
+              <li className="list-item">Printing & Packaging</li>
+              <li className="list-item">
+                Construction, Sanitary Wares & Tile, Marble, Granite Stone
+              </li>
+              <li className="list-item">Sculptures & Mining</li>
+              <li className="list-item">Modular & Antique Furniture</li>
+              <li className="list-item">Others</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </div>
   );

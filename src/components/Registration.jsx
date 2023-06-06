@@ -15,12 +15,11 @@ const Registration = () => {
 
   const handleRegistrationSuccess = () => {
     setIsRegistered(true);
-    // toast.success("Congratulations! your registration was successful.");
   };
 
   return (
     <div className="">
-      <h4 className="flex gap-4 items-center text-[#153148] text-[20px] md:text-[22px] font-[400] pb-2">
+      <h4 className="flex gap-4 items-center text-[#153148] text-[16px] md:text-[22px] font-[400] uppercase pb-2">
         <FaUnlockAlt style={{ fontSize: "21px" }} /> Registration
       </h4>
 
@@ -41,6 +40,15 @@ const Registration = () => {
                     Thank you for registering. We look forward to seeing you at
                     the event.
                   </p>
+
+                  <div className="md:flex md:justify-center w-[100%] mx-auto mt-3">
+                    <button
+                      onClick={setIsRegistered(false)}
+                      className="bg-[#f04223] text-slate-200 uppercase hover:bg-slate-200 hover:text-[#153148] w-full py-3 rounded-xl"
+                    >
+                      Register Another
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

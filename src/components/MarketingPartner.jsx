@@ -4,8 +4,8 @@ import { FaHandshake } from "react-icons/fa";
 const MarketingPartner = () => {
   return (
     <div className="">
-      <h4 className="flex gap-4 items-center text-[#153148] text-[20px] md:text-[22px] font-[400] pb-2">
-        <FaHandshake style={{ fontSize: "21px" }} /> Marketed By
+      <h4 className="flex gap-4 items-center text-[#153148] text-[16px] md:text-[22px] font-[400] pb-2 uppercase">
+        <FaHandshake style={{ fontSize: "21px" }} /> Marketing Partner
       </h4>
 
       <hr className="mb-3" />
@@ -16,7 +16,7 @@ const MarketingPartner = () => {
             <img
               src="/imgs/dta_logo.svg"
               alt=""
-              className="max-w-full w-[100%] cursor-pointer"
+              className="w-[250px] md:w-[100%] cursor-pointer"
             />
           </a>
         </div>

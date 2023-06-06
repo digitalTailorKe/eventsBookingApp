@@ -11,6 +11,7 @@ import {
   Organizers,
   Partners,
   MarketingPartner,
+  WhyImportFromIndia,
 } from "../../components";
 
 const LandingPage = () => {
@@ -54,6 +55,14 @@ const LandingPage = () => {
         {/* Hosts Component */}
         {/* <Hosts /> */}
         {/* </div> */}
+      </div>
+
+      {/* Why Import From India */}
+      <div className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 flex flex-col md:flex-row mt-3 gap-4">
+        <div className="bg-[#fff] p-5 rounded-2xl flex-1">
+          {/* Organizers Component */}
+          <WhyImportFromIndia />
+        </div>
       </div>
 
       {/* Organizers of the Event */}

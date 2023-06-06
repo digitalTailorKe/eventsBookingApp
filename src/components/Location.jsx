@@ -4,7 +4,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 const Location = () => {
   return (
     <div className="">
-      <h4 className="flex gap-4 items-center text-[#153148] text-[20px] md:text-[22px] font-[400] pb-2">
+      <h4 className="flex gap-4 items-center text-[#153148] text-[16px] md:text-[22px] font-[400] pb-2 uppercase">
         <FaMapMarkerAlt style={{ fontSize: "21px" }} /> Location
       </h4>
 

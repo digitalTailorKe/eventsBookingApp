@@ -81,11 +81,12 @@ const HeroBanner = () => {
           <Countdown />
         </div>
 
-        <div className="text-[#153148] mt-3 md:mt-0 flex gap-4 items-center">
+        {/* Location Input */}
+        <div className="text-[#153148] mt-3 mx-auto md:mx-0 md:mt-0 flex gap-4 items-center">
           <div className="border border-[#153148] rounded-full p-3">
             <FaMapMarkerAlt
               style={{
-                fontSize: "21px",
+                fontSize: "18px",
               }}
             />
           </div>
@@ -98,6 +99,14 @@ const HeroBanner = () => {
             </a>
           </div>
         </div>
+      </div>
+
+      <hr className="my-3" />
+
+      <div className="mt-3">
+        <p className="text-center text-[16px] md:text-lg font-[300]">
+          Witness the grand showcase of over 500 Indian businesses at the Expo
+        </p>
       </div>
     </div>
   );
