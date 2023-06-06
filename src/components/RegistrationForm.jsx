@@ -8,6 +8,9 @@ import axios from "axios";
 import Select from "react-select";
 import { BiCheckDouble } from "react-icons/bi";
 import { FaExclamationTriangle } from "react-icons/fa";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { isValidPhoneNumber } from "react-phone-input-2";
 
 const RegistrationForm = ({ onRegistrationSuccess }) => {
   const storeAtendeeLocalEndpoint =
@@ -29,6 +32,8 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
   const [selectedCountryCode, setSelectedCountryCode] = useState(null);
   const sortedSectors = sectors.sort((a, b) => a.name.localeCompare(b.name));
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [validationerror, setValidationError] = useState([]);
 
   const handleSelectChange = (selectedOption) => {
     setSelectedNationality(selectedOption);
@@ -70,6 +75,10 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       ...prevData,
       country_region: selectedOption.value,
     }));
+  };
+
+  const handlePhoneChange = (value) => {
+    setPhoneNumber(value);
   };
 
   useEffect(() => {
@@ -118,50 +127,55 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
   const [formErrors, setFormErrors] = useState({});
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    if (name === "sectors") {
-      setFormData((prevData) => ({
-        ...prevData,
-        business_sector_id: value,
-      }));
-    } else if (name === "nationality") {
-      setFormData((prevData) => ({
-        ...prevData,
-        nationality: value,
-      }));
-    } else if (name === "select_interest") {
-      const selectedOptions = value.map((option) => option.value);
-      setFormData((prevData) => ({
-        ...prevData,
-        interest: selectedOptions,
-      }));
-    } else if (name === "notification") {
-      setFormData((prevData) => ({
-        ...prevData,
-        notification: parseInt(value),
-      }));
-    } else if (name === "region_id") {
-      setFormData((prevData) => ({
-        ...prevData,
-        region_id: parseInt(value),
-      }));
-    } else if (name === "phone") {
-      // Validate phone number to not start with 0
-      if (value.length > 0 && value[0] === "0") {
-        setFormErrors("Phone number should not start with 0.");
-      }
-
-      setFormData((prevData) => ({
-        ...prevData,
-        phone: value, // Store only the phone number without appending the country code
-      }));
+  const handleChange = (e, valued) => {
+    if (valued) {
+      console.log(valued);
     } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
+      const { name, value } = e.target;
+
+      if (name === "sectors") {
+        setFormData((prevData) => ({
+          ...prevData,
+          business_sector_id: value,
+        }));
+      } else if (name === "nationality") {
+        setFormData((prevData) => ({
+          ...prevData,
+          nationality: value,
+        }));
+      } else if (name === "select_interest") {
+        const selectedOptions = value.map((option) => option.value);
+        setFormData((prevData) => ({
+          ...prevData,
+          interest: selectedOptions,
+        }));
+      } else if (name === "notification") {
+        setFormData((prevData) => ({
+          ...prevData,
+          notification: parseInt(value),
+        }));
+      } else if (name === "region_id") {
+        setFormData((prevData) => ({
+          ...prevData,
+          region_id: parseInt(value),
+        }));
+      } else if (valued) {
+        // setFormData((prevErrors) => ({
+        //   ...prevErrors,
+        //   phone: isValidPhoneNumber(value)
+        //     ? ""
+        //     : "Please provide a valid phone number.",
+        // }));
+        // setFormData((prevData) => ({
+        //   ...prevData,
+        //   phone: value,
+        // }));
+      } else {
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+      }
     }
   };
 
@@ -227,6 +241,17 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
     if (validateForm()) {
       // Form is valid, perform form submission logic here
+      if (!isValidPhoneNumber(formData.phone)) {
+        setFormErrors((prevErrors) => ({
+          ...prevErrors,
+          phone: "Please provide a valid phone number.",
+        }));
+        toast.error(
+          "Form is invalid. Please enter required field values and try again."
+        );
+        return;
+      }
+      // Form is valid, perform form submission logic here
       console.log("Form is valid. Submitting...");
 
       // Initializing new form data details
@@ -245,6 +270,8 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         sectors: formData.interest,
         country_code: selectedCountry.value,
       };
+
+      console.log(newRequestData);
 
       // Send data to the server.
       axios
@@ -265,6 +292,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
                 );
                 if (values.length > 0) {
                   toast.error(`${values.join(", ")}`);
+                  setValidationError(values.join(", "));
                 }
               }
             }
@@ -420,8 +448,8 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         </div>
 
         {/* Phone Country Code */}
-        <div className="md:w-1/2">
-          <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
+        <div className="md:w-1/2 mb-3">
+          {/* <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
             Phone Number <span className="text-red-500">*</span>
           </label>
           <div className="flex justify-center items-center gap-2">
@@ -453,6 +481,26 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
               placeholder="Provide your phone number"
             />
           </div>
+          {formErrors.phone && (
+            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
+              <FaExclamationTriangle />
+              {formErrors.phone}
+            </p>
+          )} */}
+          <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
+            Phone Number <span className="text-red-500">*</span>
+          </label>
+          <div className="m-2"></div>
+          <PhoneInput
+            country={"ke"}
+            value={phoneNumber}
+            onChange={handlePhoneChange}
+          />
+          Phone Number:{" "}
+          <span className="text-green-700">
+            {phoneNumber}
+            <BiCheckDouble style={{ display: "inline-block" }} />
+          </span>
           {formErrors.phone && (
             <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
               <FaExclamationTriangle />
@@ -502,7 +550,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
         {/* Business Address Inputs */}
         <div className="flex-1">
-          <TelephoneInput
+          <FormInputText
             required={true}
             label="Business Address"
             name="region_id"
@@ -610,10 +658,14 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         </div>
       </div>
 
+      <div className="text-red-600 flex flex-col justify-center items-center">
+        {validationerror}
+      </div>
+
       {/* Registration Button Input */}
       <div className="md:flex md:justify-center w-[100%] mx-auto">
-        <button className="bg-[#128e12] text-slate-200 hover:bg-slate-200 hover:text-[#153148] w-full py-3 rounded-xl">
-          Register
+        <button className="bg-[#f04223] text-slate-200 uppercase hover:bg-slate-200 hover:text-[#153148] w-full py-3 rounded-xl">
+          Register Now
         </button>
       </div>
       <ToastContainer />

@@ -54,36 +54,6 @@ const HeroBanner = () => {
             </div>
           </div>
 
-          {/* For Mobile */}
-          <div className="flex md:gap-2 md:hidden">
-            <div className="flex flex-col items-center border border-[#153148] rounded-lg">
-              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148]">
-                July
-              </div>
-              <div className="text-[14px] py-3 px-5 bg-[#153148] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
-                <p className="">05</p>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center border border-[#153148] rounded-lg">
-              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148]">
-                July
-              </div>
-              <div className="text-[14px] py-3 px-5 bg-[#153148] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
-                <p className="">06</p>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center border border-[#153148] rounded-lg">
-              <div className="text-[14px] py-2 font-normal md:text-[21px] text-[#153148]">
-                July 2023
-              </div>
-              <div className="text-[14px] py-3 px-5 bg-[#153148] text-slate-100 rounded-b-lg md:text-[21px] flex-grow">
-                <p className="">07</p>
-              </div>
-            </div>
-          </div>
-
           {/* <div className="my-auto">
             <h4 className="text-[#153148] text-[16px] md:text-[25px] font-[400] dark:text-slate-100">
               Wednesday, 05 July 2023
@@ -98,7 +68,16 @@ const HeroBanner = () => {
           </div>
         </div>
 
-        <div className="block mx-auto mb-3 md:hidden">
+        <div className="flex flex-col justify-center items-center mx-auto mb-3 md:hidden">
+          <div className="flex flex-col items-center border border-[#153148] rounded-lg w-full">
+            <div className="text-[14px] py-1 font-normal md:text-[16px] text-[#153148]">
+              July 2023
+            </div>
+            <div className="text-[14px] w-full p-2 bg-[#153148] text-slate-100 rounded-b-lg md:text-[16px] flex-grow flex justify-center items-center">
+              <p className="">05 - 07</p>
+            </div>
+          </div>
+
           <Countdown />
         </div>
 

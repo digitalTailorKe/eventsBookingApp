@@ -10,13 +10,25 @@ const Organizers = () => {
 
       <hr className="mb-3" />
 
-      <div className="flex gap-4 justify-center items-center">
-        <div className="shadow-lg rounded-2xl flex justify-center">
-          <img src="/imgs/raok.png" alt="" className="max-w-full" />
+      <div className="flex gap-4 justify-center mx-auto items-center w-full">
+        <div className="rounded-2xl flex justify-center">
+          <a href="https://repc.in/" target="_blank">
+            <img
+              src="/imgs/raok.png"
+              alt=""
+              className="max-w-full md:w-[50%] cursor-pointer"
+            />
+          </a>
         </div>
 
-        <div className="shadow-lg rounded-2xl flex justify-center">
-          <img src="/imgs/forti.png" alt="" className="max-w-full" />
+        <div className="rounded-2xl flex justify-center">
+          <a href="https://expo.forti.in" target="_blank">
+            <img
+              src="/imgs/forti.png"
+              alt=""
+              className="max-w-full md:w-[50%] cursor-pointer"
+            />
+          </a>
         </div>
       </div>
     </div>

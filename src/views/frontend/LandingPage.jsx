@@ -10,13 +10,14 @@ import {
   Footer,
   Organizers,
   Partners,
+  MarketingPartner,
 } from "../../components";
 
 const LandingPage = () => {
   return (
-    <div className="bg-slate-300 min-h-screen">
+    <div className="bg-slate-300 min-h-screen pt-2">
       {/* Site Nav Component */}
-      <SiteNav />
+      {/* <SiteNav /> */}
 
       {/* Container Section */}
       <div className="px-2">
@@ -68,6 +69,14 @@ const LandingPage = () => {
         <div className="bg-[#fff] p-5 rounded-2xl flex-1">
           {/* Partners Component */}
           <Partners />
+        </div>
+      </div>
+
+      {/* Marketing Partners */}
+      <div className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 flex flex-col md:flex-row mt-3 gap-4">
+        <div className="bg-[#fff] p-5 rounded-2xl flex-1">
+          {/* Marketing Component */}
+          <MarketingPartner />
         </div>
       </div>
 

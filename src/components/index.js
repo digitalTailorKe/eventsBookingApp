@@ -15,6 +15,7 @@ import CountdownDays from "./CountdownDays";
 import TelephoneInput from "./TelephoneInput";
 import Organizers from "./Organizers";
 import Partners from "./Partners";
+import MarketingPartner from "./MarketingPartner";
 
 export {
   SiteNav,
@@ -34,4 +35,5 @@ export {
   TelephoneInput,
   Organizers,
   Partners,
+  MarketingPartner,
 };

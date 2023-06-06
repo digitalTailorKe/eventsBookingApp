@@ -10,9 +10,25 @@ const Partners = () => {
 
       <hr className="mb-3" />
 
-      <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-        <div className="shadow-lg rounded-2xl flex justify-center w-full">
-          <img src="/imgs/partners.png" alt="" className="w-full" />
+      <div className="flex gap-4 justify-center mx-auto items-center w-full">
+        <div className="rounded-2xl flex-1 justify-center text-center">
+          <a href="https://repc.in/" target="_blank">
+            <img
+              src="/imgs/repc-logo.png"
+              alt=""
+              className="max-w-full md:w-[50%] cursor-pointer"
+            />
+          </a>
+        </div>
+
+        <div className="rounded-2xl flex-1 justify-center">
+          <a href="https://www.kenyachamber.or.ke/" target="_blank">
+            <img
+              src="/imgs/kncci-logo.png"
+              alt=""
+              className="max-w-full md:w-[50%] cursor-pointer"
+            />
+          </a>
         </div>
       </div>
     </div>

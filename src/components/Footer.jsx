@@ -14,7 +14,7 @@ const Footer = () => {
               <span className="text-[18px]" href="#">
                 For more info contact{" "}
                 <a
-                  href="info@indoeastafricaexpo.org"
+                  href="mailto:info@indoeastafricaexpo.org"
                   target="_blank"
                   className="text-blue-500 hover:underline"
                 >
@@ -50,7 +50,7 @@ const Footer = () => {
       <div className="flex justify-center my-4">
         <p>
           Copyright: &copy;2023 All rights reserved.{" "}
-          <a href="https://dta.co.ke">Marketed By Digital Tailor Agency.</a>
+          <a href="https://dta.co.ke" target="_blank">Marketed By Digital Tailor Agency Limited.</a>
         </p>
       </div>
     </div>

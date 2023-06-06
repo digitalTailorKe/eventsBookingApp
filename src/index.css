@@ -51,3 +51,13 @@ input[type="checkbox"]:checked + label .checkbox::after {
   background: #f53b04 !important;
   color: #fff !important;
 }
+
+.react-tel-input .form-control {
+  border: 1px solid #dbe8f4 !important;
+  padding-top: 24px !important;
+  padding-bottom: 24px !important;
+  width: 100% !important;
+  outline: none !important;
+  background: #dbe8f4 !important;
+  font-size: larger !important;
+}
