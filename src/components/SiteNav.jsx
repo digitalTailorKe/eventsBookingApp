@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const SiteNav = () => {
   return (
-    <div className="items-center bg-[#194d77] text-slate-300 p-2 md:p-3 sticky top-0 z-10 shadow-lg">
+    <div className="items-center bg-[#d3f8d3] text-slate-300 p-2 md:p-3 sticky top-0 z-10 shadow-lg">
       <div className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 flex justify-center items-center">
         {/* Site header */}
         <Link to="/" className="">

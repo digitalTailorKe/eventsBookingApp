@@ -10,10 +10,11 @@ const Organizers = () => {
 
       <hr className="mb-3" />
 
-      <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+      <div className="flex gap-4 justify-center items-center">
         <div className="shadow-lg rounded-2xl flex justify-center">
           <img src="/imgs/raok.png" alt="" className="max-w-full" />
         </div>
+
         <div className="shadow-lg rounded-2xl flex justify-center">
           <img src="/imgs/forti.png" alt="" className="max-w-full" />
         </div>

@@ -6,7 +6,6 @@ const TelephoneInput = ({
   name,
   value,
   onChange,
-  error,
   required = false,
   placeholder,
 }) => {
@@ -25,12 +24,7 @@ const TelephoneInput = ({
         placeholder={placeholder}
         pattern="[1-9][0-9]{8}"
       />
-      {error && (
-        <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
-          <FaExclamationTriangle />
-          {error}
-        </p>
-      )}
+      
     </div>
   );
 };

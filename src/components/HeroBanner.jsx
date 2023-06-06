@@ -8,8 +8,13 @@ const HeroBanner = () => {
       <div className="relative">
         <div className="w-full">
           <img
-            className="w-full h-full object-cover rounded-2xl shadow"
-            src="/imgs/banner1.jpg"
+            className="w-full hidden md:block h-full object-cover rounded-2xl shadow"
+            src="/imgs/desktop_bunner.jpg"
+            alt=""
+          />
+          <img
+            className="w-full md:hidden h-full object-cover rounded-2xl shadow"
+            src="/imgs/mobile_bunner.jpg"
             alt=""
           />
         </div>

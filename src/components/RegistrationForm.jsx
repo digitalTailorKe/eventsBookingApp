@@ -6,6 +6,8 @@ import TelephoneInput from "./TelephoneInput";
 import SelectInput from "./SelectInput";
 import axios from "axios";
 import Select from "react-select";
+import { BiCheckDouble } from "react-icons/bi";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 const RegistrationForm = ({ onRegistrationSuccess }) => {
   const storeAtendeeLocalEndpoint =
@@ -13,6 +15,9 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
   const getSectorsLocalEndpoint =
     "https://admin.indoeastafricaexpo.org/api/sectors";
   const getNationalities = "https://admin.indoeastafricaexpo.org/api/countries";
+
+  // Local Endpoints
+  // const storeAtendeeLocalEndpoint = "http://127.0.0.1:8000/api/attendees";
 
   const [sectors, setSectors] = useState([]);
   const [nationality, setNationality] = useState([]);
@@ -22,6 +27,8 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
   const [countryCode, setCountryCode] = useState([]);
   const [nationalityCodes, setNationalityCodes] = useState([]);
   const [selectedCountryCode, setSelectedCountryCode] = useState(null);
+  const sortedSectors = sectors.sort((a, b) => a.name.localeCompare(b.name));
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   const handleSelectChange = (selectedOption) => {
     setSelectedNationality(selectedOption);
@@ -54,6 +61,14 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     setFormData((prevData) => ({
       ...prevData,
       country_code: selectedOption.value,
+    }));
+  };
+
+  const handleSelectCountryChange = (selectedOption) => {
+    setSelectedCountry(selectedOption);
+    setFormData((prevData) => ({
+      ...prevData,
+      country_region: selectedOption.value,
     }));
   };
 
@@ -94,7 +109,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     business_name: "",
     business_sector_id: "",
     national_id: "",
-    address: "",
+    region_id: "",
     interest: "",
     notification: 1,
     registration_type_id: 1,
@@ -126,6 +141,11 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       setFormData((prevData) => ({
         ...prevData,
         notification: parseInt(value),
+      }));
+    } else if (name === "region_id") {
+      setFormData((prevData) => ({
+        ...prevData,
+        region_id: parseInt(value),
       }));
     } else if (name === "phone") {
       // Validate phone number to not start with 0
@@ -171,6 +191,22 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     if (!formData.country_code) {
       errors.country_code = "Please provide your country code.";
     }
+
+    if (!formData.national_id) {
+      errors.national_id = "Please provide your national ID.";
+    }
+
+    if (!formData.business_name) {
+      errors.business_name = "Please provide your business name.";
+    }
+
+    if (!formData.job_title) {
+      errors.job_title = "Please provide your job title.";
+    }
+
+    if (!formData.region_id) {
+      errors.region_id = "Please provide your business address.";
+    }
     // Set the form errors state
     setFormErrors(errors);
 
@@ -200,17 +236,15 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         email: formData.email,
         business_name: formData.business_name,
         business_sector_id: selectedSector.value,
-        address: formData.address,
+        region_id: formData.region_id,
         notification: formData.notification,
         registration_type_id: formData.registration_type_id,
         nationality_id: selectedNationality.value,
         id_number: formData.national_id,
         job_title: formData.job_title,
-        interests: formData.interest,
-        country_code: selectedCountryCode.value,
+        sectors: formData.interest,
+        country_code: selectedCountry.value,
       };
-
-      console.log(newRequestData);
 
       // Send data to the server.
       axios
@@ -221,10 +255,24 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
           onRegistrationSuccess();
         })
         .catch((error) => {
-          console.log(error);
-          toast.error(
-            "Something went wrong while trying to register for event. Please try again."
-          );
+          const data = error.response.data.errors;
+
+          if (data) {
+            for (const key in data) {
+              if (Array.isArray(data[key])) {
+                const values = data[key].filter(
+                  (value) => typeof value === "string"
+                );
+                if (values.length > 0) {
+                  toast.error(`${values.join(", ")}`);
+                }
+              }
+            }
+          } else {
+            toast.error(
+              "Something went wrong while trying to register for event. Please try again."
+            );
+          }
         });
     } else {
       // Form is invalid, display error messages
@@ -248,7 +296,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       business_name: "",
       business_sector_id: "",
       national_id: "",
-      address: "",
+      region_id: "",
       select_interest: "",
       notification: 1,
       registration_type_id: 1,
@@ -283,61 +331,100 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         />
       </div>
 
-      <div className="md:flex md:gap-4">
-        {/* National Id Input */}
-        <FormInputText
-          required={true}
-          label="ID/Passport No."
-          name="national_id"
-          value={formData.national_id}
-          onChange={handleChange}
-          error={formErrors.national_id}
-          placeholder="Enter your ID or passport number"
-        />
+      <div className="md:flex md:gap-4 w-full">
+        <div className="md:w-1/2">
+          {/* National Id Input */}
+          <FormInputText
+            required={true}
+            label="ID/Passport No."
+            name="national_id"
+            value={formData.national_id}
+            onChange={handleChange}
+            error={formErrors.national_id}
+            placeholder="Enter your ID or passport number"
+          />
+        </div>
+
+        {/* Select Nationality Input */}
+        <div className="md:w-1/2 mb-3">
+          <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
+            Nationality <span className="text-red-500">*</span>
+          </label>
+          <div className="m-2"></div>
+          <Select
+            name="nationality"
+            value={selectedNationality}
+            onChange={handleSelectChange}
+            options={nationality.map((nation) => ({
+              value: nation.id,
+              label: nation.nicename,
+            }))}
+            placeholder="Select Nationality or Search..."
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                background: "#dbe8f4",
+                color: "#153148",
+                padding: "0.5rem 0",
+                border: "none",
+              }),
+            }}
+          />
+          {selectedNationality && (
+            <p>
+              Selected option:{" "}
+              <span className="text-green-700">
+                {selectedNationality.label}{" "}
+                <BiCheckDouble style={{ display: "inline-block" }} />
+              </span>
+            </p>
+          )}
+        </div>
       </div>
 
-      {/* Select Nationality Input */}
-      <div className="mb-3">
-        <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
-          Nationality <span className="text-red-500">*</span>
-        </label>
-        <Select
-          name="nationality"
-          value={selectedNationality}
-          onChange={handleSelectChange}
-          options={nationality.map((nation) => ({
-            value: nation.id,
-            label: nation.nicename,
-          }))}
-          placeholder="Select Nationality or Search..."
-          className="bg-[#dbe8f4] border-none rounded-lg text-[#153148] focus:outline-none focus:ring-2 focus:ring-[#153148]"
-        />
-        {selectedNationality && (
-          <p>
-            Selected option:{" "}
-            <span className="text-green-700">{selectedNationality.label}</span>
-          </p>
-        )}
-      </div>
-
-      <div className="md:flex md:gap-4">
-        {/* Country Region Input */}
-        <FormInputText
-          required={true}
-          label="Country/Region"
-          name="country_region"
-          value={formData.country_region}
-          onChange={handleChange}
-          error={formErrors.country_region}
-          placeholder={"Provide your country/region"}
-        />
+      <div className="md:flex md:gap-4 w-full">
+        <div className="md:w-1/2">
+          <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
+            Country/Region <span className="text-red-500">*</span>
+          </label>
+          <div className="m-2"></div>
+          {/* Country Region Input */}
+          <Select
+            name="country_region"
+            value={selectedCountry}
+            onChange={handleSelectCountryChange}
+            options={nationality.map((nation) => ({
+              value: nation.id,
+              label: nation.nicename,
+            }))}
+            placeholder="Select country or Search..."
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                background: "#dbe8f4",
+                color: "#153148",
+                padding: "0.5rem 0",
+                border: "none",
+              }),
+            }}
+          />
+          {selectedCountry && (
+            <p>
+              Selected option:{" "}
+              <span className="text-green-700">
+                {selectedCountry.label}{" "}
+                <BiCheckDouble style={{ display: "inline-block" }} />
+              </span>
+            </p>
+          )}
+        </div>
 
         {/* Phone Country Code */}
-        <div className="">
+        <div className="md:w-1/2">
           <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
             Phone Number <span className="text-red-500">*</span>
           </label>
-          <div className="flex gap-2 relative">
+          <div className="flex justify-center items-center gap-2">
             <Select
               defaultValue={selectedCountryCode} // Set the default value here
               name="country_code"
@@ -348,18 +435,30 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
                 label: `(+${nation.phonecode})`,
               }))}
               placeholder="codes"
-              className="w-[200px] mt-3 border-none rounded-lg text-[#153148] focus:outline-none focus:ring-2 focus:ring-[#153148]"
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  background: "#dbe8f4",
+                  color: "#153148",
+                  width: "120px",
+                  padding: "0.5rem 0",
+                  border: "none",
+                }),
+              }}
             />
             <TelephoneInput
-              // required={true}
-              // label="Phone Number"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              error={formErrors.phone}
               placeholder="Provide your phone number"
             />
           </div>
+          {formErrors.phone && (
+            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
+              <FaExclamationTriangle />
+              {formErrors.phone}
+            </p>
+          )}
         </div>
       </div>
 
@@ -388,27 +487,37 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       </div>
 
       <div className="md:flex md:gap-4">
-        {/* Job Title Input */}
-        <FormInputText
-          required={true}
-          label="Job Title"
-          name="job_title"
-          value={formData.job_title}
-          onChange={handleChange}
-          error={formErrors.job_title}
-          placeholder={"Provide your job title"}
-        />
+        <div className="flex-1">
+          {/* Job Title Input */}
+          <FormInputText
+            required={true}
+            label="Job Title"
+            name="job_title"
+            value={formData.job_title}
+            onChange={handleChange}
+            error={formErrors.job_title}
+            placeholder={"Provide your job title"}
+          />
+        </div>
 
         {/* Business Address Inputs */}
-        <FormInputText
-          required={true}
-          label="Business Address"
-          name="address"
-          value={formData.address}
-          onChange={handleChange}
-          error={formErrors.address}
-          placeholder="Provide your business address"
-        />
+        <div className="flex-1">
+          <TelephoneInput
+            required={true}
+            label="Business Address"
+            name="region_id"
+            value={formData.region_id}
+            onChange={handleChange}
+            error={formErrors.region_id}
+            placeholder="Provide your business address (00-100)"
+          />
+          {formErrors.region_id && (
+            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
+              <FaExclamationTriangle />
+              {formErrors.region_id}
+            </p>
+          )}
+        </div>
       </div>
 
       <div className="mb-3">
@@ -416,21 +525,33 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
           Sector <span className="text-red-500">*</span>
         </label>
+        <div className="m-2"></div>
         <Select
           name="sectors"
           value={selectedSector}
           onChange={handleSectorChange}
-          options={sectors.map((sector) => ({
+          options={sortedSectors.map((sector) => ({
             value: sector.id,
             label: sector.name,
           }))}
           placeholder="Select Sector or search..."
-          className="bg-[#dbe8f4] border-none rounded-lg text-[#153148] focus:outline-none focus:ring-2 focus:ring-[#153148]"
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              background: "#dbe8f4",
+              color: "#153148",
+              padding: "0.5rem 0",
+              border: "none",
+            }),
+          }}
         />
         {selectedSector && (
           <p>
             Selected option:{" "}
-            <span className="text-green-700">{selectedSector.label}</span>
+            <span className="text-green-700">
+              {selectedSector.label}{" "}
+              <BiCheckDouble style={{ display: "inline-block" }} />
+            </span>
           </p>
         )}
       </div>
@@ -444,12 +565,20 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         name="select_interest"
         value={selectedInterest}
         onChange={handleInterestChange}
-        options={sectors.map((interest) => ({
+        options={sortedSectors.map((interest) => ({
           value: interest.id,
           label: interest.name,
         }))}
         placeholder="Select Your Interests or search..."
-        className="bg-[#dbe8f4] border-none rounded-lg text-[#153148] focus:outline-none focus:ring-2 focus:ring-[#153148]"
+        styles={{
+          control: (baseStyles, state) => ({
+            ...baseStyles,
+            background: "#dbe8f4",
+            color: "#153148",
+            padding: "0.5rem 0",
+            border: "none",
+          }),
+        }}
       />
 
       <div className="md:flex md:gap-4 my-3">
@@ -483,7 +612,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
       {/* Registration Button Input */}
       <div className="md:flex md:justify-center w-[100%] mx-auto">
-        <button className="bg-[#153148] text-slate-200 hover:bg-slate-200 hover:text-[#153148] w-full py-3 rounded-xl">
+        <button className="bg-[#128e12] text-slate-200 hover:bg-slate-200 hover:text-[#153148] w-full py-3 rounded-xl">
           Register
         </button>
       </div>
