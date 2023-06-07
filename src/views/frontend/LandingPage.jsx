@@ -1,4 +1,5 @@
 import React from "react";
+import ReactPixel from "react-facebook-pixel";
 
 import {
   SiteNav,
@@ -16,6 +17,11 @@ import {
 } from "../../components";
 
 const LandingPage = () => {
+  // Create a pixel instance
+  ReactPixel.init("934299561188277");
+  // This will trigger a "PageView" event on the pixel
+  ReactPixel.track("PageView");
+
   return (
     <div className="bg-slate-300 min-h-screen pt-2">
       {/* Site Nav Component */}

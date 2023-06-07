@@ -99,6 +99,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     }));
   };
 
+  // Get data from endpoints.
   useEffect(() => {
     axios
       .get(getSectorsLocalEndpoint)
