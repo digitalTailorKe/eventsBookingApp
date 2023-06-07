@@ -12,6 +12,7 @@ import {
   Partners,
   MarketingPartner,
   WhyImportFromIndia,
+  Sectors,
 } from "../../components";
 
 const LandingPage = () => {
@@ -55,6 +56,14 @@ const LandingPage = () => {
         {/* Hosts Component */}
         {/* <Hosts /> */}
         {/* </div> */}
+      </div>
+
+      {/* Sectors Section */}
+      <div className="container w-full lg:max-w-screen-lg lg:mx-auto px-2 md:px-0 flex flex-col md:flex-row mt-3 gap-4">
+        <div className="bg-[#fff] p-5 rounded-2xl flex-1">
+          {/* Organizers Component */}
+          <Sectors />
+        </div>
       </div>
 
       {/* Why Import From India */}

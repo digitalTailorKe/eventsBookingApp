@@ -104,8 +104,9 @@ const HeroBanner = () => {
       <hr className="my-3" />
 
       <div className="mt-3">
-        <p className="text-center text-[16px] md:text-lg font-[300]">
-          Witness the grand showcase of over 500 Indian businesses at the Expo
+        <p className="text-red-600 text-center text-[18px] md:text-lg font-[600]">
+          Witness the grand showcase of 150+ exhibitors to Witness the grand
+          showcase of Indian business
         </p>
       </div>
     </div>

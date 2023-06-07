@@ -10,7 +10,7 @@ const Partners = () => {
 
       <hr className="mb-3" />
 
-      <div className="flex flex-col md:flex-row justify-center items-center mx-auto gap-2 w-full shadow-lg p-3 rounded-lg">
+      <div className="flex flex-col md:flex-row justify-center items-center mx-auto gap-2 w-full">
         <div className="flex-1 my-3">
           <div className="flex-1 text-center">
             <a href="https://www.kenyachamber.or.ke/" target="_blank">
@@ -35,6 +35,16 @@ const Partners = () => {
             business community. KNCCI advocates for creating a good commercial,
             trade, and investment environment that supports enterprise
             expansion.
+          </p>
+          <p className="text-[16px] md:text-[18px]">
+            For more information visit:{" "}
+            <a
+              href="https://www.kenyachamber.or.ke"
+              target="_blank"
+              className="text-blue-600 italic"
+            >
+              www.kenyachamber.or.ke
+            </a>
           </p>
         </div>
       </div>

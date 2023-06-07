@@ -35,7 +35,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
   const sortedSectors = sectors.sort((a, b) => a.name.localeCompare(b.name));
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
-  // const [validationerror, setValidationError] = useState([]);
+  const [selectedSectors, setSelectedSectorz] = useState(null);
 
   const handleSelectChange = (selectedOption) => {
     setSelectedNationality(selectedOption);
@@ -63,6 +63,15 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     }));
   };
 
+  const handleSectorsChange = (selectedOptions) => {
+    const selectedIds = selectedOptions.map((option) => option.value);
+    setSelectedSectorz(selectedOptions);
+    setFormData((prevData) => ({
+      ...prevData,
+      sectors: selectedIds,
+    }));
+  };
+
   const handleCountryCodeChange = (selectedOption) => {
     setSelectedCountryCode(selectedOption);
     setFormData((prevData) => ({
@@ -83,7 +92,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     setPhoneNumber(value);
   };
 
-  const handleSwitchChange = (value) => {};
+  // const handleSwitchChange = (value) => {};
 
   useEffect(() => {
     axios
@@ -120,7 +129,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     job_title: "",
     country_region: "",
     business_name: "",
-    business_sector_id: "",
+    sectors: "",
     national_id: "",
     business_address: "",
     interest: "",
@@ -137,7 +146,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     if (name === "sectors") {
       setFormData((prevData) => ({
         ...prevData,
-        business_sector_id: value,
+        sectors: value,
       }));
     } else if (name === "nationality") {
       setFormData((prevData) => ({
@@ -160,6 +169,11 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         ...prevData,
         region_id: parseInt(value),
       }));
+    } else if (name === "phone") {
+      setFormData((prevData) => ({
+        ...prevData,
+        phone: parseInt(value),
+      }));
     } else {
       setFormData((prevData) => ({
         ...prevData,
@@ -179,6 +193,10 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
     if (!formData.last_name) {
       errors.last_name = "Please provide your last name.";
+    }
+
+    if (!formData.phone) {
+      errors.phone = "Please provide your phone number.";
     }
 
     if (!formData.email) {
@@ -227,7 +245,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       // Initializing new form data details
       const newRequestData = {
         full_name: formData.first_name + " " + formData.last_name,
-        phone: phoneNumber,
+        phone: formData.phone,
         email: formData.email,
         id_number: formData.national_id,
         job_title: formData.job_title,
@@ -236,12 +254,13 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         notification: formData.notification,
         region_id: selectedCountry.value,
         nationality_id: selectedNationality.value,
-        business_sector_id: selectedSector.value,
+        business_sector_ids: formData.sectors,
         registration_type_id: formData.registration_type_id,
-
         sectors: formData.interest,
         country_code: selectedCountry.value,
       };
+
+      // console.log(newRequestData);
 
       // Send data to the server.
       axios
@@ -291,7 +310,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       job_title: "",
       country_region: "",
       business_name: "",
-      business_sector_id: "",
+      sectors: "",
       national_id: "",
       business_address: "",
       select_interest: "",
@@ -421,7 +440,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
         {/* Phone Country Code */}
         <div className="md:w-1/2 mb-3">
-          {/* <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
+          <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
             Phone Number <span className="text-red-500">*</span>
           </label>
           <div className="flex justify-center items-center gap-2">
@@ -458,8 +477,9 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
               <FaExclamationTriangle />
               {formErrors.phone}
             </p>
-          )} */}
-          <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
+          )}
+
+          {/* <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
             Phone Number <span className="text-red-500">*</span>
           </label>
           <div className="m-2"></div>
@@ -478,7 +498,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
               <FaExclamationTriangle />
               {formErrors.phone}
             </p>
-          )}
+          )} */}
         </div>
       </div>
 
@@ -540,14 +560,15 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       <div className="mb-3">
         {/* Sector Inputs */}
         <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
-          Interested in meeting with the following sectors.{" "}
+          Sectors of your core businesses. (Select multiple){" "}
           <span className="text-red-500">*</span>
         </label>
         <div className="m-2"></div>
         <Select
+          isMulti
           name="sectors"
-          value={selectedSector}
-          onChange={handleSectorChange}
+          value={selectedSectors}
+          onChange={handleSectorsChange}
           options={sortedSectors.map((sector) => ({
             value: sector.id,
             label: sector.name,
@@ -563,21 +584,12 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
             }),
           }}
         />
-        {selectedSector && (
-          <p>
-            Selected option:{" "}
-            <span className="text-green-700">
-              {selectedSector.label}{" "}
-              <BiCheckDouble style={{ display: "inline-block" }} />
-            </span>
-          </p>
-        )}
       </div>
 
       {/* Select Interest Input */}
       <div className="w-full">
         <label htmlFor="" className="text-[#153148] text-[14px] font-[700]">
-          Select Interest (Select Multiple){" "}
+          Interested in meetings with the following sectors. (Select multiple){" "}
           <span className="text-red-500">*</span>
         </label>
         <div className="m-2"></div>
@@ -631,10 +643,6 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
             )}
           </div>
         </div>
-      </div>
-
-      <div className="flex justify-start items-center my-3">
-        <Switch onChange={handleSwitchChange} checked={"checked"} /> Yes
       </div>
 
       {/* <div className="text-red-600 flex flex-col justify-center items-center">

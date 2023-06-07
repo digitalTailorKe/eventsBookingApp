@@ -17,6 +17,7 @@ import Organizers from "./Organizers";
 import Partners from "./Partners";
 import MarketingPartner from "./MarketingPartner";
 import WhyImportFromIndia from "./WhyImportFromIndia";
+import Sectors from "./Sectors";
 
 export {
   SiteNav,
@@ -38,4 +39,5 @@ export {
   Partners,
   MarketingPartner,
   WhyImportFromIndia,
+  Sectors,
 };

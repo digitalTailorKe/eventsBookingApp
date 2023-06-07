@@ -17,6 +17,10 @@ const Registration = () => {
     setIsRegistered(true);
   };
 
+  const handleResetForm = () => {
+    setIsRegistered(false);
+  };
+
   return (
     <div className="">
       <h4 className="flex gap-4 items-center text-[#153148] text-[16px] md:text-[22px] font-[400] uppercase pb-2">
@@ -43,7 +47,7 @@ const Registration = () => {
 
                   <div className="md:flex md:justify-center w-[100%] mx-auto mt-3">
                     <button
-                      onClick={setIsRegistered(false)}
+                      onClick={handleResetForm}
                       className="bg-[#f04223] text-slate-200 uppercase hover:bg-slate-200 hover:text-[#153148] w-full py-3 rounded-xl"
                     >
                       Register Another

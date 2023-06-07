@@ -14,19 +14,17 @@ const Organizers = () => {
         <div className="flex flex-col md:flex-row w-full justify-center items-center shadow-lg p-3 rounded-lg">
           <div className="flex-1">
             <div className="flex justify-center">
-              <a href="https://repc.in/" target="_blank">
-                <img
-                  src="/imgs/raok.png"
-                  alt=""
-                  className="w-[50%] md:w-[40%] mx-auto cursor-pointer"
-                />
-              </a>
+              <img
+                src="/imgs/raok.png"
+                alt=""
+                className="w-[50%] md:w-[40%] mx-auto cursor-pointer"
+              />
             </div>
           </div>
 
           <div className="flex-1">
             <h4 className="text-center md:text-left mb-3 font-bold">
-              RAJASTHAN ASSOCIATION OF KENYA
+              RAJASTHAN ASSOCIATION OF KENYA (RAK)
             </h4>
             <p className="text-[16px] md:text-[18px]">
               It was established in 2016 as a registered body, a nonprofitable
@@ -52,7 +50,7 @@ const Organizers = () => {
 
           <div className="flex-1">
             <h4 className="text-center md:text-left mb-3 font-bold">
-              RAJASTHAN EXPORT PROMOTION COUNCIL
+              RAJASTHAN EXPORT PROMOTION COUNCIL (REPC)
             </h4>
             <p className="text-[16px] md:text-[18px]">
               It is a not-for-profit organization, constituted under the
@@ -61,6 +59,16 @@ const Organizers = () => {
               overall development of all manufacturing, service, and business
               sectors, from entrepreneurship development, export infrastructure
               development, and export ecosystem development in Rajasthan.
+            </p>
+            <p className="text-[16px] md:text-[18px]">
+              For more information visit:{" "}
+              <a
+                href="https://repc.in/"
+                target="_blank"
+                className="text-blue-600 italic"
+              >
+                www.repc.in
+              </a>
             </p>
           </div>
         </div>
@@ -80,7 +88,7 @@ const Organizers = () => {
 
           <div className="flex-1">
             <h4 className="text-center md:text-left mb-3 font-bold">
-              FEDERATION OF RAJASTHAN TRADE & INDUSTRY
+              FEDERATION OF RAJASTHAN TRADE & INDUSTRY (FORTI)
             </h4>
             <p className="text-[16px] md:text-[18px]">
               It is a registered body with the Registrar of Non-Trading
@@ -89,6 +97,16 @@ const Organizers = () => {
               industry-specific associations, and institutions besides
               individuals. It compasses a broad spectrum of industries & trade
               in all the sectors of the economy.
+            </p>
+            <p className="text-[16px] md:text-[18px]">
+              For more information visit:{" "}
+              <a
+                href="https://expo.forti.in"
+                target="_blank"
+                className="text-blue-600 italic"
+              >
+                www.expo.forti.in
+              </a>
             </p>
           </div>
         </div>

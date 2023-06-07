@@ -6,23 +6,19 @@ const Footer = () => {
 
   return (
     <div className="pb-3">
-      <div className="flex-col flex md:flex-row justify-between items-center">
+      <div className="flex flex-col justify-center items-center md:flex-row md:justify-between w-full">
         {/* Footer Links */}
-        <div className="mt-3">
-          <ul className="flex gap-4 items-center">
-            <li className="text-[#153148] text-[14px] font-[400] mb-2 md:text-[21px]">
-              <span className="text-[18px]" href="#">
-                For more info contact{" "}
-                <a
-                  href="mailto:info@indoeastafricaexpo.org"
-                  target="_blank"
-                  className="text-blue-500 hover:underline"
-                >
-                  info@indoeastafricaexpo.org
-                </a>
-              </span>
-            </li>
-          </ul>
+        <div className="mt-3 flex-1 text-center md:text-left">
+          <span className="text-[18px]" href="#">
+            For more info contact{" "}
+            <a
+              href="mailto:info@indoeastafricaexpo.org"
+              target="_blank"
+              className="text-blue-500 hover:underline"
+            >
+              info@indoeastafricaexpo.org
+            </a>
+          </span>
         </div>
 
         {/* Social Media Icons */}
@@ -48,9 +44,7 @@ const Footer = () => {
 
       <hr />
       <div className="flex justify-center my-4">
-        <p>
-          Copyright: &copy;2023 All rights reserved.
-        </p>
+        <p>Copyright: &copy;2023 All rights reserved.</p>
       </div>
     </div>
   );
