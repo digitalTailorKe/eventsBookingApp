@@ -25,7 +25,7 @@ const Sectors = () => {
                   Automotive, Motor Parts & Machinery & Tools
                 </li>
                 <li className="list-item">
-                  Artificial Jewelry, Beauty & Cosmetics
+                  Artificial jewellery, Beauty & Cosmetics
                 </li>
                 <li className="list-item">Agriculture</li>
                 <li className="list-item">Technology</li>

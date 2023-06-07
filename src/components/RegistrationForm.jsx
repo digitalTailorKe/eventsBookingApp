@@ -172,7 +172,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     } else if (name === "phone") {
       setFormData((prevData) => ({
         ...prevData,
-        phone: parseInt(value),
+        phone: value,
       }));
     } else {
       setFormData((prevData) => ({
@@ -460,7 +460,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
                   background: "#dbe8f4",
                   color: "#153148",
                   width: "120px",
-                  padding: "0.5rem 0",
+                  padding: "0.6rem 0",
                   border: "none",
                 }),
               }}
@@ -651,7 +651,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
       {/* Registration Button Input */}
       <div className="md:flex md:justify-center w-[100%] mx-auto">
-        <button className="bg-[#f04223] text-slate-200 uppercase hover:bg-slate-200 hover:text-[#153148] w-full py-3 rounded-xl">
+        <button className="bg-[#f04223] text-slate-200 uppercase hover:bg-green-600 hover:text-[#fff] w-full py-3 rounded-xl">
           Register Now
         </button>
       </div>

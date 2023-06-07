@@ -34,6 +34,44 @@ const Organizers = () => {
           </div>
         </div>
 
+        <div className="flex flex-col md:flex-row justify-center items-center shadow-lg p-3 rounded-lg mt-3">
+          <div className="flex-1 mb-3">
+            <div className="flex justify-center">
+              <a href="https://forti.in" target="_blank">
+                <img
+                  src="/imgs/forti.png"
+                  alt=""
+                  className="w-[50%] md:w-[40%] mx-auto cursor-pointer"
+                />
+              </a>
+            </div>
+          </div>
+
+          <div className="flex-1">
+            <h4 className="text-center md:text-left mb-3 font-bold">
+              FEDERATION OF RAJASTHAN TRADE & INDUSTRY (FORTI)
+            </h4>
+            <p className="text-[16px] md:text-[18px]">
+              It is a registered body with the Registrar of Non-Trading
+              Companies. It has more than 15000+ direct members and 200,000+
+              indirect members, including trading & industry establishments,
+              industry-specific associations, and institutions besides
+              individuals. It compasses a broad spectrum of industries & trade
+              in all the sectors of the economy.
+            </p>
+            <p className="text-[16px] md:text-[18px]">
+              For more information visit:{" "}
+              <a
+                href="https://forti.in"
+                target="_blank"
+                className="text-blue-600 italic"
+              >
+                www.forti.in
+              </a>
+            </p>
+          </div>
+        </div>
+
         <hr className="my-3" />
 
         {/* /imgs/repc-logo.png */}
@@ -68,44 +106,6 @@ const Organizers = () => {
                 className="text-blue-600 italic"
               >
                 www.repc.in
-              </a>
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-col md:flex-row justify-center items-center shadow-lg p-3 rounded-lg mt-3">
-          <div className="flex-1 mb-3">
-            <div className="flex justify-center">
-              <a href="https://expo.forti.in" target="_blank">
-                <img
-                  src="/imgs/forti.png"
-                  alt=""
-                  className="w-[50%] md:w-[40%] mx-auto cursor-pointer"
-                />
-              </a>
-            </div>
-          </div>
-
-          <div className="flex-1">
-            <h4 className="text-center md:text-left mb-3 font-bold">
-              FEDERATION OF RAJASTHAN TRADE & INDUSTRY (FORTI)
-            </h4>
-            <p className="text-[16px] md:text-[18px]">
-              It is a registered body with the Registrar of Non-Trading
-              Companies. It has more than 15000+ direct members and 200,000+
-              indirect members, including trading & industry establishments,
-              industry-specific associations, and institutions besides
-              individuals. It compasses a broad spectrum of industries & trade
-              in all the sectors of the economy.
-            </p>
-            <p className="text-[16px] md:text-[18px]">
-              For more information visit:{" "}
-              <a
-                href="https://expo.forti.in"
-                target="_blank"
-                className="text-blue-600 italic"
-              >
-                www.expo.forti.in
               </a>
             </p>
           </div>
