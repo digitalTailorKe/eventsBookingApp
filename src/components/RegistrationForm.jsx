@@ -80,19 +80,24 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     }));
   };
 
+  // handles the countries input field and populates the country code field
   const handleSelectCountryChange = (selectedOption) => {
     setSelectedCountry(selectedOption);
+
+    const code = selectedOption
+      ? nationalityCodes.find((item) => item.id === selectedOption.value)
+      : null;
+    const countryCode = code ? code.code : "";
+    setSelectedCountryCode([
+      { value: selectedOption.value, label: `(+${countryCode})` },
+    ]);
+    setCountryCode(countryCode);
     setFormData((prevData) => ({
       ...prevData,
       country_region: selectedOption.value,
+      country_code: selectedOption.value,
     }));
   };
-
-  const handlePhoneChange = (value) => {
-    setPhoneNumber(value);
-  };
-
-  // const handleSwitchChange = (value) => {};
 
   useEffect(() => {
     axios
@@ -245,7 +250,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       // Initializing new form data details
       const newRequestData = {
         full_name: formData.first_name + " " + formData.last_name,
-        phone: formData.phone,
+        phone: "+" + countryCode + "-" + formData.phone,
         email: formData.email,
         id_number: formData.national_id,
         job_title: formData.job_title,
@@ -260,7 +265,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         country_code: selectedCountry.value,
       };
 
-      // console.log(newRequestData);
+      console.log(newRequestData);
 
       // Send data to the server.
       axios
@@ -445,7 +450,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
           </label>
           <div className="flex justify-center items-center gap-2">
             <Select
-              defaultValue={selectedCountryCode} // Set the default value here
+              defaultValue={selectedCountryCode}
               name="country_code"
               value={selectedCountryCode}
               onChange={handleCountryCodeChange}
@@ -465,6 +470,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
                 }),
               }}
             />
+
             <TelephoneInput
               name="phone"
               value={formData.phone}
