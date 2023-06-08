@@ -2,14 +2,12 @@
   "name": "events_booking",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://indoeastafricaexpo.org/home",
   "type": "module",
+  "homepage": "https://indoeastafricaexpo.org/",
   "Author": "Dennis Otieno @DTA",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "tailwind": "npx tailwindcss -i ./src/index.css -o  ./dist/main.css --watch",
     "prettier": "npx prettier --write **/*.jsx",
     "preview": "vite preview"
   },

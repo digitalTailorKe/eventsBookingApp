@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         element: <LandingPage />,
       },
       {
-        path: "/user/organizer",
+        path: "/user-organizer",
         element: <Organizers />,
       },
       {

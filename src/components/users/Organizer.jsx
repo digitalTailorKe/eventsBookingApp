@@ -10,6 +10,10 @@ const Organizer = () => {
     setScanActive(true);
   };
 
+  const handleScanComplete = () => {
+    setScanActive(false);
+  };
+
   return (
     <div className="min-h-screen md:py-8 text-[16px] md:text-[18px]">
       <div className="max-w-5xl mx-auto bg-white shadow-md rounded-md px-4 md:px-8 py-6">
@@ -146,7 +150,10 @@ const Organizer = () => {
             {/* Add your QR code scanner component here */}
             {scanActive ? (
               // Scanner is active
-              <QrScannerFn handleScanning={scanActive} />
+              <QrScannerFn
+                handleScanning={scanActive}
+                handleScanComplete={handleScanComplete}
+              />
             ) : (
               <button
                 onClick={startScan}
