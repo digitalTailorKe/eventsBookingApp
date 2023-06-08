@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { FormInputText, PasswordInput } from "../../components";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginScreen = () => {
   const [formErrors, setFormErrors] = useState([]);
@@ -7,6 +9,12 @@ const LoginScreen = () => {
     username: "",
     password: "",
   });
+
+  const toastSettings = {
+    position: "bottom-center",
+    autoClose: 5000,
+    theme: "colored",
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,10 +50,12 @@ const LoginScreen = () => {
 
     if (!formData.password) {
       errors.password = "The password field is required.";
+      toast.error("The password field is required.", toastSettings);
     }
 
     if (!formData.username) {
       errors.username = "The username field is required.";
+      toast.error("The username field is required.", toastSettings);
     }
 
     setFormErrors(errors);
@@ -55,9 +65,9 @@ const LoginScreen = () => {
   };
 
   return (
-    <div className="min-h-screen py-8">
-      <div className="max-w-lg mx-auto bg-white mt-40 shadow-md rounded-md px-8 py-6">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+    <div className="">
+      <div className="max-w-lg mx-auto bg-white mt-40 shadow-md rounded-md px-4 md:px-8 py-6">
+        <h2 className="text-2xl text-center md:text-left font-semibold text-gray-800 mb-6">
           Organizers Account
         </h2>
         <form onSubmit={handleUserSubmit} method="post">
@@ -69,7 +79,6 @@ const LoginScreen = () => {
               name="username"
               value={formData.username}
               onChange={handleChange}
-              error={formErrors.username}
               placeholder="Enter your username"
             />
           </div>
@@ -82,7 +91,6 @@ const LoginScreen = () => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              error={formErrors.password}
               placeholder="Enter your password"
             />
           </div>
@@ -93,6 +101,7 @@ const LoginScreen = () => {
             Access Account
           </button>
         </form>
+        <ToastContainer />
       </div>
     </div>
   );

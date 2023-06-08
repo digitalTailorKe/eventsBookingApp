@@ -20,6 +20,8 @@ import WhyImportFromIndia from "./WhyImportFromIndia";
 import Sectors from "./Sectors";
 import PasswordInput from "./PasswordInput";
 import QrScannerFn from "./QrScannerFn";
+import SearchInputArea from "./SearchInputArea";
+import CustomSearchInput from "./CustomSearchInput";
 
 export {
   SiteNav,
@@ -44,4 +46,6 @@ export {
   Sectors,
   PasswordInput,
   QrScannerFn,
+  SearchInputArea,
+  CustomSearchInput,
 };

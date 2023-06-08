@@ -1,17 +1,31 @@
 import React, { useState } from "react";
 import { BiSearch, BiLock, BiQrScan, BiX } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { QrScannerFn } from "../../components";
+import { QrScannerFn, SearchInputArea } from "../../components";
+import SearchModal from "../modals/SearchModal";
 
 const Organizer = () => {
   const [scanActive, setScanActive] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const startScan = () => {
     setScanActive(true);
   };
 
+  const stopScan = () => {
+    setScanActive(false);
+  };
+
   const handleScanComplete = () => {
     setScanActive(false);
+  };
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -43,7 +57,10 @@ const Organizer = () => {
             <div className="w-full md:w-[inherit]">
               <div className="flex flex-col space-y-4 justify-center items-center md:space-x-4 md:flex-row">
                 {/* Search registered User */}
-                <button className="w-full md:w-[inherit] bg-slate-200 mt-3 px-5 py-3 hover:bg-blue-500 hover:text-slate-100 rounded-lg shadow-md">
+                <button
+                  onClick={openModal}
+                  className="w-full md:w-[inherit] bg-slate-200 mt-4 px-5 py-3 hover:bg-blue-500 hover:text-slate-100 rounded-lg shadow-md"
+                >
                   Search <BiSearch style={{ display: "inline-block" }} />
                 </button>
 
@@ -68,9 +85,10 @@ const Organizer = () => {
           </div>
         </div>
 
+        {/* Marked atendees */}
         <div className="mb-8">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">
-            Marked Attendance
+            Marked Attendance (300 Attendees)
           </h3>
           <div className="overflow-x-auto">
             <table className="min-w-full bg-white">
@@ -86,18 +104,43 @@ const Organizer = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="py-2 px-4 border-b border-gray-200">
+                <tr className="">
+                  <td className="py-4 px-4 border-b border-gray-200">
                     John Doe
                   </td>
-                  <td className="py-2 px-4 border-b border-gray-200">
+                  <td className="py-4 px-4 border-b border-gray-200">
                     john@example.com
+                  </td>
+                  <td className="py-4 px-4 border-b border-gray-200">
+                    +254725134449
+                  </td>
+                  <td className="py-4 px-4 border-b border-gray-200">
+                    26-07-2023
+                  </td>
+                  <td className="py-4 px-4 border-b text-red-600 border-gray-200">
+                    <BiX
+                      style={{
+                        color: "#da1c18",
+                        fontSize: "21px",
+                        cursor: "pointer",
+                        display: "inline-block",
+                      }}
+                    />{" "}
+                    Remove
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-4 px-4 border-b border-gray-200">
+                    Jane Smith
+                  </td>
+                  <td className="py-2 px-4 border-b border-gray-200">
+                    jane@example.com
                   </td>
                   <td className="py-2 px-4 border-b border-gray-200">
                     +254725134449
                   </td>
                   <td className="py-2 px-4 border-b border-gray-200">
-                    26-07-2023
+                    27-07-2023
                   </td>
                   <td className="py-2 px-4 border-b text-red-600 border-gray-200">
                     <BiX
@@ -112,7 +155,57 @@ const Organizer = () => {
                   </td>
                 </tr>
                 <tr>
+                  <td className="py-4 px-4 border-b border-gray-200">
+                    Jane Smith
+                  </td>
                   <td className="py-2 px-4 border-b border-gray-200">
+                    jane@example.com
+                  </td>
+                  <td className="py-2 px-4 border-b border-gray-200">
+                    +254725134449
+                  </td>
+                  <td className="py-2 px-4 border-b border-gray-200">
+                    27-07-2023
+                  </td>
+                  <td className="py-2 px-4 border-b text-red-600 border-gray-200">
+                    <BiX
+                      style={{
+                        color: "#da1c18",
+                        fontSize: "21px",
+                        cursor: "pointer",
+                        display: "inline-block",
+                      }}
+                    />{" "}
+                    Remove
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-4 px-4 border-b border-gray-200">
+                    Jane Smith
+                  </td>
+                  <td className="py-2 px-4 border-b border-gray-200">
+                    jane@example.com
+                  </td>
+                  <td className="py-2 px-4 border-b border-gray-200">
+                    +254725134449
+                  </td>
+                  <td className="py-2 px-4 border-b border-gray-200">
+                    27-07-2023
+                  </td>
+                  <td className="py-2 px-4 border-b text-red-600 border-gray-200">
+                    <BiX
+                      style={{
+                        color: "#da1c18",
+                        fontSize: "21px",
+                        cursor: "pointer",
+                        display: "inline-block",
+                      }}
+                    />{" "}
+                    Remove
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-4 px-4 border-b border-gray-200">
                     Jane Smith
                   </td>
                   <td className="py-2 px-4 border-b border-gray-200">
@@ -142,18 +235,30 @@ const Organizer = () => {
           </div>
         </div>
 
+        {/* Scanner Area */}
         <div>
           <h3 className="text-lg font-semibold text-gray-800 mb-4">
             QR Code Scanner
           </h3>
-          <div className="flex items-center justify-center bg-gray-200 h-64">
+          <div className="flex items-center justify-center bg-gray-200 h-[400px] relative">
             {/* Add your QR code scanner component here */}
             {scanActive ? (
-              // Scanner is active
-              <QrScannerFn
-                handleScanning={scanActive}
-                handleScanComplete={handleScanComplete}
-              />
+              <div className="w-full">
+                <button
+                  onClick={stopScan}
+                  className="py-3 px-8 rounded-lg bg-red-400 hover:bg-red-600 hover:text-slate-100 text-red-800 shadow-md mb-1"
+                >
+                  Close scanner{" "}
+                  <BiQrScan
+                    style={{ display: "inline-block", marginLeft: "8px" }}
+                  />{" "}
+                </button>
+
+                <QrScannerFn
+                  handleScanning={scanActive}
+                  handleScanComplete={handleScanComplete}
+                />
+              </div>
             ) : (
               <button
                 onClick={startScan}
@@ -166,6 +271,13 @@ const Organizer = () => {
               </button>
             )}
           </div>
+        </div>
+
+        {/* Search Modal */}
+        <div className="">
+          <SearchModal isOpen={modalOpen} onClose={closeModal}>
+            <SearchInputArea />
+          </SearchModal>
         </div>
       </div>
     </div>

@@ -25,7 +25,7 @@ const PasswordInput = ({
         placeholder={placeholder}
       />
       {error && (
-        <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
+        <p className="text-red-500 text-[12px] flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded">
           <FaExclamationTriangle />
           {error}
         </p>

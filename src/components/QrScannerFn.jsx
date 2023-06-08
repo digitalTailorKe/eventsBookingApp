@@ -31,13 +31,13 @@ const QrScannerFn = ({ handleScanning, handleScanComplete }) => {
   return (
     <div className="w-full">
       <QrScanner
-        delay={500}
+        delay={300}
         onDecode={handleScanning ? handleScan : handleError}
         onError={handleError}
-        style={{ width: "100%" }}
+        style={{ width: "100%", position: "absolute" }}
       />
 
-      <div className="mt-5 bg-green-200 p-4 rounded-lg">
+      <div className="mt-5">
         <h4 className="text-green-600">{result}</h4>
       </div>
     </div>
