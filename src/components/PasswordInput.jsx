@@ -1,7 +1,7 @@
 import React from "react";
 import { FaExclamationTriangle } from "react-icons/fa";
 
-const FormInputText = ({
+const PasswordInput = ({
   label,
   name,
   value,
@@ -11,12 +11,12 @@ const FormInputText = ({
   placeholder,
 }) => {
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col gap-2 mb-3 w-full">
       <label htmlFor={name} className="text-[#153148] text-[14px] font-[700]">
         {label} {required && <span className="text-red-500">*</span>}
       </label>
       <input
-        type="text"
+        type="password"
         name={name}
         id={name}
         value={value}
@@ -34,4 +34,4 @@ const FormInputText = ({
   );
 };
 
-export default FormInputText;
+export default PasswordInput;

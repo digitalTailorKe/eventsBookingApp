@@ -36,6 +36,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedSectors, setSelectedSectorz] = useState(null);
+  const [formErrors, setFormErrors] = useState({});
 
   const handleSelectChange = (selectedOption) => {
     setSelectedNationality(selectedOption);
@@ -74,6 +75,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
   const handleCountryCodeChange = (selectedOption) => {
     setSelectedCountryCode(selectedOption);
+    alert(selectedOption.label);
     setFormData((prevData) => ({
       ...prevData,
       country_code: selectedOption.value,
@@ -126,6 +128,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       });
   }, []);
 
+  // Initialize the form data inputs
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -143,8 +146,6 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     registration_type_id: 1,
     country_code: "",
   });
-
-  const [formErrors, setFormErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -201,6 +202,22 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       errors.last_name = "Please provide your last name.";
     }
 
+    if (selectedNationality == null || selectedNationality == "") {
+      errors.nationality = "Please provide your nationality.";
+    }
+
+    if (selectedCountry == null || selectedCountry == "") {
+      errors.country_region = "Please provide your country or region.";
+    }
+
+    if (!formData.sectors) {
+      errors.sectors = "Please select your stations.";
+    }
+
+    if (!formData.interest) {
+      errors.interest = "Please select your interest.";
+    }
+
     if (!formData.phone) {
       errors.phone = "Please provide your phone number.";
     }
@@ -245,13 +262,18 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     e.preventDefault();
 
     if (validateForm()) {
+      if (countryCode === "" && typeof countryCode === "object") {
+        toast.error("Please provide your country code.");
+        return;
+      }
+
       // Form is valid, perform form submission logic here
       console.log("Form is valid. Submitting...");
 
       // Initializing new form data details
       const newRequestData = {
         full_name: formData.first_name + " " + formData.last_name,
-        phone: "+" + countryCode + "-" + formData.phone,
+        phone: countryCode + "-" + formData.phone,
         email: formData.email,
         id_number: formData.national_id,
         job_title: formData.job_title,
@@ -394,6 +416,12 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
               }),
             }}
           />
+          {formErrors.nationality && (
+            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 mt-2 rounded-lg">
+              <FaExclamationTriangle />
+              {formErrors.nationality}
+            </p>
+          )}
           {selectedNationality && (
             <p>
               Selected option:{" "}
@@ -433,6 +461,12 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
               }),
             }}
           />
+          {formErrors.country_region && (
+            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 mt-2 rounded-lg">
+              <FaExclamationTriangle />
+              {formErrors.country_region}
+            </p>
+          )}
           {selectedCountry && (
             <p>
               Selected option:{" "}
@@ -591,6 +625,12 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
             }),
           }}
         />
+        {formErrors.sectors && (
+          <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 mt-2 rounded-lg">
+            <FaExclamationTriangle />
+            {formErrors.sectors}
+          </p>
+        )}
       </div>
 
       {/* Select Interest Input */}
@@ -620,6 +660,12 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
             }),
           }}
         />
+        {formErrors.interest && (
+          <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 mt-2 rounded-lg">
+            <FaExclamationTriangle />
+            {formErrors.interest}
+          </p>
+        )}
       </div>
 
       {/* Get Notification & Submit Button */}

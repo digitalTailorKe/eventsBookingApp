@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import AdminLayout from "./layout/AdminLayout";
 import FrontLayout from "./layout/FrontLayout";
-import { LandingPage, Login } from "./views/frontend";
+import { LandingPage, Login, Organizers } from "./views/frontend";
 import { Dashboard } from "./views/backend";
 import NotFound from "./views/NotFound";
 
@@ -11,13 +11,13 @@ const router = createBrowserRouter([
     path: "/",
     element: <FrontLayout />,
     children: [
-      // {
-      //   path: "/",
-      //   element: <Navigate to="/" />,
-      // },
       {
         path: "/",
         element: <LandingPage />,
+      },
+      {
+        path: "/user/organizer",
+        element: <Organizers />,
       },
       {
         path: "/auth-login",

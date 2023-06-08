@@ -18,6 +18,8 @@ import Partners from "./Partners";
 import MarketingPartner from "./MarketingPartner";
 import WhyImportFromIndia from "./WhyImportFromIndia";
 import Sectors from "./Sectors";
+import PasswordInput from "./PasswordInput";
+import QrScannerFn from "./QrScannerFn";
 
 export {
   SiteNav,
@@ -40,4 +42,6 @@ export {
   MarketingPartner,
   WhyImportFromIndia,
   Sectors,
+  PasswordInput,
+  QrScannerFn,
 };
