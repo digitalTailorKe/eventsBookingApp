@@ -2,7 +2,11 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import AdminLayout from "./layout/AdminLayout";
 import FrontLayout from "./layout/FrontLayout";
 import { LandingPage, Login, Organizers } from "./views/frontend";
-import { Dashboard } from "./views/backend";
+import {
+  Dashboard,
+  OrganizersRegisterAtendees,
+  ViewAttendeeDetails,
+} from "./views/backend";
 import NotFound from "./views/NotFound";
 
 const router = createBrowserRouter([
@@ -33,6 +37,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard to="/dashboard" />,
+      },
+      {
+        path: "/user-organizer-register-atendees",
+        element: <OrganizersRegisterAtendees />,
+      },
+      {
+        path: "/view-attendee-details/:fullName",
+        element: <ViewAttendeeDetails />,
       },
     ],
   },

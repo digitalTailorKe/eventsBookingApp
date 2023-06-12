@@ -3,18 +3,18 @@ import { BiSearch } from "react-icons/bi";
 
 const CustomSearchInput = ({ name, value, onChange, placeholder }) => {
   return (
-    <div className="flex w-full items-center gap-4 mt-5 mb-3 md:mt-0">
+    <div className="flex flex-row w-full items-center gap-1 mt-5 md:mt-0 ml-2">
       <input
         type="text"
         name={name}
         id={name}
         value={value}
         onChange={onChange}
-        className="focus:none flex-1 rounded-lg border-none py-1 px-3 text-[18px] font-[300] text-[#153148] focus:outline-none md:py-4 md:text-[21px]"
+        className="focus:none flex-1 rounded-lg border-none py-1 px-3 text-[16px] font-[300] text-[#153148] focus:outline-none md:py-4 md:text-[18px]"
         placeholder={placeholder}
         autoComplete="off"
       />
-      <BiSearch className="cursor-pointer text-[21px] font-[300] md:text-[31px]" />
+      <BiSearch className="text-gray-400 cursor-pointer text-[21px] font-[300] md:text-[31px] mr-4" />
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import CustomSearchInput from "./CustomSearchInput";
-import { BiCheckDouble, BiCheck, BiX } from "react-icons/bi";
 import { MagnifyingGlass } from "react-loader-spinner";
 import axiosClient from "../axiosClient";
 import { ClipLoader, PulseLoader } from "react-spinners";
@@ -8,9 +7,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SearchInputArea = () => {
+  const baseUrl = `${import.meta.env.VITE_LOCAL_API_BASE_URL}/api`;
   const [filteredResults, setFilteredResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [buttonLoading, setbuttonLoading] = useState(false);
+  const [clickedButtonId, setClickedButtonId] = useState(null); // To track which button was clicked
   const [searchText, setSearchText] = useState("");
   const [formData, setFormData] = useState({
     search: "",
@@ -58,8 +59,19 @@ const SearchInputArea = () => {
   };
 
   const handleAttendClick = (data) => {
+    setClickedButtonId(data.id); // Set the clicked button ID
     console.log(data.id);
     toast.success("Attendee marked successfully", toastSettings);
+  };
+
+  const handleGoToViewPage = (data) => {
+    return () => {
+      // TODO:
+      // 1. Set the clicked button ID
+      // 2. Get client's data from the server
+      // 3. Redirect to the view page with the data
+      console.log(data.id);
+    };
   };
 
   return (
@@ -81,7 +93,10 @@ const SearchInputArea = () => {
               <hr className="" />
               {filteredResults.map((result) => (
                 <div key={result.id} className="">
-                  <div className="flex items-center justify-between hover:bg-slate-300 p-1 md:p-3 cursor-pointer">
+                  <div
+                    onClick={handleGoToViewPage(result)}
+                    className="flex items-center justify-between hover:bg-[#e4ecf5] p-1 md:p-2 cursor-pointer md:px-3"
+                  >
                     {/* Atendee Info */}
                     <div className="flex items-center space-x-4 md:mb-1">
                       <img
@@ -89,12 +104,12 @@ const SearchInputArea = () => {
                         src="/imgs/profile.png"
                         alt="User Profile"
                       />
-                      <div className="text-[16px] md:text-[18px]">
-                        <p className="text-gray-800 font-semibold">
+                      <div className="text-[16px] md:text-small">
+                        <p className="text-gray-800 font-semibold m-0">
                           {result.full_name}
                         </p>
-                        <p className="text-gray-600">{result.email}</p>
-                        <p className="text-gray-600">{result.phone}</p>
+                        <p className="text-gray-600 m-0">{result.email}</p>
+                        <p className="text-gray-600 m-0">{result.phone}</p>
                       </div>
                     </div>
 
@@ -104,11 +119,14 @@ const SearchInputArea = () => {
                         onClick={() => handleAttendClick(result)}
                         className="bg-yellow-500 hover:bg-yellow-700 text-white font-normal md:font-bold py-1 md:py-2 px-2 md:px-4 rounded focus:outline-none focus:shadow-outline"
                       >
-                        Attend{" "}
-                        {buttonLoading ? (
-                          <PulseLoader color="#fff" />
+                        {clickedButtonId === result.id ? ( // Show loading state only for the clicked button
+                          <PulseLoader
+                            color="#fff"
+                            size={10}
+                            style={{ display: "inline-block" }}
+                          />
                         ) : (
-                          <BiCheck className="inline-block" />
+                          "Attend"
                         )}
                       </button>
                     </div>

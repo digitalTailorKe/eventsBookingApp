@@ -15,7 +15,7 @@ const SearchModal = ({ isOpen, onClose, children }) => {
   return (
     <div className={modalClass} onClick={onClose}>
       <div className={modalContentClass} onClick={(e) => e.stopPropagation()}>
-        <div className="px-3">{children}</div>
+        <div className="">{children}</div>
       </div>
     </div>
   );

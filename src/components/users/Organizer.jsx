@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { BiSearch, BiLock, BiQrScan, BiX } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import {
@@ -11,6 +11,7 @@ import SearchModal from "../modals/SearchModal";
 const Organizer = () => {
   const [scanActive, setScanActive] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const scannerRef = useRef(null);
 
   const startScan = () => {
     setScanActive(true);
@@ -48,6 +49,24 @@ const Organizer = () => {
     // Add more data rows as needed
   ];
 
+  const scrollToScanner = () => {
+    if (scannerRef.current) {
+      scannerRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // Get current time
+  const now = new Date();
+  const currentHour = now.getHours();
+  let salutation = "";
+  if (currentHour >= 5 && currentHour < 12) {
+    salutation = "Good Morning";
+  } else if (currentHour >= 12 && currentHour < 18) {
+    salutation = "Good Afternoon";
+  } else {
+    salutation = "Good Evening";
+  }
+
   return (
     <div className="min-h-screen lg:py-8 text-[16px] lg:text-[18px]">
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg px-4 md:px-8 lg:px-8 pb-6">
@@ -56,8 +75,8 @@ const Organizer = () => {
         </h2>
 
         <div className="mb-8">
-          <h3 className="ml-5 lg:ml-1 text-lg font-semibold text-gray-800 mb-4">
-            User Profile
+          <h3 className="ml-5 lg:ml-1 text-lg font-semibold text-gray-500 mb-4">
+            {salutation}, John 👋 <span>Welcome Back</span>
           </h3>
           <div className="flex flex-col items-center lg:justify-between lg:flex-row">
             {/* User info */}
@@ -85,7 +104,13 @@ const Organizer = () => {
                 </button>
 
                 {/* QR Scanner */}
-                <button className="w-full lg:w-[inherit] py-3 px-5 rounded-lg bg-blue-300 text-blue-700 shadow-lg hover:bg-blue-600 hover:text-slate-100">
+                <button
+                  onClick={() => {
+                    startScan();
+                    scrollToScanner();
+                  }}
+                  className="w-full lg:w-[inherit] py-3 px-5 rounded-lg bg-blue-300 text-blue-700 shadow-lg hover:bg-blue-600 hover:text-slate-100"
+                >
                   Scan{" "}
                   <BiQrScan
                     style={{ display: "inline-block", marginLeft: "8px" }}
@@ -94,7 +119,7 @@ const Organizer = () => {
 
                 {/* Registration Link */}
                 <Link
-                  to=""
+                  to="/user-organizer-register-atendees"
                   className="px-5 w-full lg:w-[inherit] py-3 text-center bg-red-200 text-red-700 rounded-lg hover:bg-red-500 hover:text-slate-100 shadow-lg"
                 >
                   Register Attendee{" "}
@@ -109,7 +134,7 @@ const Organizer = () => {
         <OrganizersTable data={data} />
 
         {/* Scanner Area */}
-        <div>
+        <div ref={scannerRef}>
           <h3 className="text-lg font-semibold text-gray-800 mb-4">
             QR Code Scanner
           </h3>

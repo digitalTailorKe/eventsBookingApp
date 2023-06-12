@@ -1,3 +1,5 @@
 import Dashboard from "./Dashboard";
+import OrganizersRegisterAtendees from "./OrganizersRegisterAtendees";
+import ViewAttendeeDetails from "./ViewAttendeeDetails";
 
-export { Dashboard };
+export { Dashboard, OrganizersRegisterAtendees, ViewAttendeeDetails };
