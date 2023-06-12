@@ -96,8 +96,8 @@ input[type="checkbox"]:checked + label .checkbox::after {
 }
 
 .modal-content-search {
-  position: relative;
-  top: -10%;
+  position: fixed;
+  top: 20%;
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
@@ -111,12 +111,19 @@ input[type="checkbox"]:checked + label .checkbox::after {
 
 @media (max-width: 768px) {
   .modal-content-search {
-    top: -15%;
+    top: 30%;
     margin: 0 10px;
   }
 
   .modal-content-search {
-    padding: 20px 10px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .modal-content-search {
+    top: 15%;
+    margin: 0 10px;
   }
 }
 
@@ -169,4 +176,102 @@ input[type="checkbox"]:checked + label .checkbox::after {
 .modal-content-search.active {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Datatable styling */
+.odd {
+  background-color: #e4ecf5 !important;
+}
+
+.even {
+  background-color: #fff !important;
+}
+
+tr > td {
+  padding: 0.5rem !important;
+  font-size: medium !important;
+  color: #424242 !important;
+}
+
+#attendee_table_info {
+  font-size: medium !important;
+  color: #153148 !important;
+}
+
+.paginate_button.current {
+  background-color: #2463eb !important;
+  color: #fff !important;
+}
+
+.paginate_button.current:hover {
+  background-color: #2463eb !important;
+  color: #fff !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  background-color: #2463eb !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  border: none !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  color: inherit !important;
+  border: none !important;
+  border-radius: 8px !important;
+  background: #88acfb !important;
+}
+
+#attendee_table_next {
+  background: #2463eb !important;
+  color: #fff !important;
+}
+
+#attendee_table_filter {
+  margin: 10px 0 !important;
+}
+
+#attendee_table_filter input[type="search"] {
+  border: none !important;
+  border-radius: 8px !important;
+  background: #dbe8f4 !important;
+  padding: 10px !important;
+  width: 300px !important;
+  color: #2463eb !important;
+}
+
+#attendee_table_length {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#attendee_table_length label {
+  margin: 0 !important;
+  font-size: medium !important;
+  color: #2463eb !important;
+}
+
+#attendee_table_length select {
+  border: none !important;
+  border-radius: 8px !important;
+  background: #dbe8f4 !important;
+  padding: 10px !important;
+  margin: 0 10px !important;
+}
+
+.paginate_button.previous.disabled {
+  background: #bdc2c9 !important;
+}
+
+#attendee_table_previous {
+  background: #2463eb !important;
+  color: #fff !important;
+}
+
+.created-at-cell {
+  font-size: medium !important;
+  color: #f59104 !important;
 }

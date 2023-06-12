@@ -22,6 +22,7 @@ import PasswordInput from "./PasswordInput";
 import QrScannerFn from "./QrScannerFn";
 import SearchInputArea from "./SearchInputArea";
 import CustomSearchInput from "./CustomSearchInput";
+import OrganizersTable from "./OrganizersTable";
 
 export {
   SiteNav,
@@ -48,4 +49,5 @@ export {
   QrScannerFn,
   SearchInputArea,
   CustomSearchInput,
+  OrganizersTable,
 };

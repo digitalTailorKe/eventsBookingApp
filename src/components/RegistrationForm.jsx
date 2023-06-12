@@ -8,11 +8,8 @@ import axios from "axios";
 import Select from "react-select";
 import { BiCheckDouble } from "react-icons/bi";
 import { FaExclamationTriangle } from "react-icons/fa";
-import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { isValidPhoneNumber } from "react-phone-input-2";
-import { Component } from "react";
-import Switch from "react-switch";
+import axiosClient from "../axiosClient";
 
 const RegistrationForm = ({ onRegistrationSuccess }) => {
   const storeAtendeeLocalEndpoint =
@@ -45,9 +42,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       ? nationalityCodes.find((item) => item.id === selectedOption.value)
       : null;
     const countryCode = code ? code.code : "";
-    setCountryCode([
-      { value: selectedOption.value, label: `(+${countryCode})` },
-    ]);
+    setCountryCode([{ value: selectedOption.value, label: `${countryCode}` }]);
     setSelectedCountryCode(countryCode);
   };
 
@@ -75,7 +70,6 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
   const handleCountryCodeChange = (selectedOption) => {
     setSelectedCountryCode(selectedOption);
-    alert(selectedOption.label);
     setFormData((prevData) => ({
       ...prevData,
       country_code: selectedOption.value,
@@ -91,7 +85,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       : null;
     const countryCode = code ? code.code : "";
     setSelectedCountryCode([
-      { value: selectedOption.value, label: `(+${countryCode})` },
+      { value: selectedOption.value, label: `+${countryCode}` },
     ]);
     setCountryCode(countryCode);
     setFormData((prevData) => ({
@@ -180,6 +174,16 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       setFormData((prevData) => ({
         ...prevData,
         phone: value,
+      }));
+    } else if (name === "email") {
+      setFormData((prevData) => ({
+        ...prevData,
+        email: value,
+      }));
+    } else if (name === "national_id") {
+      setFormData((prevData) => ({
+        ...prevData,
+        national_id: value,
       }));
     } else {
       setFormData((prevData) => ({
@@ -288,9 +292,11 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         country_code: selectedCountry.value,
       };
 
-      console.log(newRequestData);
+      // console.log(newRequestData);
 
       // Send data to the server.
+      // axiosClient
+      //   .post("/attendees", newRequestData)
       axios
         .post(storeAtendeeLocalEndpoint, newRequestData)
         .then(() => {
@@ -308,15 +314,15 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
                   (value) => typeof value === "string"
                 );
                 if (values.length > 0) {
-                  toast.error(`${values.join(", ")}`);
+                  toast.error(`${values.join(", ")}`, {
+                    autoClose: 15000,
+                  });
                   // setValidationError(values.join(", "));
                 }
               }
             }
           } else {
-            toast.error(
-              "Something went wrong while trying to register for event. Please try again."
-            );
+            toast.error("Invalid registration. Please try again.");
           }
         });
     } else {
@@ -491,7 +497,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
               onChange={handleCountryCodeChange}
               options={nationality.map((nation) => ({
                 value: nation.id,
-                label: `(+${nation.phonecode})`,
+                label: `${nation.nicename} +${nation.phonecode}`,
               }))}
               placeholder="codes"
               styles={{
@@ -499,7 +505,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
                   ...baseStyles,
                   background: "#dbe8f4",
                   color: "#153148",
-                  width: "120px",
+                  width: "150px",
                   padding: "0.6rem 0",
                   border: "none",
                 }),
