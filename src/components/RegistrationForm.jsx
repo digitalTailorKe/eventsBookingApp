@@ -3,7 +3,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FormInputText from "./FormInputText";
 import TelephoneInput from "./TelephoneInput";
-import SelectInput from "./SelectInput";
 import axios from "axios";
 import Select from "react-select";
 import { BiCheckDouble } from "react-icons/bi";
@@ -24,14 +23,12 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
   const [sectors, setSectors] = useState([]);
   const [nationality, setNationality] = useState([]);
   const [selectedNationality, setSelectedNationality] = useState(null);
-  const [selectedSector, setSelectedSectors] = useState(null);
   const [selectedInterest, setSelectedInterest] = useState(null);
   const [countryCode, setCountryCode] = useState([]);
   const [nationalityCodes, setNationalityCodes] = useState([]);
   const [selectedCountryCode, setSelectedCountryCode] = useState(null);
   const sortedSectors = sectors.sort((a, b) => a.name.localeCompare(b.name));
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedSectors, setSelectedSectorz] = useState(null);
   const [formErrors, setFormErrors] = useState({});
 
@@ -42,12 +39,8 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       ? nationalityCodes.find((item) => item.id === selectedOption.value)
       : null;
     const countryCode = code ? code.code : "";
-    setCountryCode([{ value: selectedOption.value, label: `${countryCode}` }]);
+    setCountryCode(countryCode);
     setSelectedCountryCode(countryCode);
-  };
-
-  const handleSectorChange = (selectedOption) => {
-    setSelectedSectors(selectedOption);
   };
 
   const handleInterestChange = (selectedOptions) => {
@@ -72,7 +65,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     setSelectedCountryCode(selectedOption);
     setFormData((prevData) => ({
       ...prevData,
-      country_code: selectedOption.value,
+      country_code: selectedOption.label,
     }));
   };
 
@@ -84,14 +77,15 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       ? nationalityCodes.find((item) => item.id === selectedOption.value)
       : null;
     const countryCode = code ? code.code : "";
-    setSelectedCountryCode([
-      { value: selectedOption.value, label: `+${countryCode}` },
-    ]);
+    setSelectedCountryCode({
+      value: `+${countryCode}`,
+      label: `+${countryCode}`,
+    });
     setCountryCode(countryCode);
     setFormData((prevData) => ({
       ...prevData,
       country_region: selectedOption.value,
-      country_code: selectedOption.value,
+      country_code: countryCode,
     }));
   };
 
@@ -273,11 +267,13 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
       // Form is valid, perform form submission logic here
       console.log("Form is valid. Submitting...");
+      console.log(selectedCountryCode.value);
+      console.log(countryCode);
 
       // Initializing new form data details
       const newRequestData = {
         full_name: formData.first_name + " " + formData.last_name,
-        phone: countryCode + "-" + formData.phone,
+        phone: selectedCountryCode.value + "-" + formData.phone,
         email: formData.email,
         id_number: formData.national_id,
         job_title: formData.job_title,
@@ -292,11 +288,6 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         country_code: selectedCountry.value,
       };
 
-      // console.log(newRequestData);
-
-      // Send data to the server.
-      // axiosClient
-      //   .post("/attendees", newRequestData)
       axios
         .post(storeAtendeeLocalEndpoint, newRequestData)
         .then(() => {
@@ -317,7 +308,6 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
                   toast.error(`${values.join(", ")}`, {
                     autoClose: 15000,
                   });
-                  // setValidationError(values.join(", "));
                 }
               }
             }
@@ -496,7 +486,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
               value={selectedCountryCode}
               onChange={handleCountryCodeChange}
               options={nationality.map((nation) => ({
-                value: nation.id,
+                value: nation.phonecode,
                 label: `${nation.nicename} +${nation.phonecode}`,
               }))}
               placeholder="codes"
