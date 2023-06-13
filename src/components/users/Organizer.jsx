@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { BiSearch, BiLock, BiQrScan, BiX } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { useStateContext } from "../../context/ContextProvider";
 import {
   QrScannerFn,
   SearchInputArea,
@@ -11,6 +12,7 @@ import SearchModal from "../modals/SearchModal";
 const Organizer = () => {
   const [scanActive, setScanActive] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const { user } = useStateContext();
   const scannerRef = useRef(null);
 
   const startScan = () => {
@@ -76,7 +78,7 @@ const Organizer = () => {
 
         <div className="mb-8">
           <h3 className="ml-5 lg:ml-1 text-lg font-semibold text-gray-500 mb-4">
-            {salutation}, John 👋 <span>Welcome Back</span>
+            {salutation}, {user.name} 👋 <span>Welcome Back</span>
           </h3>
           <div className="flex flex-col items-center lg:justify-between lg:flex-row">
             {/* User info */}
@@ -87,8 +89,8 @@ const Organizer = () => {
                 alt="User Profile"
               />
               <div>
-                <p className="text-gray-800 font-semibold">John Doe</p>
-                <p className="text-gray-600">john@example.com</p>
+                <p className="text-gray-800 font-semibold">{user.name}</p>
+                <p className="text-gray-600">{user.email}</p>
               </div>
             </div>
 

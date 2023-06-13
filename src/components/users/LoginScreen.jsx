@@ -1,12 +1,23 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FormInputText, PasswordInput } from "../../components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axiosClient from "../../axiosClient";
+import { useStateContext } from "../../context/ContextProvider";
+import { ClipLoader, PulseLoader } from "react-spinners";
 
 const LoginScreen = () => {
+  const baseUrl = `${import.meta.env.VITE_LOCAL_API_BASE_URL}/api`;
   const [formErrors, setFormErrors] = useState([]);
+  const [validationErrors, setValidationErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { user, setUser, setToken } = useStateContext();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -19,10 +30,10 @@ const LoginScreen = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "username") {
+    if (name === "email") {
       setFormData((prevData) => ({
         ...prevData,
-        username: value,
+        email: value,
       }));
     }
 
@@ -34,13 +45,32 @@ const LoginScreen = () => {
     }
   };
 
-  const handleUserSubmit = (e) => {
+  const handleUserSubmit = async (e) => {
     e.preventDefault();
     if (validateErrors()) {
       // if the validation passes
+      try {
+        setLoading(true);
+        const response = await axiosClient.post(baseUrl + "/login", formData);
+        const { data } = response;
+        setSuccessMessage(data.message);
+        setUser(data.user);
+        setToken(data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        if (error.response && error.response.status === 422) {
+          const { errors } = error.response.data;
+          setValidationErrors(errors);
+          console.log(errors);
+        } else {
+          console.log("Error:", error.message);
+        }
+      }
     } else {
       // if the validation fails
-      //
+      return;
     }
   };
 
@@ -53,9 +83,9 @@ const LoginScreen = () => {
       toast.error("The password field is required.", toastSettings);
     }
 
-    if (!formData.username) {
-      errors.username = "The username field is required.";
-      toast.error("The username field is required.", toastSettings);
+    if (!formData.email) {
+      errors.email = "The email field is required.";
+      toast.error("The email field is required.", toastSettings);
     }
 
     setFormErrors(errors);
@@ -70,16 +100,37 @@ const LoginScreen = () => {
         <h2 className="text-2xl text-center md:text-left font-semibold text-gray-800 mb-6">
           Organizers Account
         </h2>
+
+        <div className="my-3">
+          {validationErrors.email && (
+            <div className="text-red-500 test-small bg-red-200 px-5 py-2 rounded">
+              {validationErrors.email}
+            </div>
+          )}
+
+          {validationErrors.password && (
+            <div className="text-red-500 test-small bg-red-200 px-5 py-2 rounded">
+              {validationErrors.password}
+            </div>
+          )}
+
+          {successMessage && (
+            <div className="text-green-500 test-small bg-green-200 px-5 py-2 rounded">
+              {successMessage}
+            </div>
+          )}
+        </div>
+
         <form onSubmit={handleUserSubmit} method="post">
           <div className="mb-6">
             {/* Username Name Input */}
             <FormInputText
               required={true}
-              label="Username"
-              name="username"
-              value={formData.username}
+              label="Email Address"
+              name="email"
+              value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your username"
+              placeholder="Enter your email"
             />
           </div>
 
@@ -98,7 +149,15 @@ const LoginScreen = () => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            Access Account
+            {loading ? ( // Show loading state only for the clicked button
+              <PulseLoader
+                color="#fff"
+                size={10}
+                style={{ display: "inline-block" }}
+              />
+            ) : (
+              "Access Account"
+            )}
           </button>
         </form>
         <ToastContainer />
