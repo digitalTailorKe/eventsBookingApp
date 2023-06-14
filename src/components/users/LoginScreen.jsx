@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FormInputText, PasswordInput } from "../../components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axiosClient from "../../axiosClient";
 import { useStateContext } from "../../context/ContextProvider";
-import { ClipLoader, PulseLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
+import { BiXCircle } from "react-icons/bi";
 
 const LoginScreen = () => {
   const baseUrl = `${import.meta.env.VITE_LOCAL_API_BASE_URL}/api`;
@@ -53,9 +54,9 @@ const LoginScreen = () => {
         setLoading(true);
         const response = await axiosClient.post(baseUrl + "/login", formData);
         const { data } = response;
-        setSuccessMessage(data.message);
         setUser(data.user);
         setToken(data.token);
+        toast.success(data.message, toastSettings);
         localStorage.setItem("user", JSON.stringify(data.user));
         setLoading(false);
       } catch (error) {
@@ -80,15 +81,16 @@ const LoginScreen = () => {
 
     if (!formData.password) {
       errors.password = "The password field is required.";
-      toast.error("The password field is required.", toastSettings);
+      // toast.error("The password field is required.", toastSettings);
     }
 
     if (!formData.email) {
       errors.email = "The email field is required.";
-      toast.error("The email field is required.", toastSettings);
+      // toast.error("The email field is required.", toastSettings);
     }
 
     setFormErrors(errors);
+    setValidationErrors(errors);
 
     // Returns true is there is no errors
     return Object.keys(errors).length === 0;
@@ -97,26 +99,50 @@ const LoginScreen = () => {
   return (
     <div className="">
       <div className="max-w-lg mx-auto bg-white mt-40 shadow-md rounded-md px-4 md:px-8 py-6">
-        <h2 className="text-2xl text-center md:text-left font-semibold text-gray-800 mb-6">
+        <Link to={"/"}>
+          <img
+            className="text-center"
+            style={{ width: "150px", textAlign: "center", margin: "0 auto" }}
+            src="/imgs/logo.png"
+            alt=""
+          />
+        </Link>
+        <h2 className="text-2xl text-center font-semibold text-gray-800 mb-6">
           Organizers Account
         </h2>
 
         <div className="my-3">
           {validationErrors.email && (
-            <div className="text-red-500 test-small bg-red-200 px-5 py-2 rounded">
-              {validationErrors.email}
+            <div className="text-red-500 test-small bg-red-200 px-5 py-2 rounded mb-2 flex justify-between items-center">
+              {validationErrors.email}{" "}
+              <BiXCircle
+                onClick={() =>
+                  setValidationErrors({ ...validationErrors, email: "" })
+                }
+                style={{ cursor: "pointer" }}
+              />
             </div>
           )}
 
           {validationErrors.password && (
-            <div className="text-red-500 test-small bg-red-200 px-5 py-2 rounded">
-              {validationErrors.password}
+            <div className="text-red-500 test-small bg-red-200 px-5 py-2 rounded mb-2 flex justify-between items-center">
+              {validationErrors.password}{" "}
+              <BiXCircle
+                onClick={() =>
+                  setValidationErrors({ ...validationErrors, password: "" })
+                }
+                style={{ cursor: "pointer" }}
+              />
             </div>
           )}
 
           {successMessage && (
-            <div className="text-green-500 test-small bg-green-200 px-5 py-2 rounded">
-              {successMessage}
+            <div className="text-green-500 test-small bg-green-200 px-5 py-2 rounded mb-2 flex justify-between items-center">
+              {successMessage}{" "}
+              <BiXCircle
+                onClick={() => setSuccessMessage("")}
+                style={{ cursor: "pointer" }}
+              />
             </div>
           )}
         </div>

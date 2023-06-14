@@ -1,4 +1,3 @@
-import React from "react";
 import { BiXCircle } from "react-icons/bi";
 
 const Modal = ({ isOpen, onClose, children, title }) => {

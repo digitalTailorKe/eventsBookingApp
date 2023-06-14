@@ -70,13 +70,12 @@ const SearchInputArea = () => {
       // 1. Set the clicked button ID
       // 2. Get client's data from the server
       // 3. Redirect to the view page with the data
-      console.log(data.id);
     };
   };
 
   return (
     <div className="w-full">
-      <div className="w-full">
+      <div className="w-full pt-3">
         {/* Search input */}
         <CustomSearchInput
           name="search"
