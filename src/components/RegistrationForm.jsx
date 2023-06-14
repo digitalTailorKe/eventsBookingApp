@@ -9,9 +9,10 @@ import { BiCheckDouble } from "react-icons/bi";
 import { FaExclamationTriangle } from "react-icons/fa";
 import "react-phone-input-2/lib/style.css";
 import axiosClient from "../axiosClient";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationForm = ({ onRegistrationSuccess }) => {
-  const storeAtendeeLocalEndpoint =
+  const storeAttendeeLocalEndpoint =
     "https://admin.indoeastafricaexpo.org/api/attendees";
   const getSectorsLocalEndpoint =
     "https://admin.indoeastafricaexpo.org/api/sectors";
@@ -31,6 +32,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedSectors, setSelectedSectorz] = useState(null);
   const [formErrors, setFormErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleSelectChange = (selectedOption) => {
     setSelectedNationality(selectedOption);
@@ -290,11 +292,12 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       };
 
       axios
-        .post(storeAtendeeLocalEndpoint, newRequestData)
+        .post(storeAttendeeLocalEndpoint, newRequestData)
         .then(() => {
           clearFormFields();
           toast.success("Congratulations! your registration was successful.");
           onRegistrationSuccess();
+          navigate("/success-page");
         })
         .catch((error) => {
           const data = error.response.data.errors;

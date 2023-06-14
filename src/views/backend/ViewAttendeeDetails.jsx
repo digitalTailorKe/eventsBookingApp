@@ -16,29 +16,47 @@ const ViewAttendeeDetails = () => {
     }
   }, [rowData]);
 
+  // const renderSectors = (sectors) => {
+  //   if (!sectors) {
+  //     return null;
+  //   }
+  //   // Split the sectors string by the closing tag to get individual sectors
+  //   const sectorArray = sectors.split("</span>");
+  //   return sectorArray.map((sector, index) => {
+  //     // Remove any leading or trailing white spaces
+  //     const trimmedSector = sector.trim();
+  //     // Check if the sector is not empty
+  //     if (trimmedSector) {
+  //       // Append the closing tag to the sector
+  //       const sectorWithClosingTag = trimmedSector + "</span>";
+  //       return (
+  //         <span
+  //           key={index}
+  //           className="bg-cyan-200 text-[16px] px-5 text-info rounded-full mr-2 mb-2 inline-block text-cyan-600 cursor-default"
+  //           dangerouslySetInnerHTML={{ __html: sectorWithClosingTag }}
+  //         ></span>
+  //       );
+  //     }
+
+  //     return null;
+  //   });
+  // };
+
   const renderSectors = (sectors) => {
-    if (!sectors) {
+    if (!sectors || sectors.length === 0) {
       return null;
     }
-    // Split the sectors string by the closing tag to get individual sectors
-    const sectorArray = sectors.split("</span>");
-    return sectorArray.map((sector, index) => {
-      // Remove any leading or trailing white spaces
-      const trimmedSector = sector.trim();
-      // Check if the sector is not empty
-      if (trimmedSector) {
-        // Append the closing tag to the sector
-        const sectorWithClosingTag = trimmedSector + "</span>";
-        return (
-          <span
-            key={index}
-            className="bg-cyan-200 text-[16px] px-5 text-info rounded-full mr-2 mb-2 inline-block text-cyan-600 cursor-default"
-            dangerouslySetInnerHTML={{ __html: sectorWithClosingTag }}
-          ></span>
-        );
-      }
 
-      return null;
+    return sectors.map((sector, index) => {
+      const { name } = sector;
+      return (
+        <span
+          key={index}
+          className="bg-cyan-200 text-[16px] px-5 text-info rounded-full mr-2 mb-2 inline-block text-cyan-600 cursor-default"
+        >
+          {name}
+        </span>
+      );
     });
   };
 
@@ -70,7 +88,7 @@ const ViewAttendeeDetails = () => {
   return (
     <div className="min-h-screen lg:py-8 text-[16px] lg:text-[18px]">
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg px-4 md:px-8 lg:px-8 pb-6">
-        <h2 className="text-3xl text-center p-10 font-semibold mb-6 border-b-4 border-b-blue-500 text-blue-500 flex justify-center items-center">
+        <h2 className="text-xl lg:text-3xl text-center p-5 lg:p-10 font-semibold mb-6 border-b-4 border-b-blue-500 text-blue-500 flex justify-center items-center">
           <BiUserCheck className="inline-block mr-2 text-[41px]" />
           {fullName}'s Details.
         </h2>
@@ -79,11 +97,13 @@ const ViewAttendeeDetails = () => {
           <div className="mb-5 text-left">
             <Link
               onClick={handleGoBack}
-              className="bg-blue-200 py-2 px-5 text-blue-700 rounded hover:bg-blue-500 hover:text-white font-[300] flex justify-center items-center"
+              className="bg-blue-200 py-2 px-5 text-blue-700 rounded hover:bg-blue-500 hover:text-white font-[700] flex justify-center items-center"
             >
               <FaArrowLeft className="inline-block mr-2" /> Back
             </Link>
           </div>
+
+          {/* Attendees Table */}
           <h1 className="text-2xl font-bold mb-4">Attendee Details</h1>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="border p-4 rounded-md shadow-md">

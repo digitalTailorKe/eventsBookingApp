@@ -17,9 +17,9 @@ const OrganizersRegisterAtendees = () => {
         <div className="mb-5">
           <Link
             onClick={handleGoBack}
-            className="bg-blue-200 py-2 px-5 text-blue-700 rounded hover:bg-blue-500 hover:text-white font-[300] flex justify-center items-center"
+            className="bg-blue-200 py-2 px-5 text-blue-700 rounded hover:bg-blue-500 hover:text-white font-[700] flex justify-center items-center"
           >
-            <FaArrowLeft className="inline-block ml-2 font-[300]" /> Back
+            <FaArrowLeft className="inline-block mr-2 font-[300]" /> Back
           </Link>
         </div>
       </div>

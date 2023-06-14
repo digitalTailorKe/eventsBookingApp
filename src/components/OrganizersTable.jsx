@@ -6,7 +6,7 @@ import "datatables.net-dt/css/jquery.dataTables.css";
 import "datatables.net-dt";
 import axiosClient from "../axiosClient";
 
-const OrganizersTable = ({ data }) => {
+const OrganizersTable = ({ data, getTotalRegistered, getTotalAttended }) => {
   const tableRef = useRef(null);
   const [dataTable, setDataTable] = useState(null);
   const [attendeeCount, setAttendeeCount] = useState(0);
@@ -23,6 +23,8 @@ const OrganizersTable = ({ data }) => {
         );
         const { data } = response;
         const count = data.data.length;
+        getTotalRegistered(count);
+        getTotalAttended(10);
 
         // Destroy the existing DataTable instance if it exists
         if (dataTable) {
@@ -48,7 +50,7 @@ const OrganizersTable = ({ data }) => {
               width: "150px",
             },
             { name: "email", data: "email", width: "150px" },
-            { name: "phone", data: "phone", width: "150px" },
+            { name: "phone", data: "phone", width: "200px" },
             {
               name: "created_at",
               data: "created_at",
@@ -148,10 +150,10 @@ const OrganizersTable = ({ data }) => {
 
   return (
     <div className="mb-8">
-      <h3 className="text-lg font-semibold text-gray-800 mb-4">
+      {/* <h3 className="text-lg font-semibold text-gray-800 mb-4">
         Marked Attendance ({attendeeCount} Attendee
         {attendeeCount !== 1 ? "s" : ""})
-      </h3>
+      </h3> */}
       <div className="overflow-x-auto">
         <table
           ref={tableRef}

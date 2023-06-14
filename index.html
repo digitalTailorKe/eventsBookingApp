@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/public/imgs/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Indo East Africa Trade Expo Registration.</title>
     <meta
       name="keywords"
       content="East Africa,Indo Expo,East Africa Trade Expo,trade,expo,kenya,india,rajasthan"
@@ -66,8 +65,44 @@
       fbq("track", "PageView");
     </script>
     <!-- End Meta Pixel Code -->
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-05LB87FWWT"
+    ></script>
+
+    <!-- Google tag config -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-05LB87FWWT");
+    </script>
+
+    <!-- Facebook Track -->
+    <script>
+      fbq("track", "CompleteRegistration");
+    </script>
   </head>
   <body style="background: #cbd5e1">
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=934299561188277&ev=PageView&noscript=1"
+    /></noscript>
+
+    <script>
+      gtag("event", "conversion", {
+        send_to: "AW-11206699742/zB6_CO76gakYEN7V4t8p",
+      });
+    </script>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

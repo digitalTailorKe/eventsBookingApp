@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import PageTitle from "../../components/PageTitle";
 
 const SectorDetails = () => {
   const handleGoBack = () => {
@@ -7,6 +8,8 @@ const SectorDetails = () => {
   };
   return (
     <div className="min-h-screen lg:py-8 text-[16px] lg:text-[18px] p-3">
+      {/* Page title */}
+      <PageTitle title="Indo east africa trade expo - sector details." />
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg px-4 md:px-8 lg:px-8 pb-6">
         <h2 className="text-xl md:text-3xl text-center p-5 font-semibold mb-6 border-b-2 border-b-gray-500 text-gray-500 flex justify-center items-center">
           Sector Details

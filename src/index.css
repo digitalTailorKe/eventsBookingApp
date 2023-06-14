@@ -114,9 +114,6 @@ input[type="checkbox"]:checked + label .checkbox::after {
   .modal-content-search {
     top: 30%;
     margin: 0 10px;
-  }
-
-  .modal-content-search {
     padding: 10px;
   }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import PageTitle from "../../components/PageTitle";
 import ReactPixel from "react-facebook-pixel";
 
 import {
@@ -26,6 +26,7 @@ const LandingPage = () => {
     <div className="bg-slate-300 min-h-screen pt-2">
       {/* Site Nav Component */}
       {/* <SiteNav /> */}
+      <PageTitle title="Indo East Africa Trade Expo Registration." />
 
       {/* Container Section */}
       <div className="px-2">

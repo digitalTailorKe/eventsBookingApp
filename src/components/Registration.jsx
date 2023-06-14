@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { FaUnlockAlt } from "react-icons/fa";
+import { FaUnlockAlt, FaCheckCircle } from "react-icons/fa";
 import RegistrationForm from "./RegistrationForm";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SuccessPage from "../views/frontend/SuccessPage";
+
 const Registration = () => {
   const [showForm, setShowForm] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
@@ -31,15 +32,7 @@ const Registration = () => {
       {/* Registration Body */}
       <div className="mt-5">
         <div className="mt-5">
-          {isRegistered ? (
-            // Load the success page
-            <SuccessPage />
-          ) : (
-            // Load the Registration page
-            <RegistrationForm
-              onRegistrationSuccess={handleRegistrationSuccess}
-            />
-          )}
+          <RegistrationForm onRegistrationSuccess={handleRegistrationSuccess} />
         </div>
       </div>
       <ToastContainer />

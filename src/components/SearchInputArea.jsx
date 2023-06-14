@@ -5,6 +5,7 @@ import axiosClient from "../axiosClient";
 import { ClipLoader, PulseLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const SearchInputArea = () => {
   const baseUrl = `${import.meta.env.VITE_LOCAL_API_BASE_URL}/api`;
@@ -59,23 +60,46 @@ const SearchInputArea = () => {
   };
 
   const handleAttendClick = (data) => {
-    setClickedButtonId(data.id); // Set the clicked button ID
-    console.log(data.id);
-    toast.success("Attendee marked successfully", toastSettings);
+    setClickedButtonId(data.id);
+    const attendeeId = data.id; // Set the clicked button ID
+    return () => {
+      // 1. Get client's data from the server
+      axiosClient
+        .get(`/mark-attendance/${attendeeId}`)
+        .then((response) => {
+          toast.success("Attendee marked successfully", toastSettings);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
   };
 
+  const navigate = useNavigate();
+
   const handleGoToViewPage = (data) => {
+    const fullName = data.full_name;
     return () => {
-      // TODO:
       // 1. Set the clicked button ID
+      const attendeeId = data.id;
       // 2. Get client's data from the server
-      // 3. Redirect to the view page with the data
+      axiosClient
+        .get(`/attendee/data/${attendeeId}`)
+        .then((response) => {
+          // 3. Redirect to the view page with the data
+          navigate(`/view-attendee-details/${fullName}`, {
+            state: { rowData: response.data.data },
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     };
   };
 
   return (
     <div className="w-full">
-      <div className="w-full pt-3">
+      <div className="w-full md:pt-3">
         {/* Search input */}
         <CustomSearchInput
           name="search"
@@ -92,12 +116,12 @@ const SearchInputArea = () => {
               <hr className="" />
               {filteredResults.map((result) => (
                 <div key={result.id} className="">
-                  <div
-                    onClick={handleGoToViewPage(result)}
-                    className="flex items-center justify-between hover:bg-[#e4ecf5] p-1 md:p-2 cursor-pointer md:px-3"
-                  >
+                  <div className="flex items-center justify-between hover:bg-[#e4ecf5] p-1 md:p-2 cursor-pointer md:px-3">
                     {/* Atendee Info */}
-                    <div className="flex items-center space-x-4 md:mb-1">
+                    <div
+                      onClick={handleGoToViewPage(result)}
+                      className="flex items-center space-x-4 md:mb-1"
+                    >
                       <img
                         className="w-10 h-10 md:w-16 md:h-16 rounded-full"
                         src="/imgs/profile.png"

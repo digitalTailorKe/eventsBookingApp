@@ -1,5 +1,10 @@
 import React, { useState, useRef } from "react";
-import { BiSearch, BiLock, BiQrScan, BiX } from "react-icons/bi";
+import {
+  BiSearch,
+  BiLock,
+  BiQrScan,
+  BiObjectsVerticalBottom,
+} from "react-icons/bi";
 import { FaSignOutAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../context/ContextProvider";
@@ -19,6 +24,8 @@ const Organizer = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
+  const [totalRegistered, setTotalRegistered] = useState(0);
+  const [totalAttended, setTotalAttended] = useState(0);
   const [logoutPopup, setLogoutPopup] = useState(false);
   const [toggle, setToggle] = useState(false);
   const { user, logout } = useStateContext();
@@ -103,12 +110,20 @@ const Organizer = () => {
     setPasswordModalOpen(false);
   };
 
+  const getTotalRegistered = (total) => {
+    setTotalRegistered(total);
+  };
+
+  const getTotalAttended = (total) => {
+    setTotalAttended(total);
+  };
+
   return (
     <>
       {user ? (
-        <div className="min-h-screen lg:py-8 text-[16px] lg:text-[18px]">
+        <div className="min-h-screen text-[16px] lg:text-[18px]">
           <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg px-4 md:px-8 lg:px-8 pb-6">
-            <h2 className="text-3xl text-center p-10 font-semibold mb-6 border-b-4 border-b-blue-500 text-blue-500">
+            <h2 className="text-xl md:text-3xl text-center p-5 md:p-10 font-semibold mb-6 border-b-2 md:border-b-4 border-b-blue-500 text-blue-500">
               Organizers Dashboard
             </h2>
 
@@ -176,13 +191,14 @@ const Organizer = () => {
 
                 {/* Buttons */}
                 <div className="w-full lg:w-[inherit]">
-                  <div className="flex flex-col space-y-4 justify-center items-center lg:space-x-4 lg:flex-row">
+                  <div className="flex justify-center items-center space-x-4">
                     {/* Search registered User */}
                     <button
                       onClick={openModal}
-                      className="w-full lg:w-[inherit] bg-slate-200 mt-4 px-5 py-3 hover:bg-blue-500 hover:text-slate-100 rounded-lg shadow-lg"
+                      className="w-full font-[700] text-gray-800 lg:w-[inherit] bg-slate-200 px-5 py-3 hover:bg-blue-500 hover:text-slate-100 rounded-md flex justify-center items-center space-x-2"
                     >
-                      Search <BiSearch style={{ display: "inline-block" }} />
+                      <span className="hidden md:block">Search</span>{" "}
+                      <BiSearch />
                     </button>
 
                     {/* QR Scanner */}
@@ -191,29 +207,59 @@ const Organizer = () => {
                         startScan();
                         scrollToScanner();
                       }}
-                      className="w-full lg:w-[inherit] py-3 px-5 rounded-lg bg-blue-300 text-blue-700 shadow-lg hover:bg-blue-600 hover:text-slate-100"
+                      className="w-full lg:w-[inherit] py-3 px-5 rounded-md bg-blue-300 text-blue-700 font-[700] hover:bg-blue-600 hover:text-slate-100 flex justify-center items-center space-x-2"
                     >
-                      Scan{" "}
-                      <BiQrScan
-                        style={{ display: "inline-block", marginLeft: "8px" }}
-                      />{" "}
+                      <span className="hidden md:block">Scan</span> <BiQrScan />{" "}
                     </button>
 
                     {/* Registration Link */}
                     <Link
                       to="/user-organizer-register-atendees"
-                      className="px-5 w-full lg:w-[inherit] py-3 text-center bg-red-200 text-red-700 rounded-lg hover:bg-red-500 hover:text-slate-100 shadow-lg"
+                      className="px-5 w-full lg:w-[inherit] py-3 text-center bg-red-200 text-red-700 rounded-md hover:bg-red-500 hover:text-slate-100 font-[700] flex justify-center items-center space-x-2"
                     >
-                      Register Attendee{" "}
-                      <BiLock style={{ display: "inline-block" }} />
+                      <span className="hidden md:block">Register Attendee</span>{" "}
+                      <BiLock />
                     </Link>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Marked atendees */}
-            <OrganizersTable data={data} />
+            {/* Dashboard Stats */}
+            <div className="my-5">
+              <div className="grid md:grid-cols-2 gap-4">
+                {/* Total Registered */}
+                <div className="border p-4 rounded-md bg-purple-200 text-purple-800">
+                  <h2 className="text-lg font-bold mb-2 flex justify-between items-center">
+                    Total Registered Attendees{" "}
+                    <BiObjectsVerticalBottom
+                      style={{ display: "inline-block" }}
+                    />
+                  </h2>
+                  <hr />
+                  <p className="mt-3 text-center text-2xl">{totalRegistered}</p>
+                </div>
+
+                {/* Total Attended */}
+                <div className="border p-4 rounded-md bg-green-200 text-green-800">
+                  <h2 className="text-lg font-bold mb-2 flex justify-between items-center">
+                    Total Attended Attendees{" "}
+                    <BiObjectsVerticalBottom
+                      style={{ display: "inline-block" }}
+                    />
+                  </h2>
+                  <hr />
+                  <p className="mt-3 text-center text-2xl">{totalAttended}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Marked attendees */}
+            <OrganizersTable
+              data={data}
+              getTotalRegistered={getTotalRegistered}
+              getTotalAttended={getTotalAttended}
+            />
 
             {/* Scanner Area */}
             <div ref={scannerRef}>
@@ -226,7 +272,7 @@ const Organizer = () => {
                   <div className="w-full">
                     <button
                       onClick={stopScan}
-                      className="py-3 px-8 rounded-lg bg-red-400 hover:bg-red-600 hover:text-slate-100 text-red-800 shadow-lg mb-1"
+                      className="py-3 px-8 rounded-md font-[700] bg-red-400 hover:bg-red-600 hover:text-slate-100 text-red-800 shadow-lg mb-1"
                     >
                       Close scanner{" "}
                       <BiQrScan
@@ -242,7 +288,7 @@ const Organizer = () => {
                 ) : (
                   <button
                     onClick={startScan}
-                    className="py-3 px-8 rounded-lg bg-blue-300 text-blue-700 shadow-lg"
+                    className="py-3 px-8 rounded-md font-[700] bg-blue-300 text-blue-700 shadow-lg"
                   >
                     Open Scanner{" "}
                     <BiQrScan

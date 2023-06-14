@@ -3,7 +3,7 @@ import { BiSearch } from "react-icons/bi";
 
 const CustomSearchInput = ({ name, value, onChange, placeholder }) => {
   return (
-    <div className="flex flex-row w-full items-center gap-1 mt-5 md:mt-0 ml-2">
+    <div className="flex flex-row w-full items-center gap-1 ml-2">
       <input
         type="text"
         name={name}
