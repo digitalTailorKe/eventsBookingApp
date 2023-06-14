@@ -18,7 +18,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
   const getNationalities = "https://admin.indoeastafricaexpo.org/api/countries";
 
   // Local Endpoints
-  // const storeAtendeeLocalEndpoint = "http://127.0.0.1:8000/api/attendees";
+  // const storeAttendeeLocalEndpoint = "http://127.0.0.1:8000/api/attendees";
 
   const [sectors, setSectors] = useState([]);
   const [nationality, setNationality] = useState([]);
@@ -135,6 +135,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     country_code: "",
   });
 
+  // Handle state change for the form inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -323,6 +324,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     }
   };
 
+  // Clear form fields
   const clearFormFields = () => {
     // Reset form data and errors
     setFormData({
@@ -413,7 +415,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
             }}
           />
           {formErrors.nationality && (
-            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 mt-2 rounded-lg">
+            <p className="text-red-500 text-[12px] flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 mt-2 rounded-lg">
               <FaExclamationTriangle />
               {formErrors.nationality}
             </p>
@@ -458,7 +460,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
             }}
           />
           {formErrors.country_region && (
-            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 mt-2 rounded-lg">
+            <p className="text-red-500 text-[12px] flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 mt-2 rounded-lg">
               <FaExclamationTriangle />
               {formErrors.country_region}
             </p>
@@ -510,7 +512,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
             />
           </div>
           {formErrors.phone && (
-            <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
+            <p className="text-red-500 text-[12px] flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
               <FaExclamationTriangle />
               {formErrors.phone}
             </p>
@@ -622,7 +624,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
           }}
         />
         {formErrors.sectors && (
-          <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 mt-2 rounded-lg">
+          <p className="text-red-500 text-[12px] flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 mt-2 rounded-lg">
             <FaExclamationTriangle />
             {formErrors.sectors}
           </p>
@@ -657,7 +659,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
           }}
         />
         {formErrors.interest && (
-          <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 mt-2 rounded-lg">
+          <p className="text-red-500 text-[12px] flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 mt-2 rounded-lg">
             <FaExclamationTriangle />
             {formErrors.interest}
           </p>
@@ -685,7 +687,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
               <span>Get invited to seminars specific to sectors above.</span>
             </label>
             {formErrors.getNotified && (
-              <p className="text-red-500 flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
+              <p className="text-red-500 text-[12px] flex gap-2 items-center border border-red-500 border-dashed py-1 px-2 rounded-lg">
                 <FaExclamationTriangle />
                 {formErrors.getNotified}
               </p>
@@ -693,10 +695,6 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
           </div>
         </div>
       </div>
-
-      {/* <div className="text-red-600 flex flex-col justify-center items-center">
-        {validationerror}
-      </div> */}
 
       {/* Registration Button Input */}
       <div className="md:flex md:justify-center w-[100%] mx-auto">

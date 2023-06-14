@@ -23,6 +23,7 @@ import QrScannerFn from "./QrScannerFn";
 import SearchInputArea from "./SearchInputArea";
 import CustomSearchInput from "./CustomSearchInput";
 import OrganizersTable from "./OrganizersTable";
+import SuccessRegistration from "./SuccessRegistration";
 
 export {
   SiteNav,
@@ -50,4 +51,5 @@ export {
   SearchInputArea,
   CustomSearchInput,
   OrganizersTable,
+  SuccessRegistration,
 };

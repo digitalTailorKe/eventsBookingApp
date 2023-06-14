@@ -1,7 +1,13 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import AdminLayout from "./layout/AdminLayout";
 import FrontLayout from "./layout/FrontLayout";
-import { LandingPage, Login, Organizers } from "./views/frontend";
+import {
+  LandingPage,
+  Login,
+  Organizers,
+  SuccessPage,
+  SectorDetails,
+} from "./views/frontend";
 import {
   Dashboard,
   OrganizersRegisterAtendees,
@@ -18,6 +24,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <LandingPage />,
+      },
+      {
+        path: "/success-page",
+        element: <SuccessPage />,
+      },
+      {
+        path: "/sector-details",
+        element: <SectorDetails />,
       },
       {
         path: "/user-organizer",
