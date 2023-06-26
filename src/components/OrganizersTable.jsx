@@ -5,12 +5,14 @@ import "datatables.net";
 import "datatables.net-dt/css/jquery.dataTables.css";
 import "datatables.net-dt";
 import axiosClient from "../axiosClient";
+import axios from "axios";
 
-const OrganizersTable = ({ data, getTotalRegistered, getTotalAttended }) => {
+const OrganizersTable = ({ getTotalRegistered, getTotalAttended }) => {
   const tableRef = useRef(null);
   const [dataTable, setDataTable] = useState(null);
   const [attendeeCount, setAttendeeCount] = useState(0);
 
+  // const baseUrl = `${import.meta.env.VITE_EVENTS_API_BASE_URL}/api`;
   const baseUrl = `${import.meta.env.VITE_LOCAL_API_BASE_URL}/api`;
   const navigate = useNavigate();
 
@@ -19,12 +21,12 @@ const OrganizersTable = ({ data, getTotalRegistered, getTotalAttended }) => {
       try {
         // Fetch the data from the API for counting
         const response = await axiosClient.get(
-          baseUrl + "/organizer-attendance"
+          "/organizer-attendance"
         );
         const { data } = response;
         const count = data.data.length;
         getTotalRegistered(count);
-        getTotalAttended(10);
+        getTotalAttended(0);
 
         // Destroy the existing DataTable instance if it exists
         if (dataTable) {
@@ -39,6 +41,7 @@ const OrganizersTable = ({ data, getTotalRegistered, getTotalAttended }) => {
             url: baseUrl + "/organizer-attendance",
             type: "GET",
           },
+          order: [[0, "desc"]],
           columns: [
             { name: "id", data: "id", visible: false },
             {
@@ -50,10 +53,11 @@ const OrganizersTable = ({ data, getTotalRegistered, getTotalAttended }) => {
               width: "150px",
             },
             { name: "email", data: "email", width: "150px" },
-            { name: "phone", data: "phone", width: "200px" },
+            { name: "phone", data: "phone", width: "150px" },
             {
               name: "created_at",
               data: "created_at",
+              width: "150px",
               render: formatDateTime,
             },
             {
@@ -70,7 +74,7 @@ const OrganizersTable = ({ data, getTotalRegistered, getTotalAttended }) => {
         setDataTable(newDataTable);
       } catch (error) {
         // Handle errors here
-        console.log("Error fetching attendees:", error);
+        console.log("Error fetching attendees:", error.message);
       }
     };
     // Call the initializeDataTable function
@@ -84,7 +88,7 @@ const OrganizersTable = ({ data, getTotalRegistered, getTotalAttended }) => {
     const cancelAttendance = (row) => {
       const id = row.id;
       const fullName = encodeURIComponent(row.full_name);
-      const url = `${baseUrl}/organizer-attendance/${id}`;
+      const url = `/organizer-attendance/${id}`;
       const data = {
         _method: "PUT",
       };

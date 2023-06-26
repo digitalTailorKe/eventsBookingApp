@@ -9,7 +9,6 @@ import { PulseLoader } from "react-spinners";
 import { BiXCircle } from "react-icons/bi";
 
 const LoginScreen = () => {
-  const baseUrl = `${import.meta.env.VITE_LOCAL_API_BASE_URL}/api`;
   const [formErrors, setFormErrors] = useState([]);
   const [validationErrors, setValidationErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
@@ -52,7 +51,7 @@ const LoginScreen = () => {
       // if the validation passes
       try {
         setLoading(true);
-        const response = await axiosClient.post(baseUrl + "/login", formData);
+        const response = await axiosClient.post("/login", formData);
         const { data } = response;
         setUser(data.user);
         setToken(data.token);

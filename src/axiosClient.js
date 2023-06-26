@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  // baseURL: `${import.meta.env.VITE_EVENTS_API_BASE_URL}/api`,
-  baseURL: `${import.meta.env.VITE_LOCAL_API_BASE_URL}/api`,
+  baseURL: `${import.meta.env.VITE_EVENTS_API_BASE_URL}/api`,
+  // baseURL: `${import.meta.env.VITE_LOCAL_API_BASE_URL}/api`,
 });
 
 axiosClient.interceptors.request.use((config) => {

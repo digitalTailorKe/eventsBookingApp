@@ -8,10 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 const SearchInputArea = () => {
-  const baseUrl = `${import.meta.env.VITE_LOCAL_API_BASE_URL}/api`;
   const [filteredResults, setFilteredResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [buttonLoading, setbuttonLoading] = useState(false);
   const [clickedButtonId, setClickedButtonId] = useState(null); // To track which button was clicked
   const [searchText, setSearchText] = useState("");
   const [formData, setFormData] = useState({
@@ -62,17 +60,17 @@ const SearchInputArea = () => {
   const handleAttendClick = (data) => {
     setClickedButtonId(data.id);
     const attendeeId = data.id; // Set the clicked button ID
-    return () => {
-      // 1. Get client's data from the server
-      axiosClient
-        .get(`/mark-attendance/${attendeeId}`)
-        .then((response) => {
-          toast.success("Attendee marked successfully", toastSettings);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
+
+    axiosClient
+      .post(`/mark-attendance/${attendeeId}`)
+      .then((response) => {
+        setClickedButtonId(null);
+        toast.success("Attendee marked successfully", toastSettings);
+      })
+      .catch((error) => {
+        console.error(error);
+        setClickedButtonId(null);
+      });
   };
 
   const navigate = useNavigate();
@@ -117,7 +115,7 @@ const SearchInputArea = () => {
               {filteredResults.map((result) => (
                 <div key={result.id} className="">
                   <div className="flex items-center justify-between hover:bg-[#e4ecf5] p-1 md:p-2 cursor-pointer md:px-3">
-                    {/* Atendee Info */}
+                    {/* Attendee Info */}
                     <div
                       onClick={handleGoToViewPage(result)}
                       className="flex items-center space-x-4 md:mb-1"

@@ -7,6 +7,9 @@ import {
   Organizers,
   SuccessPage,
   SectorDetails,
+  ProfilePage,
+  ConfirmationPage,
+  PrintingPage,
 } from "./views/frontend";
 import {
   Dashboard,
@@ -40,6 +43,18 @@ const router = createBrowserRouter([
       {
         path: "/auth-login",
         element: <Login />,
+      },
+      {
+        path: "/profile",
+        element: <ProfilePage />,
+      },
+      {
+        path: "/confirmation/:id",
+        element: <ConfirmationPage />,
+      },
+      {
+        path: "/printing",
+        element: <PrintingPage />,
       },
     ],
   },

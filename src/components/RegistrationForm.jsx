@@ -3,24 +3,16 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FormInputText from "./FormInputText";
 import TelephoneInput from "./TelephoneInput";
-import axios from "axios";
 import Select from "react-select";
-import { BiCheckDouble } from "react-icons/bi";
+import { BiCheckDouble, BiXCircle } from "react-icons/bi";
 import { FaExclamationTriangle } from "react-icons/fa";
 import "react-phone-input-2/lib/style.css";
 import axiosClient from "../axiosClient";
 import { useNavigate } from "react-router-dom";
+import { PulseLoader } from "react-spinners";
+import ValidationErrorsBox from "./ValidationErrorsBox";
 
-const RegistrationForm = ({ onRegistrationSuccess }) => {
-  const storeAttendeeLocalEndpoint =
-    "https://admin.indoeastafricaexpo.org/api/attendees";
-  const getSectorsLocalEndpoint =
-    "https://admin.indoeastafricaexpo.org/api/sectors";
-  const getNationalities = "https://admin.indoeastafricaexpo.org/api/countries";
-
-  // Local Endpoints
-  // const storeAttendeeLocalEndpoint = "http://127.0.0.1:8000/api/attendees";
-
+const RegistrationForm = () => {
   const [sectors, setSectors] = useState([]);
   const [nationality, setNationality] = useState([]);
   const [selectedNationality, setSelectedNationality] = useState(null);
@@ -30,21 +22,18 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
   const [selectedCountryCode, setSelectedCountryCode] = useState(null);
   const sortedSectors = sectors.sort((a, b) => a.name.localeCompare(b.name));
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [selectedSectors, setSelectedSectorz] = useState(null);
+  const [selectedSectors, setSelectedSectors] = useState(null);
+  const [validationErrors, setValidationErrors] = useState({});
   const [formErrors, setFormErrors] = useState({});
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Sets the selected country code to state
   const handleSelectChange = (selectedOption) => {
     setSelectedNationality(selectedOption);
-
-    const code = selectedOption
-      ? nationalityCodes.find((item) => item.id === selectedOption.value)
-      : null;
-    const countryCode = code ? code.code : "";
-    setCountryCode(countryCode);
-    setSelectedCountryCode(countryCode);
   };
 
+  // Sets interests in state and updates the sate
   const handleInterestChange = (selectedOptions) => {
     const selectedIds = selectedOptions.map((option) => option.value);
     setSelectedInterest(selectedOptions);
@@ -54,15 +43,17 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     }));
   };
 
+  // Sets sectors in state and updates the sate
   const handleSectorsChange = (selectedOptions) => {
     const selectedIds = selectedOptions.map((option) => option.value);
-    setSelectedSectorz(selectedOptions);
+    setSelectedSectors(selectedOptions);
     setFormData((prevData) => ({
       ...prevData,
       sectors: selectedIds,
     }));
   };
 
+  // Sets the selected country code and updates the state.
   const handleCountryCodeChange = (selectedOption) => {
     setSelectedCountryCode(selectedOption);
     setFormData((prevData) => ({
@@ -93,8 +84,8 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
   // Get data from endpoints.
   useEffect(() => {
-    axios
-      .get(getSectorsLocalEndpoint)
+    axiosClient
+      .get(`/sectors`)
       .then((response) => {
         setSectors(response.data.data);
       })
@@ -102,8 +93,8 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         console.log(error);
       });
 
-    axios
-      .get(getNationalities)
+    axiosClient
+      .get(`/countries`)
       .then((response) => {
         setNationality(response.data.data);
         setNationalityCodes(
@@ -263,6 +254,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     e.preventDefault();
 
     if (validateForm()) {
+      setLoading(true);
       if (countryCode === "" && typeof countryCode === "object") {
         toast.error("Please provide your country code.");
         return;
@@ -270,8 +262,6 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
       // Form is valid, perform form submission logic here
       console.log("Form is valid. Submitting...");
-      console.log(selectedCountryCode.value);
-      console.log(countryCode);
 
       // Initializing new form data details
       const newRequestData = {
@@ -291,39 +281,25 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         country_code: selectedCountry.value,
       };
 
-      axios
-        .post(storeAttendeeLocalEndpoint, newRequestData)
+      // console.log(newRequestData);
+
+      axiosClient
+        .post("/attendees", newRequestData)
         .then(() => {
+          setLoading(false);
           clearFormFields();
           toast.success("Congratulations! your registration was successful.");
-          onRegistrationSuccess();
           navigate("/success-page");
         })
         .catch((error) => {
+          setLoading(false);
           const data = error.response.data.errors;
-
-          if (data) {
-            for (const key in data) {
-              if (Array.isArray(data[key])) {
-                const values = data[key].filter(
-                  (value) => typeof value === "string"
-                );
-                if (values.length > 0) {
-                  toast.error(`${values.join(", ")}`, {
-                    autoClose: 15000,
-                  });
-                }
-              }
-            }
-          } else {
-            toast.error("Invalid registration. Please try again.");
-          }
+          setValidationErrors(data);
         });
     } else {
+      setLoading(false);
       // Form is invalid, display error messages
-      toast.error(
-        "Form is invalid. Please enter required field values and try again."
-      );
+      setValidationErrors({ error: "Please fill in all the required fields" });
     }
   };
 
@@ -699,10 +675,19 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         </div>
       </div>
 
+      {/* Validation Errors Box */}
+      <ValidationErrorsBox
+        validationErrors={validationErrors}
+        setValidationErrors={setValidationErrors}
+      />
+
       {/* Registration Button Input */}
       <div className="md:flex md:justify-center w-[100%] mx-auto">
-        <button className="bg-[#f04223] text-slate-200 uppercase hover:bg-green-600 hover:text-[#fff] w-full py-3 rounded-xl">
-          Register Now
+        <button
+          disabled={loading}
+          className="bg-[#f04223] text-slate-200 uppercase hover:bg-green-600 hover:text-[#fff] w-full py-3 rounded-md font-[700]"
+        >
+          {loading ? "Submitting..." : "Register Now"}
         </button>
       </div>
       <ToastContainer />

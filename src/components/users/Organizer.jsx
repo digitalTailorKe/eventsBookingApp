@@ -51,22 +51,6 @@ const Organizer = () => {
     setModalOpen(false);
   };
 
-  const data = [
-    {
-      full_name: "John Doe",
-      email: "john@example.com",
-      phone: "+254725134449",
-      created_at: "26-07-2023",
-    },
-    {
-      full_name: "Jane Smith",
-      email: "jane@example.com",
-      phone: "+254725134449",
-      created_at: "27-07-2023",
-    },
-    // Add more data rows as needed
-  ];
-
   const scrollToScanner = () => {
     if (scannerRef.current) {
       scannerRef.current.scrollIntoView({ behavior: "smooth" });
@@ -256,7 +240,6 @@ const Organizer = () => {
 
             {/* Marked attendees */}
             <OrganizersTable
-              data={data}
               getTotalRegistered={getTotalRegistered}
               getTotalAttended={getTotalAttended}
             />

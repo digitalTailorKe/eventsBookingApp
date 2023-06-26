@@ -15,12 +15,13 @@ import {
   WhyImportFromIndia,
   Sectors,
 } from "../../components";
+import { useEffect } from "react";
 
 const LandingPage = () => {
-  // Create a pixel instance
-  ReactPixel.init("934299561188277");
-  // This will trigger a "PageView" event on the pixel
-  ReactPixel.track("PageView");
+  useEffect(() => {
+    // This will trigger a "PageView" event on the pixel
+    ReactPixel.pageView();
+  }, []);
 
   return (
     <div className="bg-slate-300 min-h-screen pt-2">

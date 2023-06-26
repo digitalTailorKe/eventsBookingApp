@@ -1,17 +1,40 @@
+import React, { useEffect } from "react";
 import { BiCheckCircle } from "react-icons/bi";
 import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import ReactPixel from "react-facebook-pixel";
-
+import ReactGA from "react-ga";
+import TagManager from "react-gtm-module";
+import PageTitle from "../../components/PageTitle";
 
 const SuccessPage = () => {
-  ReactPixel.pageView();
-  
+  const ga_tracking_id = "AW-11206699742/zB6_CO76gakYEN7V4t8p";
+
+  useEffect(() => {
+    // Initialize Facebook Pixel
+    // ReactPixel.init(fb_pixel_tracking_id);
+
+    // Track page view
+    ReactPixel.pageView("success");
+
+    // Initialize Google Analytics
+    ReactGA.initialize(ga_tracking_id);
+
+    // Track page view for Google Analytics
+    ReactGA.pageview(window.location.pathname + window.location.search);
+
+    // Initialize Tag Manager
+    TagManager.initialize({ gtmId: "G-05LB87FWWT" });
+  }, []);
+
   const handleGoBack = () => {
     window.history.back();
   };
+
   return (
     <div className="min-h-screen grid place-items-center lg:py-8 text-[16px] lg:text-[18px] p-3">
+      {/* Page title */}
+      <PageTitle title="Registration Successful" />
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg px-4 md:px-8 lg:px-8 pb-6">
         <Link to="/">
           <img

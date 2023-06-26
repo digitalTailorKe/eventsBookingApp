@@ -3,5 +3,17 @@ import Login from "./Login";
 import Organizers from "./Organizers";
 import SuccessPage from "./SuccessPage";
 import SectorDetails from "./SectorDetails";
+import ProfilePage from "./ProfilePage";
+import PrintingPage from "./PrintingPage";
+import ConfirmationPage from "./ConfirmationPage";
 
-export { LandingPage, Login, Organizers, SuccessPage, SectorDetails };
+export {
+  LandingPage,
+  Login,
+  Organizers,
+  SuccessPage,
+  SectorDetails,
+  ProfilePage,
+  PrintingPage,
+  ConfirmationPage,
+};
