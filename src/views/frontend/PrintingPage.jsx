@@ -19,38 +19,68 @@ const PrintingPage = () => {
     }
   };
 
+  // name, position, company, phone, email, title, address;
+
   const confirmedData = [
     {
+      id: "1",
       name: "Dennis Otieno",
       position: "Software Developer",
       company: "Indo East Africa Expo",
       phone: "+254 712 345 678",
-      id: "1",
+      email: "otienodennis29@gmail.com",
+      title: "Mr.",
+      address: "The Mall Westlands, Nairobi",
       serial: "A001",
+      notes: [
+        { businessInterest: ["Note 1", "Note 2"] },
+        { sectorOfInterest: ["Sector 1", "Sector 2"] },
+      ],
     },
     {
+      id: "2",
       name: "Aggrey Lustinga",
       position: "CEO",
       company: "Digital Tailor Agency",
       phone: "+254 712 345 678",
-      id: "2",
+      email: "aggrey@dta.co.ke",
+      title: "Mr.",
+      address: "The Mall Westlands, Nairobi",
       serial: "A002",
+      notes: [
+        { businessInterest: ["Note 1", "Note 2"] },
+        { sectorOfInterest: ["Sector 1", "Sector 2"] },
+      ],
     },
     {
+      id: "3",
       name: "John Doe",
       position: "Marketing Manager",
       company: "Traders CO. Ltd",
       phone: "+254 712 345 678",
-      id: "2",
+      email: "johndoe@gmail.com",
+      title: "Mr.",
+      address: "The Mall Westlands, Nairobi",
       serial: "A003",
+      notes: [
+        { businessInterest: ["Note 1", "Note 2"] },
+        { sectorOfInterest: ["Sector 1", "Sector 2"] },
+      ],
     },
     {
+      id: "4",
       name: "Victor Juma",
       position: "Tech Lead",
       company: "Kenyatta University",
       phone: "+254 712 345 678",
-      id: "2",
+      email: "victo@gmail.com",
+      title: "Mr.",
+      address: "The Mall Westlands, Nairobi",
       serial: "A004",
+      notes: [
+        { businessInterest: ["Note 1", "Note 2"] },
+        { sectorOfInterest: ["Sector 1", "Sector 2"] },
+      ],
     },
   ];
 
@@ -94,6 +124,10 @@ const PrintingPage = () => {
                   company={data.company}
                   serial={data.serial}
                   phone={data.phone}
+                  email={data.email}
+                  address={data.address}
+                  title={data.title}
+                  notes={data.notes}
                 />
               ))}
             </div>

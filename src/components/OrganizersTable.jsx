@@ -12,8 +12,8 @@ const OrganizersTable = ({ getTotalRegistered, getTotalAttended }) => {
   const [dataTable, setDataTable] = useState(null);
   const [attendeeCount, setAttendeeCount] = useState(0);
 
-  // const baseUrl = `${import.meta.env.VITE_EVENTS_API_BASE_URL}/api`;
-  const baseUrl = `${import.meta.env.VITE_LOCAL_API_BASE_URL}/api`;
+  const baseUrl = `${import.meta.env.VITE_EVENTS_API_BASE_URL}/api`;
+  // const baseUrl = `${import.meta.env.VITE_LOCAL_API_BASE_URL}/api`;
   const navigate = useNavigate();
 
   useEffect(() => {

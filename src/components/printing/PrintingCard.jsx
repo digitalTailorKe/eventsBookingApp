@@ -2,7 +2,18 @@ import React from "react";
 import QRCode from "qrcode.react";
 import QRCodeComponent from "../utils/QRCodeComponent";
 
-const PrintingCard = ({ id, name, position, company, serial, phone }) => {
+const PrintingCard = ({
+  id,
+  name,
+  position,
+  company,
+  serial,
+  phone,
+  email,
+  address,
+  title,
+  notes,
+}) => {
   return (
     <div className="card w-[110mm] h-[157mm] border flex-col justify-center items-center bg-[#e4f2e6] rounded pt-3 mb-2">
       <div className="">
@@ -34,18 +45,18 @@ const PrintingCard = ({ id, name, position, company, serial, phone }) => {
         <h4 className="text-gray-800 font-[500] text-center uppercase text-xl leading-tight tracking-wide">
           {name}
         </h4>
-        <p className="text-center text-gray-400 text-[18px] capitalize leading-tight tracking-wider">
+        <p className="text-center text-gray-400 text-[16px] capitalize leading-tight tracking-wider">
           {position}
         </p>
-        <div className="flex justify-center my-2">
-          <div className="w-[100px] bg-[#fe3b00] h-[2px]"></div>
+        <div className="flex justify-center by-2">
+          <div className="w-[60px] bg-[#fe3b00] h-[2px]"></div>
         </div>
         <p className="text-center text-gray-800 text-[20px] capitalize tracking-wider leading-tight">
           {company}
         </p>
       </div>
 
-      <div className="flex justify-center mt-3">
+      <div className="flex justify-center mt-2">
         <div className="bg-white p-2">
           <QRCodeComponent
             id={id}
@@ -53,18 +64,21 @@ const PrintingCard = ({ id, name, position, company, serial, phone }) => {
             position={position}
             company={company}
             phone={phone}
+            email={email}
+            address={address}
+            notes={notes}
           />
         </div>
       </div>
 
-      <div className="bg-[#fe3b00] mt-3 py-2">
+      <div className="bg-[#fe3b00] mt-2 py-2">
         <h4 className="text-slate-100 font-[300] text-center text-[18px]">
-          Scan the <b className="font-bold">QR Code</b> to now me
+          Scan the <b className="font-bold">QR Code</b> to know me
         </h4>
       </div>
 
       <h4 className="text-gray-800 font-bold text-center text-[18px] mt-1 font-mono">
-        Serial No: {serial}
+        {serial}
       </h4>
     </div>
   );
