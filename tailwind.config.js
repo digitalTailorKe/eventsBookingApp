@@ -11,7 +11,11 @@ export default {
         "2xl": "6rem",
       },
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'pattern': "url('../public/imgs/pattern.jpg')",
+      },
+    },
   },
   plugins: [],
 };

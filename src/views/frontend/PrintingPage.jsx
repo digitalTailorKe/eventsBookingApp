@@ -82,6 +82,21 @@ const PrintingPage = () => {
         { sectorOfInterest: ["Sector 1", "Sector 2"] },
       ],
     },
+    {
+      id: "5",
+      name: "Almasi Gerald",
+      position: "Software Developer",
+      company: "Digital Tailor Agency",
+      phone: "+254 712 345 678",
+      email: "almasi@gmail.com",
+      title: "Mr.",
+      address: "The Mall Westlands, Nairobi",
+      serial: "A005",
+      notes: [
+        { businessInterest: ["Note 1", "Note 2"] },
+        { sectorOfInterest: ["Sector 1", "Sector 2"] },
+      ],
+    },
   ];
 
   return (

@@ -17,6 +17,7 @@ import {
   ViewAttendeeDetails,
 } from "./views/backend";
 import NotFound from "./views/NotFound";
+import PrintingBack from "./views/frontend/PrintingBack";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "/printing",
         element: <PrintingPage />,
+      },
+      {
+        path: "/printing-back",
+        element: <PrintingBack />,
       },
     ],
   },

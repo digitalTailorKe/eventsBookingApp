@@ -1,5 +1,3 @@
-import React from "react";
-import QRCode from "qrcode.react";
 import QRCodeComponent from "../utils/QRCodeComponent";
 
 const PrintingCard = ({
@@ -11,22 +9,21 @@ const PrintingCard = ({
   phone,
   email,
   address,
-  title,
   notes,
 }) => {
   return (
-    <div className="card w-[110mm] h-[157mm] border flex-col justify-center items-center bg-[#e4f2e6] rounded pt-3 mb-2">
+    <div className="card w-[110mm] h-[157mm] border flex-col justify-center items-center bg-pattern bg-contain rounded pt-3 mb-2">
       <div className="">
         <img
           className="text-center"
-          style={{ width: "100px", textAlign: "center", margin: "0 auto" }}
+          style={{ width: "120px", textAlign: "center", margin: "0 auto" }}
           src="/imgs/logo.png"
           alt=""
         />
       </div>
 
       <div className="bg-[#128e12]">
-        <h2 className="text-xl text-center font-semibold text-slate-100 mb-3 py-1 uppercase">
+        <h2 className="text-xl text-center font-semibold text-slate-100 mb-2 py-1 uppercase">
           Indo East Africa Trade <br className="m-0" /> Expo 2023
         </h2>
       </div>
@@ -42,22 +39,22 @@ const PrintingCard = ({
       </div>
 
       <div className="mt-5">
-        <h4 className="text-gray-800 font-[500] text-center uppercase text-xl leading-tight tracking-wide">
+        <h4 className="text-gray-800 font-[600] tracking-tight text-center uppercase text-xl leading-tight tracking-wide">
           {name}
         </h4>
-        <p className="text-center text-gray-400 text-[16px] capitalize leading-tight tracking-wider">
+        <p className="text-center text-gray-500 text-[16px] capitalize leading-tight tracking-wider">
           {position}
         </p>
-        <div className="flex justify-center by-2">
+        <div className="flex justify-center my-2">
           <div className="w-[60px] bg-[#fe3b00] h-[2px]"></div>
         </div>
-        <p className="text-center text-gray-800 text-[20px] capitalize tracking-wider leading-tight">
+        <p className="text-center text-gray-800 text-[18px] tracking-tight uppercase leading-tight">
           {company}
         </p>
       </div>
 
       <div className="flex justify-center mt-2">
-        <div className="bg-white p-2">
+        <div className="bg-white p-1">
           <QRCodeComponent
             id={id}
             name={name}

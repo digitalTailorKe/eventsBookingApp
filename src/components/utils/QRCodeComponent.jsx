@@ -44,7 +44,7 @@ FN:Indo Expo ${name}
 ORG:${company}
 TEL:${phone}
 EMAIL:${email}
-TITLE:${title}
+TITLE:${position}
 ADR:${address}
 NOTE:${notesString}
 END:VCARD`;
