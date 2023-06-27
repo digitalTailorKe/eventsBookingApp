@@ -12,8 +12,8 @@ const OrganizersTable = ({ getTotalRegistered, getTotalAttended }) => {
   const [dataTable, setDataTable] = useState(null);
   const [attendeeCount, setAttendeeCount] = useState(0);
 
-  const baseUrl = `${import.meta.env.VITE_EVENTS_API_BASE_URL}/api`;
-  // const baseUrl = `${import.meta.env.VITE_LOCAL_API_BASE_URL}/api`;
+  // const baseUrl = `${import.meta.env.VITE_EVENTS_API_BASE_URL}/api`;
+  const baseUrl = `${import.meta.env.VITE_LOCAL_API_BASE_URL}/api`;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,17 +21,18 @@ const OrganizersTable = ({ getTotalRegistered, getTotalAttended }) => {
       try {
         // Fetch the data from the API for counting
         const response = await axiosClient.get(
-          "/organizer-attendance"
+          "/attendee-count"
         );
         const { data } = response;
-        const count = data.data.length;
+        const count = data.attendeeCount;
         getTotalRegistered(count);
-        getTotalAttended(0);
+        getTotalAttended(data.attendanceCount);
 
         // Destroy the existing DataTable instance if it exists
         if (dataTable) {
           dataTable.destroy();
         }
+        const token = localStorage.getItem("ACCESS_TOKEN");
         // Initialize the DataTable instance
         const newDataTable = $(tableRef.current).DataTable({
           processing: true,
@@ -39,6 +40,7 @@ const OrganizersTable = ({ getTotalRegistered, getTotalAttended }) => {
           bDestroy: true,
           ajax: {
             url: baseUrl + "/organizer-attendance",
+            headers: { Authorization: `Bearer ${token}` },
             type: "GET",
           },
           order: [[0, "desc"]],

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PrintingCard from "../../components/printing/PrintingCard";
 import PageTitle from "../../components/PageTitle";
+import axiosClient from "../../axiosClient";
 
 const PrintingPage = () => {
   const [pin, setPin] = useState("");
@@ -19,6 +20,19 @@ const PrintingPage = () => {
       setPinError(true);
     }
   };
+
+  // Get the data from the API
+  const [totalRegistered, setTotalRegistered] = useState(0);
+  const getConfirmedData = async () => {
+    const response = await axiosClient.get("/attendee-confirmed");
+    const { data } = response;
+    const attendeeData = data.attendees;
+    setTotalRegistered(attendeeData);
+  }
+ 
+  useEffect(() => {
+    getConfirmedData();
+  }, []);
 
   // name, position, company, phone, email, title, address;
 
