@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PrintingCard from "../../components/printing/PrintingCard";
 import PageTitle from "../../components/PageTitle";
 import axiosClient from "../../axiosClient";
@@ -28,8 +28,8 @@ const PrintingPage = () => {
     const { data } = response;
     const attendeeData = data.attendees;
     setTotalRegistered(attendeeData);
-  }
- 
+  };
+
   useEffect(() => {
     getConfirmedData();
   }, []);
@@ -48,7 +48,7 @@ const PrintingPage = () => {
       address: "The Mall Westlands, Nairobi",
       serial: "A001",
       notes: [
-        { businessInterest: ["Note 1", "Note 2"] },
+        { businessInterest: ["business interest 1", "business interest 2"] },
         { sectorOfInterest: ["Sector 1", "Sector 2"] },
       ],
     },
@@ -63,7 +63,7 @@ const PrintingPage = () => {
       address: "The Mall Westlands, Nairobi",
       serial: "A002",
       notes: [
-        { businessInterest: ["Note 1", "Note 2"] },
+        { businessInterest: ["business interest 1", "business interest 2"] },
         { sectorOfInterest: ["Sector 1", "Sector 2"] },
       ],
     },
@@ -78,7 +78,7 @@ const PrintingPage = () => {
       address: "The Mall Westlands, Nairobi",
       serial: "A003",
       notes: [
-        { businessInterest: ["Note 1", "Note 2"] },
+        { businessInterest: ["business interest 1", "business interest 2"] },
         { sectorOfInterest: ["Sector 1", "Sector 2"] },
       ],
     },
@@ -93,7 +93,7 @@ const PrintingPage = () => {
       address: "The Mall Westlands, Nairobi",
       serial: "A004",
       notes: [
-        { businessInterest: ["Note 1", "Note 2"] },
+        { businessInterest: ["business interest 1", "business interest 2"] },
         { sectorOfInterest: ["Sector 1", "Sector 2"] },
       ],
     },
@@ -108,7 +108,7 @@ const PrintingPage = () => {
       address: "The Mall Westlands, Nairobi",
       serial: "A005",
       notes: [
-        { businessInterest: ["Note 1", "Note 2"] },
+        { businessInterest: ["business interest 1", "business interest 2"] },
         { sectorOfInterest: ["Sector 1", "Sector 2"] },
       ],
     },
@@ -116,9 +116,9 @@ const PrintingPage = () => {
 
   return (
     <>
-    {/* Page title */}
+      {/* Page title */}
       <PageTitle title="INDO - Printing front page for visitors cards" />
-    
+
       <div className={`bg-blur ${isPinCorrect ? "bg-none" : ""}`}>
         {!isPinCorrect && (
           <div className="flex justify-center items-center h-screen">

@@ -1,8 +1,9 @@
 import { BiLockOpen } from "react-icons/bi";
 import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import ManualRegistrationForm from "../../components/backend/ManualRegistrationForm";
 
-const OrganizersRegisterAtendees = () => {
+const OrganizersRegisterAttendees = () => {
   const handleGoBack = () => {
     window.history.back();
   };
@@ -22,9 +23,14 @@ const OrganizersRegisterAtendees = () => {
             <FaArrowLeft className="inline-block mr-2 font-[300]" /> Back
           </Link>
         </div>
+
+        {/* Register form Area */}
+        <div className="">
+          <ManualRegistrationForm />
+        </div>
       </div>
     </div>
   );
 };
 
-export default OrganizersRegisterAtendees;
+export default OrganizersRegisterAttendees;

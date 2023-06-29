@@ -198,7 +198,7 @@ const Organizer = () => {
 
                     {/* Registration Link */}
                     <Link
-                      to="/user-organizer-register-atendees"
+                      to="/user-organizer-register-attendees"
                       className="px-5 w-full lg:w-[inherit] py-3 text-center bg-red-200 text-red-700 rounded-md hover:bg-red-500 hover:text-slate-100 font-[700] flex justify-center items-center space-x-2"
                     >
                       <span className="hidden md:block">Register Attendee</span>{" "}

@@ -13,7 +13,7 @@ import {
 } from "./views/frontend";
 import {
   Dashboard,
-  OrganizersRegisterAtendees,
+  OrganizersRegisterAttendees,
   ViewAttendeeDetails,
 } from "./views/backend";
 import NotFound from "./views/NotFound";
@@ -73,8 +73,8 @@ const router = createBrowserRouter([
         element: <Dashboard to="/dashboard" />,
       },
       {
-        path: "/user-organizer-register-atendees",
-        element: <OrganizersRegisterAtendees />,
+        path: "/user-organizer-register-attendees",
+        element: <OrganizersRegisterAttendees />,
       },
       {
         path: "/view-attendee-details/:fullName",

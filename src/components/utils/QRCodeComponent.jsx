@@ -34,7 +34,7 @@ const QRCodeComponent = ({
       : "";
 
     // Concatenate the two strings separated by a new line
-    const notesString = `${businessInterestString} \n ${sectorOfInterestString}`;
+    const notesString = `${businessInterestString} ${"\n - "} ${sectorOfInterestString}`;
 
     // Generate the vCard string
     const vcardString = `BEGIN:VCARD
@@ -65,7 +65,7 @@ END:VCARD`;
           organizations: [new ContactOrganization(true, "work", company)],
           phoneNumbers: [new ContactField("mobile", phone)],
           emails: [new ContactField("work", email)],
-          name: new ContactName({ familyName: name, honorificSuffix: title }),
+          // name: new ContactName({ familyName: name, honorificSuffix: title }),
           addresses: [new ContactAddress("work", address)],
           note: generateVCard(),
         };
