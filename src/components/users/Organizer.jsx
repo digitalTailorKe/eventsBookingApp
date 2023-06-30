@@ -18,7 +18,6 @@ import LoginScreen from "./LoginScreen";
 import Modal from "../modals/Modal";
 import EditUsersProfile from "./EditUsersProfile";
 import ChangePassword from "./ChangePassword";
-import axiosClient from "../../axiosClient";
 import updateTotalAttended from "../../../hooks/UpdateAtendeeCount";
 
 const Organizer = () => {
@@ -103,6 +102,10 @@ const Organizer = () => {
   // Returns data from the child component (OrganizersTable.jsx)
   const getTotalAttended = (total) => {
     setTotalAttended(total);
+  };
+
+  const handleUpdateAttendeeCount = (total) => {
+    setTotalAttended(totalAttended + total);
   };
 
   // This function updates the total attended count
@@ -255,6 +258,7 @@ const Organizer = () => {
             <OrganizersTable
               getTotalRegistered={getTotalRegistered}
               getTotalAttended={getTotalAttended}
+              setAttendeeCount={handleUpdateAttendeeCount}
             />
 
             {/* Scanner Area */}

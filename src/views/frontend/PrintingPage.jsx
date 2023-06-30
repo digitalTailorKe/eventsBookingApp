@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PrintingCard from "../../components/printing/PrintingCard";
 import PageTitle from "../../components/PageTitle";
 import axiosClient from "../../axiosClient";
+import getConfirmedVisitors from "../../../hooks/GetConfirmedVisitors";
 
 const PrintingPage = () => {
   const [pin, setPin] = useState("");
@@ -22,97 +23,16 @@ const PrintingPage = () => {
   };
 
   // Get the data from the API
-  const [totalRegistered, setTotalRegistered] = useState(0);
-  const getConfirmedData = async () => {
-    const response = await axiosClient.get("/attendee-confirmed");
-    const { data } = response;
-    const attendeeData = data.attendees;
-    setTotalRegistered(attendeeData);
+  const [confirmedData, setConfirmedData] = useState([]);
+
+  const getConfirmedVisitorsData = async () => {
+    const data = await getConfirmedVisitors();
+    setConfirmedData(data);
   };
 
   useEffect(() => {
-    getConfirmedData();
+    getConfirmedVisitorsData();
   }, []);
-
-  // name, position, company, phone, email, title, address;
-
-  const confirmedData = [
-    {
-      id: "1",
-      name: "Dennis Otieno",
-      position: "Software Developer",
-      company: "Indo East Africa Expo",
-      phone: "+254 712 345 678",
-      email: "otienodennis29@gmail.com",
-      title: "Mr.",
-      address: "The Mall Westlands, Nairobi",
-      serial: "A001",
-      notes: [
-        { businessInterest: ["business interest 1", "business interest 2"] },
-        { sectorOfInterest: ["Sector 1", "Sector 2"] },
-      ],
-    },
-    {
-      id: "2",
-      name: "Aggrey Lustinga",
-      position: "CEO",
-      company: "Digital Tailor Agency",
-      phone: "+254 712 345 678",
-      email: "aggrey@dta.co.ke",
-      title: "Mr.",
-      address: "The Mall Westlands, Nairobi",
-      serial: "A002",
-      notes: [
-        { businessInterest: ["business interest 1", "business interest 2"] },
-        { sectorOfInterest: ["Sector 1", "Sector 2"] },
-      ],
-    },
-    {
-      id: "3",
-      name: "John Doe",
-      position: "Marketing Manager",
-      company: "Traders CO. Ltd",
-      phone: "+254 712 345 678",
-      email: "johndoe@gmail.com",
-      title: "Mr.",
-      address: "The Mall Westlands, Nairobi",
-      serial: "A003",
-      notes: [
-        { businessInterest: ["business interest 1", "business interest 2"] },
-        { sectorOfInterest: ["Sector 1", "Sector 2"] },
-      ],
-    },
-    {
-      id: "4",
-      name: "Victor Juma",
-      position: "Tech Lead",
-      company: "Kenyatta University",
-      phone: "+254 712 345 678",
-      email: "victo@gmail.com",
-      title: "Mr.",
-      address: "The Mall Westlands, Nairobi",
-      serial: "A004",
-      notes: [
-        { businessInterest: ["business interest 1", "business interest 2"] },
-        { sectorOfInterest: ["Sector 1", "Sector 2"] },
-      ],
-    },
-    {
-      id: "5",
-      name: "Almasi Gerald",
-      position: "Software Developer",
-      company: "Digital Tailor Agency",
-      phone: "+254 712 345 678",
-      email: "almasi@gmail.com",
-      title: "Mr.",
-      address: "The Mall Westlands, Nairobi",
-      serial: "A005",
-      notes: [
-        { businessInterest: ["business interest 1", "business interest 2"] },
-        { sectorOfInterest: ["Sector 1", "Sector 2"] },
-      ],
-    },
-  ];
 
   return (
     <>

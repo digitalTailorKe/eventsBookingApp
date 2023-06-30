@@ -5,24 +5,32 @@ import "datatables.net";
 import "datatables.net-dt/css/jquery.dataTables.css";
 import "datatables.net-dt";
 import axiosClient from "../axiosClient";
-import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
-const OrganizersTable = ({ getTotalRegistered, getTotalAttended }) => {
+const OrganizersTable = ({
+  getTotalRegistered,
+  getTotalAttended,
+  setAttendeeCount,
+}) => {
   const tableRef = useRef(null);
   const [dataTable, setDataTable] = useState(null);
-  const [attendeeCount, setAttendeeCount] = useState(0);
 
   const baseUrl = `${import.meta.env.VITE_EVENTS_API_BASE_URL}/api`;
   // const baseUrl = `${import.meta.env.VITE_LOCAL_API_BASE_URL}/api`;
   const navigate = useNavigate();
 
+  // Toast settings
+  const toastSettings = {
+    position: "bottom-center",
+    autoClose: 5000,
+    theme: "colored",
+  };
+
   useEffect(() => {
     const initializeDataTable = async () => {
       try {
         // Fetch the data from the API for counting
-        const response = await axiosClient.get(
-          "/attendee-count"
-        );
+        const response = await axiosClient.get("/attendee-count");
         const { data } = response;
         const count = data.attendeeCount;
         getTotalRegistered(count);
@@ -64,15 +72,23 @@ const OrganizersTable = ({ getTotalRegistered, getTotalAttended }) => {
             },
             {
               data: null,
+              width: "120px",
               render: function (data, type, row) {
-                return `<button class="cancel_attendance m-0 rounded-full cursor-pointer py-1 px-4 bg-green-200 text-green-800 border-gray-200" data-id="${row.id}" data-action="delete"> Attending</button>`;
+                return `${
+                  data.atendee_attendances.length > 0
+                    ? `<button disabled class="m-0 font-bold shadow-md rounded-full cursor-pointer py-1 px-4 bg-green-200 hover:bg-green-400 hover:text-white text-green-800 border-gray-200" data-id="${row.id}" data-action="delete">
+                            Attending
+                        </button>`
+                    : `<button class="cancel_attendance m-0 font-bold shadow-md rounded-full cursor-pointer py-1 px-4 bg-orange-200 hover:bg-orange-400 hover:text-white text-orange-800 border-gray-200" data-id="${row.id}" data-action="delete">
+                            Mark Attend
+                        </button>`
+                }`;
               },
             },
           ],
           data: data,
         });
         // Set the attendee count & the DataTable instance
-        setAttendeeCount(count);
         setDataTable(newDataTable);
       } catch (error) {
         // Handle errors here
@@ -86,33 +102,26 @@ const OrganizersTable = ({ getTotalRegistered, getTotalAttended }) => {
   useEffect(() => {
     // Handle table click events
     const table = $(tableRef.current);
-
     const cancelAttendance = (row) => {
       const id = row.id;
-      const fullName = encodeURIComponent(row.full_name);
-      const url = `/organizer-attendance/${id}`;
-      const data = {
-        _method: "PUT",
-      };
-      // Send a PUT request to the API
+      const url = `/attendee/mark_attendance/${id}`;
+      // Send an update request to the API
       axiosClient
-        .delete(url, data)
+        .get(url)
         .then((response) => {
-          // Reload the DataTable instance
-          dataTable.ajax.reload();
           // Update the attendee count
-          setAttendeeCount(attendeeCount - 1);
-          // Navigate to the view attendee details page
-          navigate(`/view-attendee-details/${fullName}`, {
-            state: { rowData: row },
-          });
+          setAttendeeCount(1);
+          // Reload the DataTable instance
+          toast.success(response.data.message, toastSettings);
+          dataTable.ajax.reload();
         })
         .catch((error) => {
           // Handle errors here
-          console.log("Error deleting attendee:", error);
+          toast.success("Error marking attendance: " + error, toastSettings);
         });
     };
 
+    // Navigate to the attendee details page with the row data
     const viewAttendeeDetails = (row) => {
       const fullName = encodeURIComponent(row.full_name);
       navigate(`/view-attendee-details/${fullName}`, {
@@ -120,11 +129,13 @@ const OrganizersTable = ({ getTotalRegistered, getTotalAttended }) => {
       });
     };
 
+    // Listens to click on the cancel attendance button
     table.on("click", ".cancel_attendance", function () {
       const row = dataTable.row($(this).closest("tr")).data();
       cancelAttendance(row);
     });
 
+    // Listens to click on the attendee name link on the table
     table.on("click", ".name-link", function () {
       const row = dataTable.row($(this).closest("tr")).data();
       viewAttendeeDetails(row);
@@ -181,6 +192,7 @@ const OrganizersTable = ({ getTotalRegistered, getTotalAttended }) => {
 
           <tbody></tbody>
         </table>
+        <ToastContainer />
       </div>
     </div>
   );

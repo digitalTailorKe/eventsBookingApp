@@ -13,6 +13,7 @@ const ViewAttendeeDetails = () => {
   const rowData = location.state?.rowData;
   const { fullName } = useParams();
 
+  // Toast settings
   const toastSettings = {
     position: "bottom-center",
     autoClose: 5000,
@@ -90,7 +91,7 @@ const ViewAttendeeDetails = () => {
     return formattedDateTime;
   }
 
-  console.log(data);
+  // console.log(data);
 
   const handleGoBack = () => {
     window.history.back();
@@ -242,7 +243,7 @@ const ViewAttendeeDetails = () => {
                 className={`${
                   isMarked
                     ? "bg-green-200 rounded text-green-700 hover:bg-green-500"
-                    : "bg-blue-200 rounded text-blue-700 hover:bg-blue-500"
+                    : "bg-orange-200 rounded text-orange-700 hover:bg-orange-500"
                 } py-2 px-5 mr-3 hover:text-white mb-3`}
               >
                 {" "}

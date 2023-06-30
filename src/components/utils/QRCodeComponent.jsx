@@ -24,14 +24,22 @@ const QRCodeComponent = ({
     );
 
     // Generate a business interest string
-    const businessInterestString = businessInterest
-      ? `Business Interest: ${businessInterest["businessInterest"].join(", ")}`
-      : "";
+    const businessInterestString =
+      businessInterest["businessInterest"] &&
+      businessInterest["businessInterest"].length > 0
+        ? `Business Interest: ${businessInterest["businessInterest"].join(
+            ", "
+          )}`
+        : "";
 
     // Generate a sector of interest string
-    const sectorOfInterestString = sectorOfInterest
-      ? `Sector of Interest: ${sectorOfInterest["sectorOfInterest"].join(", ")}`
-      : "";
+    const sectorOfInterestString =
+      sectorOfInterest["sectorOfInterest"] &&
+      sectorOfInterest["sectorOfInterest"].length > 0
+        ? `Sector of Interest: ${sectorOfInterest["sectorOfInterest"].join(
+            ", "
+          )}`
+        : "";
 
     // Concatenate the two strings separated by a new line
     const notesString = `${businessInterestString} ${"\n - "} ${sectorOfInterestString}`;
