@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
-const SearchInputArea = () => {
+const SearchInputArea = ({ updateTotalAttended }) => {
   const [filteredResults, setFilteredResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [clickedButtonId, setClickedButtonId] = useState(null); // To track which button was clicked
@@ -38,6 +38,7 @@ const SearchInputArea = () => {
     }
   };
 
+  // Perform search when the user presses the enter key
   const performSearch = (query) => {
     setLoading(true);
     axiosClient
@@ -57,15 +58,19 @@ const SearchInputArea = () => {
       });
   };
 
+  const [confirmed, setConfirmed] = useState(null);
+
   const handleAttendClick = (data) => {
     setClickedButtonId(data.id);
     const attendeeId = data.id; // Set the clicked button ID
 
     axiosClient
-      .post(`/mark-attendance/${attendeeId}`)
+      .get(`/attendee/mark_attendance/${attendeeId}`)
       .then((response) => {
         setClickedButtonId(null);
-        toast.success("Attendee marked successfully", toastSettings);
+        toast.success(response.data.message, toastSettings);
+        updateTotalAttended();
+        setConfirmed(attendeeId);
       })
       .catch((error) => {
         console.error(error);
@@ -112,7 +117,7 @@ const SearchInputArea = () => {
           {formData.search.length > 0 && (
             <div>
               <hr className="" />
-              {filteredResults.map((result) => (
+              {filteredResults?.map((result) => (
                 <div key={result.id} className="">
                   <div className="flex items-center justify-between hover:bg-[#e4ecf5] p-1 md:p-2 cursor-pointer md:px-3">
                     {/* Attendee Info */}
@@ -127,7 +132,12 @@ const SearchInputArea = () => {
                       />
                       <div className="text-[16px] md:text-small">
                         <p className="text-gray-800 font-semibold m-0">
-                          {result.full_name}
+                          {result.full_name}{" "}
+                          <span className="ml-2">
+                            {result.confirmation && (
+                              <span className="bg-green-200 text-green-800 px-3 py-1 rounded-lg shadow-md">{result.confirmation.passkey}</span>
+                            )}
+                          </span>
                         </p>
                         <p className="text-gray-600 m-0">{result.email}</p>
                         <p className="text-gray-600 m-0">{result.phone}</p>
@@ -136,20 +146,35 @@ const SearchInputArea = () => {
 
                     {/* Attend Button */}
                     <div className="">
-                      <button
-                        onClick={() => handleAttendClick(result)}
-                        className="bg-yellow-500 hover:bg-yellow-700 text-white font-normal md:font-bold py-1 md:py-2 px-2 md:px-4 rounded focus:outline-none focus:shadow-outline"
-                      >
-                        {clickedButtonId === result.id ? ( // Show loading state only for the clicked button
-                          <PulseLoader
-                            color="#fff"
-                            size={10}
-                            style={{ display: "inline-block" }}
-                          />
-                        ) : (
-                          "Attend"
-                        )}
-                      </button>
+                      {result.atendee_attendances.length > 0 ? (
+                        <button
+                          disabled
+                          className="bg-green-500 hover:bg-green-700 text-white font-normal md:font-bold py-1 md:py-2 px-2 md:px-4 rounded focus:outline-none focus:shadow-outline"
+                        >
+                          Attendance Marked
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleAttendClick(result)}
+                          className={`${
+                            confirmed === result.id
+                              ? "bg-green-500 hover:bg-green-700"
+                              : "bg-yellow-500 hover:bg-yellow-700"
+                          }  text-white font-normal md:font-bold py-1 md:py-2 px-2 md:px-4 rounded focus:outline-none focus:shadow-outline`}
+                        >
+                          {clickedButtonId === result.id ? ( // Show loading state only for the clicked button
+                            <PulseLoader
+                              color="#fff"
+                              size={10}
+                              style={{ display: "inline-block" }}
+                            />
+                          ) : confirmed === result.id ? (
+                            "Attendance Marked"
+                          ) : (
+                            "Attend"
+                          )}
+                        </button>
+                      )}
                     </div>
                   </div>
                   <hr className="" />
@@ -192,142 +217,3 @@ const SearchInputArea = () => {
 };
 
 export default SearchInputArea;
-
-// {/* <div className="flex items-center justify-between hover:bg-slate-300 p-1 md:p-3 cursor-pointer">
-//             {/* Atendee Info */}<PulseLoader color="#36d7b7" />
-//             <div className="flex items-center space-x-4 mb-3 md:mb-1">
-//               <img
-//                 className="w-10 h-10 md:w-16 md:h-16 rounded-full"
-//                 src="/imgs/profile.png"
-//                 alt="User Profile"
-//               />
-//               <div className="text-[16px] md:text-[18px]">
-//                 <p className="text-gray-800 font-semibold">John Doe</p>
-//                 <p className="text-gray-600">john@example.com</p>
-//               </div>
-//             </div>
-
-//             {/* Attend Button */}
-//             <div className="">
-//               <button className="bg-green-500 hover:bg-green-700 text-white font-normal md:font-bold py-1 md:py-2 px-2 md:px-4 rounded focus:outline-none focus:shadow-outline">
-//                 Attended <BiCheckDouble className="inline-block" />
-//               </button>
-//             </div>
-//           </div>
-//           <hr className="" />
-
-//           <div className="flex items-center justify-between hover:bg-slate-300 p-1 md:p-3 cursor-pointer">
-//             {/* Atendee Info */}
-//             <div className="flex items-center space-x-4 mb-3 md:mb-1">
-//               <img
-//                 className="w-10 h-10 md:w-16 md:h-16 rounded-full"
-//                 src="/imgs/profile.png"
-//                 alt="User Profile"
-//               />
-//               <div className="text-[16px] md:text-[18px]">
-//                 <p className="text-gray-800 font-semibold">John Doe</p>
-//                 <p className="text-gray-600">john@example.com</p>
-//               </div>
-//             </div>
-
-//             {/* Attend Button */}
-//             <div className="">
-//               <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-normal md:font-bold py-1 md:py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-//                 Attend <BiCheck className="inline-block" />
-//               </button>
-//             </div>
-//           </div>
-//           <hr className="" />
-
-//           <div className="flex items-center justify-between hover:bg-slate-300 p-1 md:p-3 cursor-pointer">
-//             {/* Atendee Info */}
-//             <div className="flex items-center space-x-4 md:mb-1">
-//               <img
-//                 className="w-10 h-10 md:w-16 md:h-16 rounded-full"
-//                 src="/imgs/profile.png"
-//                 alt="User Profile"
-//               />
-//               <div className="text-[16px] md:text-[18px]">
-//                 <p className="text-gray-800 font-semibold">John Doe</p>
-//                 <p className="text-gray-600">john@example.com</p>
-//               </div>
-//             </div>
-
-//             {/* Attend Button */}
-//             <div className="">
-//               <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-normal md:font-bold py-1 md:py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-//                 Attend <BiCheck className="inline-block" />
-//               </button>
-//             </div>
-//           </div>
-//           {/* Separator */}
-//           <hr className="" />
-
-//           <div className="flex items-center justify-between hover:bg-slate-300 p-1 md:p-3 cursor-pointer">
-//             {/* Atendee Info */}
-//             <div className="flex items-center space-x-4 mb-3 md:mb-1">
-//               <img
-//                 className="w-10 h-10 md:w-16 md:h-16 rounded-full"
-//                 src="/imgs/profile.png"
-//                 alt="User Profile"
-//               />
-//               <div className="text-[16px] md:text-[18px]">
-//                 <p className="text-gray-800 font-semibold">John Doe</p>
-//                 <p className="text-gray-600">john@example.com</p>
-//               </div>
-//             </div>
-
-//             {/* Attend Button */}
-//             <div className="">
-//               <button className="bg-red-500 hover:bg-red-700 text-white font-normal md:font-bold py-1 md:py-2 px-2 md:px-4 rounded focus:outline-none focus:shadow-outline">
-//                 Cancelled <BiX className="inline-block" />
-//               </button>
-//             </div>
-//           </div>
-//           <hr className="" />
-
-//           <div className="flex items-center justify-between hover:bg-slate-300 p-1 md:p-3 cursor-pointer">
-//             {/* Atendee Info */}
-//             <div className="flex items-center space-x-4 mb-3 md:mb-1">
-//               <img
-//                 className="w-10 h-10 md:w-16 md:h-16 rounded-full"
-//                 src="/imgs/profile.png"
-//                 alt="User Profile"
-//               />
-//               <div className="text-[16px] md:text-[18px]">
-//                 <p className="text-gray-800 font-semibold">John Doe</p>
-//                 <p className="text-gray-600">john@example.com</p>
-//               </div>
-//             </div>
-
-//             {/* Attend Button */}
-//             <div className="">
-//               <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-normal md:font-bold py-1 md:py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-//                 Attend <BiCheck className="inline-block" />
-//               </button>
-//             </div>
-//           </div>
-//           <hr className="" />
-
-//           <div className="flex items-center justify-between hover:bg-slate-300 p-1 md:p-3 cursor-pointer">
-//             {/* Atendee Info */}
-//             <div className="flex items-center space-x-4 mb-3 md:mb-1">
-//               <img
-//                 className="w-10 h-10 md:w-16 md:h-16 rounded-full"
-//                 src="/imgs/profile.png"
-//                 alt="User Profile"
-//               />
-//               <div className="text-[16px] md:text-[18px]">
-//                 <p className="text-gray-800 font-semibold">John Doe</p>
-//                 <p className="text-gray-600">john@example.com</p>
-//               </div>
-//             </div>
-
-//             {/* Attend Button */}
-//             <div className="">
-//               <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-normal md:font-bold py-1 md:py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-//                 Attend <BiCheck className="inline-block" />
-//               </button>
-//             </div>
-//           </div>
-//           <hr className="" /> */}

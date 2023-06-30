@@ -18,6 +18,8 @@ import LoginScreen from "./LoginScreen";
 import Modal from "../modals/Modal";
 import EditUsersProfile from "./EditUsersProfile";
 import ChangePassword from "./ChangePassword";
+import axiosClient from "../../axiosClient";
+import updateTotalAttended from "../../../hooks/UpdateAtendeeCount";
 
 const Organizer = () => {
   const [scanActive, setScanActive] = useState(false);
@@ -98,8 +100,15 @@ const Organizer = () => {
     setTotalRegistered(total);
   };
 
+  // Returns data from the child component (OrganizersTable.jsx)
   const getTotalAttended = (total) => {
     setTotalAttended(total);
+  };
+
+  // This function updates the total attended count
+  const handleUpdateTotalAttended = async () => {
+    const count = await updateTotalAttended();
+    setTotalAttended(count);
   };
 
   return (
@@ -221,7 +230,9 @@ const Organizer = () => {
                     />
                   </h2>
                   <hr />
-                  <p className="mt-3 text-center text-2xl">{totalRegistered}</p>
+                  <p className="mt-3 text-center text-2xl">
+                    {totalRegistered.toLocaleString()}
+                  </p>
                 </div>
 
                 {/* Total Attended */}
@@ -233,7 +244,9 @@ const Organizer = () => {
                     />
                   </h2>
                   <hr />
-                  <p className="mt-3 text-center text-2xl">{totalAttended}</p>
+                  <p className="mt-3 text-center text-2xl">
+                    {totalAttended.toLocaleString()}
+                  </p>
                 </div>
               </div>
             </div>
@@ -285,7 +298,9 @@ const Organizer = () => {
             {/* Search Modal */}
             <div className="">
               <SearchModal isOpen={modalOpen} onClose={closeModal}>
-                <SearchInputArea />
+                <SearchInputArea
+                  updateTotalAttended={handleUpdateTotalAttended}
+                />
               </SearchModal>
             </div>
 

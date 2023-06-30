@@ -1,10 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { BiUserCheck, BiCheckDouble, BiTrash } from "react-icons/bi"; //
+import { BiUserCheck, BiCheckDouble, BiTrash, BiCheck } from "react-icons/bi"; //
 import { FaArrowLeft } from "react-icons/fa";
 import axiosClient from "../../axiosClient";
 import { ToastContainer, toast } from "react-toastify";
+import PageTitle from "../../components/PageTitle";
 
 const ViewAttendeeDetails = () => {
   const location = useLocation();
@@ -89,22 +90,28 @@ const ViewAttendeeDetails = () => {
     return formattedDateTime;
   }
 
+  console.log(data);
+
   const handleGoBack = () => {
     window.history.back();
   };
 
-  const handleMarkAttendance = async () => {
+  const [isMarked, setIsMarked] = useState(false);
+
+  const handleMarkAttendance = async (event) => {
+    event.preventDefault();
     const { id } = data;
     try {
-      const response = await axiosClient.put(`/attendees/${id}`);
+      const response = await axiosClient.get(`/attendee/mark_attendance/${id}`);
       const { data } = response;
       setData(data);
-      toast.success("Attendance marked successfully", toastSettings);
+      toast.success(response.data.message, toastSettings);
+      setIsMarked(true);
     } catch (error) {
       console.log(error);
       toast.error("Error marking attendance", toastSettings);
     }
-  }
+  };
 
   const handleCancelAttendance = async () => {
     const { id } = data;
@@ -117,10 +124,11 @@ const ViewAttendeeDetails = () => {
       console.log(error);
       toast.error("Error cancelling attendance", toastSettings);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen lg:py-8 text-[16px] lg:text-[18px]">
+      <PageTitle title={`${fullName} Details`} />
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg px-4 md:px-8 lg:px-8 pb-6">
         <h2 className="text-xl lg:text-3xl text-center p-5 lg:p-10 font-semibold mb-6 border-b-4 border-b-blue-500 text-blue-500 flex justify-center items-center">
           <BiUserCheck className="inline-block mr-2 text-[41px]" />
@@ -188,7 +196,7 @@ const ViewAttendeeDetails = () => {
               <p className="mt-3">
                 <strong>Registration Type:</strong>{" "}
                 <span className="text-slate-500">
-                  {data.registration_type_name}
+                  {data.registration_type?.name}
                 </span>
               </p>
               <p className="">
@@ -208,23 +216,45 @@ const ViewAttendeeDetails = () => {
               <hr />
               <p className="mt-3">
                 <strong>Nationality:</strong>{" "}
-                <span className="text-slate-500">{data.nationality_name}</span>
+                <span className="text-slate-500">{data.nationality?.name}</span>
               </p>
               <p className="">
                 <strong>Region:</strong>{" "}
-                <span className="text-slate-500">{data.region_name}</span>
+                <span className="text-slate-500">{data.region?.name}</span>
               </p>
             </div>
           </div>
 
           <div className="mt-4 border p-4 rounded-md">
             <h2 className="text-lg font-bold mb-2">Actions</h2>
-            <button onClick={() => handleMarkAttendance()} className="bg-green-200 rounded text-green-700 py-2 px-5 mr-3 hover:bg-green-500 hover:text-white mb-3">
-              {" "}
-              Mark as Attended
-              <BiCheckDouble className="inline-block ml-2" />
-            </button>
-            <button onClick={() => handleCancelAttendance()} className="bg-red-300 py-2 px-5 text-red-700 rounded hover:bg-red-500 hover:text-white">
+            {data.atendee_attendances?.length ? (
+              <button
+                onClick={() => handleMarkAttendance()}
+                className="bg-green-200 rounded text-green-700 py-2 px-5 mr-3 hover:bg-green-500 hover:text-white mb-3"
+              >
+                {" "}
+                Attendance Marked
+                <BiCheckDouble className="inline-block ml-2" />
+              </button>
+            ) : (
+              <button
+                onClick={() => handleMarkAttendance()}
+                className={`${
+                  isMarked
+                    ? "bg-green-200 rounded text-green-700 hover:bg-green-500"
+                    : "bg-blue-200 rounded text-blue-700 hover:bg-blue-500"
+                } py-2 px-5 mr-3 hover:text-white mb-3`}
+              >
+                {" "}
+                Mark as Attended
+                <BiCheck className="inline-block ml-2" />
+              </button>
+            )}
+
+            <button
+              onClick={() => handleCancelAttendance()}
+              className="bg-red-300 py-2 px-5 text-red-700 rounded hover:bg-red-500 hover:text-white"
+            >
               Cancel Attendance <BiTrash className="inline-block ml-2" />
             </button>
             <ToastContainer />
