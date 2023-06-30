@@ -10,6 +10,7 @@ import {
   ProfilePage,
   ConfirmationPage,
   PrintingPage,
+  GatePass,
 } from "./views/frontend";
 import {
   Dashboard,
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/printing-back",
         element: <PrintingBack />,
+      },
+      {
+        path: "/gatepass/:id",
+        element: <GatePass />,
       },
     ],
   },

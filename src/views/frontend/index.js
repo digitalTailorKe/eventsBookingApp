@@ -6,6 +6,7 @@ import SectorDetails from "./SectorDetails";
 import ProfilePage from "./ProfilePage";
 import PrintingPage from "./PrintingPage";
 import ConfirmationPage from "./ConfirmationPage";
+import GatePass from "./GatePass";
 
 export {
   LandingPage,
@@ -16,4 +17,5 @@ export {
   ProfilePage,
   PrintingPage,
   ConfirmationPage,
+  GatePass,
 };

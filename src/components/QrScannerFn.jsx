@@ -38,7 +38,9 @@ const QrScannerFn = ({ handleScanning, handleScanComplete }) => {
       />
 
       <div className="mt-5">
-        <h4 className="text-green-600">{result}</h4>
+        <h4 className="text-green-800 bg-green-200 px-4 py-2 rounded-md">
+          {result}
+        </h4>
       </div>
     </div>
   );

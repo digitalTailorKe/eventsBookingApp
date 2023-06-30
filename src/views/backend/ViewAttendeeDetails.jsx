@@ -62,7 +62,7 @@ const ViewAttendeeDetails = () => {
       return (
         <span
           key={index}
-          className="bg-cyan-200 text-[16px] px-5 text-info rounded-full mr-2 mb-2 inline-block text-cyan-600 cursor-default"
+          className="bg-cyan-200 text-[16px] px-5 text-info rounded-full mr-2 mb-2 inline-block text-cyan-600 cursor-default shadow-md"
         >
           {name}
         </span>
@@ -244,7 +244,7 @@ const ViewAttendeeDetails = () => {
                   isMarked
                     ? "bg-green-200 rounded text-green-700 hover:bg-green-500"
                     : "bg-orange-200 rounded text-orange-700 hover:bg-orange-500"
-                } py-2 px-5 mr-3 hover:text-white mb-3`}
+                } py-2 px-5 mr-3 hover:text-white mb-3 font-bold shadow-md`}
               >
                 {" "}
                 Mark as Attended
@@ -254,7 +254,7 @@ const ViewAttendeeDetails = () => {
 
             <button
               onClick={() => handleCancelAttendance()}
-              className="bg-red-300 py-2 px-5 text-red-700 rounded hover:bg-red-500 hover:text-white"
+              className="bg-red-300 py-2 px-5 text-red-700 rounded hover:bg-red-500 hover:text-white font-bold shadow-md"
             >
               Cancel Attendance <BiTrash className="inline-block ml-2" />
             </button>
