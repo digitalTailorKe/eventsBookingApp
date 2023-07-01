@@ -8,7 +8,7 @@ const GatePass = () => {
   const id = queryParams.get("id");
   const name = queryParams.get("name");
 
-  const urlWithId = `https://example.com/${id}`;
+  const urlWithId = `https://example.com?name=John%20Doe&id=123`;
 
   return (
     <div style={styles.container}>
@@ -22,8 +22,9 @@ const GatePass = () => {
         <div style={styles.text}>GatePass</div>
       </div>
       <div className="w-[280px] mt-3">
-        <div className="text-xl text-white font-[300]">
-          Hello Dennis Otieno, present this at the gate for scanning.
+        <div className="text-lg text-white font-[300]">
+          Hello {name}, <br /> Your confirmation has been successfully
+          processed. Present this at the gate for scanning.
         </div>
       </div>
     </div>

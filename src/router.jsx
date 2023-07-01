@@ -19,6 +19,7 @@ import {
 } from "./views/backend";
 import NotFound from "./views/NotFound";
 import PrintingBack from "./views/frontend/PrintingBack";
+import SuccessConfirmationPage from "./views/frontend/SuccessConfirmationPage";
 
 const router = createBrowserRouter([
   {
@@ -63,8 +64,12 @@ const router = createBrowserRouter([
         element: <PrintingBack />,
       },
       {
-        path: "/gatepass/:id",
+        path: "/gatepass",
         element: <GatePass />,
+      },
+      {
+        path: "/success-confirmation",
+        element: <SuccessConfirmationPage />,
       },
     ],
   },
