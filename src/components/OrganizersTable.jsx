@@ -62,7 +62,7 @@ const OrganizersTable = ({
               },
               width: "150px",
             },
-            { name: "email", data: "email", width: "150px" },
+            { name: "email", data: "email", width: "130px" },
             { name: "phone", data: "phone", width: "150px" },
             {
               name: "created_at",
@@ -72,7 +72,7 @@ const OrganizersTable = ({
             },
             {
               data: null,
-              width: "120px",
+              width: "130px",
               render: function (data, type, row) {
                 return `${
                   data.atendee_attendances.length > 0
@@ -99,12 +99,14 @@ const OrganizersTable = ({
     initializeDataTable();
   }, [baseUrl]);
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   useEffect(() => {
     // Handle table click events
     const table = $(tableRef.current);
     const cancelAttendance = (row) => {
       const id = row.id;
-      const url = `/attendee/mark_attendance/${id}`;
+      const url = `/attendee/mark_attendance/${id}/${user.user_id}`;
       // Send an update request to the API
       axiosClient
         .get(url)

@@ -8,7 +8,7 @@ const GatePass = () => {
   const id = queryParams.get("id");
   const name = queryParams.get("name");
 
-  const urlWithId = `https://example.com?name=John%20Doe&id=123`;
+  const urlWithId = `https://admin.indoeastafricaexpo.org/api/attendee/mark_attendance/${id}/`;
 
   return (
     <div style={styles.container}>

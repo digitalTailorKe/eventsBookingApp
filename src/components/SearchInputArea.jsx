@@ -58,6 +58,7 @@ const SearchInputArea = ({ updateTotalAttended }) => {
       });
   };
 
+  const user = JSON.parse(localStorage.getItem("user"));
   const [confirmed, setConfirmed] = useState(null);
 
   const handleAttendClick = (data) => {
@@ -65,7 +66,7 @@ const SearchInputArea = ({ updateTotalAttended }) => {
     const attendeeId = data.id; // Set the clicked button ID
 
     axiosClient
-      .get(`/attendee/mark_attendance/${attendeeId}`)
+      .get(`/attendee/mark_attendance/${attendeeId}/${user.user_id}`)
       .then((response) => {
         setClickedButtonId(null);
         toast.success(response.data.message, toastSettings);
@@ -135,7 +136,9 @@ const SearchInputArea = ({ updateTotalAttended }) => {
                           {result.full_name}{" "}
                           <span className="ml-2">
                             {result.confirmation && (
-                              <span className="bg-green-200 text-green-800 px-3 py-1 rounded-lg shadow-md">{result.confirmation.passkey}</span>
+                              <span className="bg-green-200 text-green-800 px-3 py-1 rounded-lg shadow-md">
+                                {result.confirmation.passkey}
+                              </span>
                             )}
                           </span>
                         </p>
