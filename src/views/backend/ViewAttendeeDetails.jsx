@@ -12,6 +12,7 @@ const ViewAttendeeDetails = () => {
   const [data, setData] = useState({});
   const rowData = location.state?.rowData;
   const { fullName } = useParams();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   // Toast settings
   const toastSettings = {
@@ -103,7 +104,9 @@ const ViewAttendeeDetails = () => {
     event.preventDefault();
     const { id } = data;
     try {
-      const response = await axiosClient.get(`/attendee/mark_attendance/${id}`);
+      const response = await axiosClient.get(
+        `/attendee/mark_attendance/${id}/${user.user_id}}`
+      );
       const { data } = response;
       setData(data);
       toast.success(response.data.message, toastSettings);

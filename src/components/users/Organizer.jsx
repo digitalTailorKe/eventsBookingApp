@@ -308,7 +308,7 @@ const Organizer = () => {
               </SearchModal>
             </div>
 
-            {/* Edit Profile Modal */}
+            {/* Edit Profile Modal */}  
             <div className="">
               <Modal
                 isOpen={profileModalOpen}

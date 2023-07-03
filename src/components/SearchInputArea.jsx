@@ -103,7 +103,7 @@ const SearchInputArea = ({ updateTotalAttended }) => {
 
   return (
     <div className="w-full">
-      <div className="w-full md:pt-3">
+      <div className="md:pt-3">
         {/* Search input */}
         <CustomSearchInput
           name="search"
@@ -114,17 +114,17 @@ const SearchInputArea = ({ updateTotalAttended }) => {
       </div>
       <div className="">
         {/* Search Result */}
-        <div className="max-h-[500px] overflow-y-scroll">
+        <div className="max-h-[500px] overflow-y-scroll w-[inherit]">
           {formData.search.length > 0 && (
             <div>
               <hr className="" />
               {filteredResults?.map((result) => (
                 <div key={result.id} className="">
-                  <div className="flex items-center justify-between hover:bg-[#e4ecf5] p-1 md:p-2 cursor-pointer md:px-3">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between hover:bg-[#e4ecf5] p-1 md:p-2 cursor-pointer md:px-3">
                     {/* Attendee Info */}
                     <div
-                      onClick={handleGoToViewPage(result)}
                       className="flex items-center space-x-4 md:mb-1"
+                      onClick={handleGoToViewPage(result)}
                     >
                       <img
                         className="w-10 h-10 md:w-16 md:h-16 rounded-full"
@@ -148,36 +148,38 @@ const SearchInputArea = ({ updateTotalAttended }) => {
                     </div>
 
                     {/* Attend Button */}
-                    <div className="">
-                      {result.atendee_attendances.length > 0 ? (
-                        <button
-                          disabled
-                          className="bg-green-500 hover:bg-green-700 text-white font-normal md:font-bold py-1 md:py-2 px-2 md:px-4 rounded focus:outline-none focus:shadow-outline"
-                        >
-                          Attendance Marked
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => handleAttendClick(result)}
-                          className={`${
-                            confirmed === result.id
-                              ? "bg-green-500 hover:bg-green-700"
-                              : "bg-yellow-500 hover:bg-yellow-700"
-                          }  text-white font-normal md:font-bold py-1 md:py-2 px-2 md:px-4 rounded focus:outline-none focus:shadow-outline`}
-                        >
-                          {clickedButtonId === result.id ? ( // Show loading state only for the clicked button
-                            <PulseLoader
-                              color="#fff"
-                              size={10}
-                              style={{ display: "inline-block" }}
-                            />
-                          ) : confirmed === result.id ? (
-                            "Attendance Marked"
-                          ) : (
-                            "Attend"
-                          )}
-                        </button>
-                      )}
+                    <div className="flex flex-row justify-end">
+                      <div className="">
+                        {result.atendee_attendances.length > 0 ? (
+                          <button
+                            disabled
+                            className="bg-green-500 hover:bg-green-700 text-white font-normal md:font-bold py-1 md:py-2 px-2 md:px-4 rounded focus:outline-none focus:shadow-outline"
+                          >
+                            Attendance Marked
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => handleAttendClick(result)}
+                            className={`${
+                              confirmed === result.id
+                                ? "bg-green-500 hover:bg-green-700"
+                                : "bg-yellow-500 hover:bg-yellow-700"
+                            }  text-white font-normal md:font-bold py-1 md:py-2 px-2 md:px-4 rounded focus:outline-none focus:shadow-outline`}
+                          >
+                            {clickedButtonId === result.id ? ( // Show loading state only for the clicked button
+                              <PulseLoader
+                                color="#fff"
+                                size={10}
+                                style={{ display: "inline-block" }}
+                              />
+                            ) : confirmed === result.id ? (
+                              "Attendance Marked"
+                            ) : (
+                              "Attend"
+                            )}
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
                   <hr className="" />

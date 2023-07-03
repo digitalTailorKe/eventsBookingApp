@@ -10,7 +10,7 @@ const CustomSearchInput = ({ name, value, onChange, placeholder }) => {
         id={name}
         value={value}
         onChange={onChange}
-        className="focus:none flex-1 rounded-lg border-none py-1 px-3 text-[16px] font-[300] text-[#153148] focus:outline-none md:py-4 md:text-[18px]"
+        className="focus:none flex-1 rounded-lg border-none py-2 mb-2 md:mb-0 px-3 text-[16px] font-[300] text-[#153148] focus:outline-none md:py-4 md:text-[18px]"
         placeholder={placeholder}
         autoComplete="off"
       />

@@ -108,6 +108,7 @@ input[type="checkbox"]:checked + label .checkbox::after {
   transform: translateY(-20px);
   transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
   overflow: hidden; /* Hide scrollbars */
+  /* margin: 0 10px 0 10px; */
 }
 
 @media (max-width: 768px) {
@@ -115,6 +116,8 @@ input[type="checkbox"]:checked + label .checkbox::after {
     top: 30%;
     margin: 0 10px;
     padding: 10px;
+    max-width: 368px;
+    width: 100%;
   }
 }
 
