@@ -3,6 +3,7 @@ import PrintingCard from "../../components/printing/PrintingCard";
 import PageTitle from "../../components/PageTitle";
 import axiosClient from "../../axiosClient";
 import getConfirmedVisitors from "../../../hooks/GetConfirmedVisitors";
+import PrintingGatePassCard from "../../components/printing/PrintingGatePassCard";
 
 const PrintingPage = () => {
   const [pin, setPin] = useState("");
@@ -71,8 +72,9 @@ const PrintingPage = () => {
             <div className="mx-auto bg-white w-[228mm] h-auto">
               <div className="grid grid-cols-2 gap-2 pt-2 pl-2">
                 {confirmedData?.map((data) => (
-                  <PrintingCard
+                  <PrintingGatePassCard
                     key={data.id}
+                    id={data.id}
                     name={data.name}
                     position={data.position}
                     company={data.company}

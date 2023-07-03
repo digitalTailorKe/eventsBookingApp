@@ -1,4 +1,5 @@
 import QRCodeComponent from "../utils/QRCodeComponent";
+import PrintingGatePassCard from "./PrintingGatePassCard";
 
 const PrintingCard = ({
   id,
@@ -71,7 +72,7 @@ const PrintingCard = ({
 
       <div className="flex justify-center mt-2">
         <div className="bg-white p-1">
-          <QRCodeComponent
+          <PrintingGatePassCard
             id={id}
             name={name}
             position={position}
