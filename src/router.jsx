@@ -11,6 +11,8 @@ import {
   ConfirmationPage,
   PrintingPage,
   GatePass,
+  ScanMe,
+  FindGatePass,
 } from "./views/frontend";
 import {
   Dashboard,
@@ -20,6 +22,8 @@ import {
 import NotFound from "./views/NotFound";
 import PrintingBack from "./views/frontend/PrintingBack";
 import SuccessConfirmationPage from "./views/frontend/SuccessConfirmationPage";
+import QrCodeConfirm from "./views/frontend/QrCodeConfirm";
+import QrcodeAreadyConfirmed from "./views/frontend/QrcodeAreadyConfirmed";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +74,22 @@ const router = createBrowserRouter([
       {
         path: "/success-confirmation",
         element: <SuccessConfirmationPage />,
+      },
+      {
+        path: "/scan-me",
+        element: <ScanMe />,
+      },
+      {
+        path: "/find-gatepass",
+        element: <FindGatePass />,
+      },
+      {
+        path: "/qr-code-confirm",
+        element: <QrCodeConfirm />,
+      },
+      {
+        path: "/qr-code-already-confirmed",
+        element: <QrcodeAreadyConfirmed />,
       },
     ],
   },

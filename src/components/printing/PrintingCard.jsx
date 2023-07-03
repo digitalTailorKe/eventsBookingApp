@@ -11,6 +11,16 @@ const PrintingCard = ({
   address,
   notes,
 }) => {
+  function limitWords(text, limit) {
+    // Remove leading/trailing whitespace and split into words
+    const words = text.trim().split(" ");
+
+    // Extract the desired number of words and join them back into a string
+    const limitedText = words.slice(0, limit).join(" ");
+
+    return limitedText;
+  }
+
   return (
     <div className="card w-[110mm] h-[157mm] border flex-col justify-center items-center bg-pattern bg-contain rounded pt-3 mb-2">
       <div className="">
@@ -43,7 +53,7 @@ const PrintingCard = ({
           {name}
         </h4>
         <p className="text-center text-gray-500 text-[16px] capitalize leading-tight tracking-wider">
-          {position}
+          {limitWords(position, 10)}
         </p>
         <div className="flex justify-center my-2">
           <div className="w-[60px] bg-[#fe3b00] h-[2px]"></div>

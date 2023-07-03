@@ -18,9 +18,7 @@ const getConfirmedVisitors = async () => {
         serial: item.confirmation.passkey,
         notes: [
           {
-            businessInterest: item.business_sector?.map(
-              (sector) => sector.name
-            ),
+            businessInterest: item.sectors?.map((sector) => sector.name),
           },
           {
             sectorOfInterest: item.sectors?.map((sector) => sector.name),

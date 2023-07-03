@@ -202,7 +202,9 @@ const ViewAttendeeDetails = () => {
               </p>
               <p className="">
                 <strong>Registered By:</strong>{" "}
-                <span className="text-slate-500">Self</span>
+                <span className="text-slate-500">
+                  {data.created_by_name ? data.created_by_name : "Self"}
+                </span>
               </p>
               <p className="">
                 <strong>Created At:</strong>{" "}

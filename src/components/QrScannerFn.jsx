@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { QrScanner } from "@yudiel/react-qr-scanner";
 import axiosClient from "../axiosClient";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 
 const QrScannerFn = ({ handleScanning, handleScanComplete }) => {
   const [result, setResult] = useState("");
   const user = JSON.parse(localStorage.getItem("user"));
+  const beepSound = new Audio("beep.mp3");
 
   // Toast settings
   const toastSettings = {
@@ -18,21 +20,21 @@ const QrScannerFn = ({ handleScanning, handleScanComplete }) => {
     if (data) {
       try {
         const endpoint = data.trim() + user.user_id; // Trim any leading/trailing spaces
-        console.log(`Scanning ${endpoint}...`);
-        const response = await axiosClient.get(endpoint);
-        console.log("Response:", response);
+        const response = await axios.get(endpoint);
         if (response.data) {
           toast.success(response.data.message, toastSettings);
+          beepSound.play();
           setResult("Already attended");
         } else {
+          beepSound.play();
           setResult("Attendance marked successfully");
-          toast.error(response.data.message, toastSettings);
+          toast.success(response.data.message, toastSettings);
         }
 
         handleScanComplete();
       } catch (error) {
         console.error("Error marking attendance:", error);
-        toast.error("Error marking attendance: "+ error, toastSettings);
+        toast.error("Error marking attendance: " + error, toastSettings);
       }
     }
   };

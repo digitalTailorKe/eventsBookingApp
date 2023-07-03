@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PageTitle from "../../components/PageTitle";
 
 const SuccessConfirmationPage = () => {
   return (
     <div className="h-screen flex justify-center items-center w-full">
+      <PageTitle title="Success Page" />
       <div className="bg-white p-3 rounded-md shadow-md mx-2">
         <div className="mb-3 flex justify-center">
           <img src="/imgs/logo.png" alt="logo" className="w-40" />

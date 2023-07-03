@@ -7,6 +7,8 @@ import ProfilePage from "./ProfilePage";
 import PrintingPage from "./PrintingPage";
 import ConfirmationPage from "./ConfirmationPage";
 import GatePass from "./GatePass";
+import FindGatePass from "./FindGatePass";
+import ScanMe from "./ScanMe";
 
 export {
   LandingPage,
@@ -18,4 +20,6 @@ export {
   PrintingPage,
   ConfirmationPage,
   GatePass,
+  FindGatePass,
+  ScanMe,
 };

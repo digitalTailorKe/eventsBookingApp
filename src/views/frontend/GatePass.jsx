@@ -1,6 +1,7 @@
 import React from "react";
 import QRCode from "qrcode.react";
 import { useLocation, useParams } from "react-router-dom";
+import PageTitle from "../../components/PageTitle";
 
 const GatePass = () => {
   const location = useLocation();
@@ -8,10 +9,11 @@ const GatePass = () => {
   const id = queryParams.get("id");
   const name = queryParams.get("name");
 
-  const urlWithId = `https://admin.indoeastafricaexpo.org/api/attendee/mark_attendance/${id}/`;
+  const urlWithId = `https://admin.indoeastafricaexpo.org/api/attendee/mark_gatepass_attendance/${id}`;
 
   return (
     <div style={styles.container}>
+      <PageTitle title="GatePass" />
       <div className="mb-3">
         <img src="/imgs/logo.png" alt="logo" className="w-40" />
       </div>
@@ -22,7 +24,7 @@ const GatePass = () => {
         <div style={styles.text}>GatePass</div>
       </div>
       <div className="w-[280px] mt-3">
-        <div className="text-lg text-white font-[300]">
+        <div className="text-lg text-gray-800 font-[300]">
           Hello {name}, <br /> Your confirmation has been successfully
           processed. Present this at the gate for scanning.
         </div>
