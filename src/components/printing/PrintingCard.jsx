@@ -23,13 +23,19 @@ const PrintingCard = ({
 
   return (
     <div className="card w-[110mm] h-[157mm] border flex-col justify-center items-center bg-pattern bg-contain rounded pt-3 mb-2">
-      <div className="">
+      <div className="relative">
         <img
           className="text-center"
           style={{ width: "120px", textAlign: "center", margin: "0 auto" }}
           src="/imgs/logo.png"
           alt=""
         />
+
+        <div className="absolute top-4 right-14">
+          <h4 className="text-gray-800 font-bold text-center text-[18px] mt-1 font-mono">
+            {serial}
+          </h4>
+        </div>
       </div>
 
       <div className="bg-[#128e12]">
@@ -83,10 +89,6 @@ const PrintingCard = ({
           Scan the <b className="font-bold">QR Code</b> to know me
         </h4>
       </div>
-
-      <h4 className="text-gray-800 font-bold text-center text-[18px] mt-1 font-mono">
-        {serial}
-      </h4>
     </div>
   );
 };
