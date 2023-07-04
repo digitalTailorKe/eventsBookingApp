@@ -10,17 +10,7 @@ const GatePass = () => {
   const id = queryParams.get("id");
   const name = queryParams.get("name");
 
-  const decryptIds = (encryptedId) => {
-    // Decrypt the encrypted ID using the secret key
-    const secretKey = "1234567890";
-    const decryptedIdBytes = CryptoJS.AES.decrypt(encryptedId, secretKey);
-    const decryptedId = decryptedIdBytes.toString(CryptoJS.enc.Utf8);
-    return decryptedId;
-  };
-
-  const decryptedId = decryptIds(id);
-
-  const urlWithId = `https://admin.indoeastafricaexpo.org/api/attendee/mark_gatepass_attendance/${decryptedId}`;
+  const urlWithId = `https://admin.indoeastafricaexpo.org/api/attendee/mark_gatepass_attendance/${id}`;
 
   return (
     <div style={styles.container}>

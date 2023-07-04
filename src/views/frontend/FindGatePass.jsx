@@ -43,7 +43,7 @@ const FindGatePass = () => {
           // Redirect to the gatepass page with name and id as query params
           const redirectUrl = `https://indoeastafricaexpo.org/gatepass?name=${encodeURIComponent(
             data.data.full_name
-          )}&id=${encodeURIComponent(encryptIds(data.data.id))}`;
+          )}&id=${encodeURIComponent(data.data.id)}`;
 
           setUrl(redirectUrl);
         } else {
@@ -71,15 +71,15 @@ const FindGatePass = () => {
     window.location.href = url;
   };
 
-  const encryptIds = (id) => {
-    // Encrypt the id using a secret key
-    const secretKey = "1234567890";
-    const encryptedId = CryptoJS.AES.encrypt(
-      id.toString(),
-      secretKey
-    ).toString();
-    return encryptedId;
-  };
+  // const encryptIds = (id) => {
+  //   // Encrypt the id using a secret key
+  //   const secretKey = "1234567890";
+  //   const encryptedId = CryptoJS.AES.encrypt(
+  //     id.toString(),
+  //     secretKey
+  //   ).toString();
+  //   return encryptedId;
+  // };
 
   // This function renders the success message when the gatePass is found
   const renderSuccessMessage = (search, data) => {

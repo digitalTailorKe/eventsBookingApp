@@ -24,7 +24,7 @@ const PrintingGatePassCard = ({
 
   return (
     <div className="card w-[110mm] h-[157mm] border flex-col justify-center items-center bg-pattern bg-contain rounded pt-3 mb-2">
-      <div className="relative">
+      <div className="relative mt-5">
         <img
           className="text-center"
           style={{ width: "120px", textAlign: "center", margin: "0 auto" }}
