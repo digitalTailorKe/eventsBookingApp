@@ -13,6 +13,7 @@ import {
   GatePass,
   ScanMe,
   FindGatePass,
+  OnsiteRegistration,
 } from "./views/frontend";
 import {
   Dashboard,
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
       {
         path: "/qr-code-already-confirmed",
         element: <QrcodeAreadyConfirmed />,
+      },
+      {
+        path: "/onsite-registration",
+        element: <OnsiteRegistration />,
       },
     ],
   },

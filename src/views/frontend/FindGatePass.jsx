@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { PulseLoader } from "react-spinners";
 import axios from "axios";
 import PageTitle from "../../components/PageTitle";
+import CryptoJS from "crypto-js";
 
 const FindGatePass = () => {
   const baseUrl = `${import.meta.env.VITE_EVENTS_API_BASE_URL}/api`;
@@ -35,19 +36,20 @@ const FindGatePass = () => {
           },
         }); // Endpoint is open to the public
         const { data } = response;
+
         if (data.data !== null) {
           setHasMessage(true);
           setSuccessMessage(renderSuccessMessage(formData.search, data));
           // Redirect to the gatepass page with name and id as query params
           const redirectUrl = `https://indoeastafricaexpo.org/gatepass?name=${encodeURIComponent(
             data.data.full_name
-          )}&id=${encodeURIComponent(data.data.id)}`;
-          // console.log(redirectUrl);
+          )}&id=${encodeURIComponent(encryptIds(data.data.id))}`;
+
           setUrl(redirectUrl);
         } else {
           setHasMessage(true);
           setErrorMessages([
-            `No gatepass found for "${formData.search}". Please try again with a different phone number, email or ID/Passport. Remember to use the same details you used during registration.`,
+            `No gatepass found for "${formData.search}". Please try again with a different phone number, email, or ID/Passport. Remember to use the same details you used during registration.`,
           ]);
         }
         setLoading(false);
@@ -61,7 +63,6 @@ const FindGatePass = () => {
       }
     } else {
       setLoading(false);
-      return false;
     }
   };
 
@@ -70,14 +71,25 @@ const FindGatePass = () => {
     window.location.href = url;
   };
 
-  // This function render success message when the gatePass is found
+  const encryptIds = (id) => {
+    // Encrypt the id using a secret key
+    const secretKey = "1234567890";
+    const encryptedId = CryptoJS.AES.encrypt(
+      id.toString(),
+      secretKey
+    ).toString();
+    return encryptedId;
+  };
+
+  // This function renders the success message when the gatePass is found
   const renderSuccessMessage = (search, data) => {
     return (
       <div className="w-[350px] md:w-[400px] mb-3">
         <div className="text-green-800 bg-green-200 p-3 rounded-md font-[300]">
-          <p className="">
-            Gatepass found for <b>"{search}"</b>. Details are:
+          <p className="mb-3">
+            Gatepass found for <b>"{search}"</b>.
           </p>
+          <h4 className="underline font-bold">Details:</h4>
           <p className="">
             <span className="font-bold">Name:</span> {data.data.full_name}.
           </p>
@@ -91,12 +103,16 @@ const FindGatePass = () => {
             <span className="font-bold">ID/Passport:</span>{" "}
             {data.data.id_number}.
           </p>
+          <p className="">
+            <span className="font-bold">Gate Pass No:</span>{" "}
+            {data.data.confirmation?.passkey || "Get Visitors Pass!"}
+          </p>
           <br />
           <p className="">
             If this is you, please proceed to the gatepass page to download your
             gatepass. If this is not you, please try again with a different
-            phone number, email or ID/Passport. Remember to use the same details
-            you used during registration.
+            phone number, email, or ID/Passport. Remember to use the same
+            details you used during registration.
           </p>
         </div>
       </div>
@@ -107,14 +123,14 @@ const FindGatePass = () => {
   const validateSearchInput = () => {
     const errors = [];
     if (formData.search.trim() === "") {
-      errors.push("Please enter your phone number, email or ID/Passport.");
+      errors.push("Please enter your phone number, email, or ID/Passport.");
     }
     setErrorMessages(errors);
-    return Object.keys(errors).length === 0;
+    return errors.length === 0;
   };
 
   const handleRedirect = () => {
-    window.location.href = "https://indoeastafricaexpo.org";
+    window.location.href = "https://indoeastafricaexpo.org/onsite-registration";
   };
 
   return (
@@ -125,16 +141,16 @@ const FindGatePass = () => {
       </div>
       <div className="w-[380px] text-center md:w-[400px]">
         <h4 className="mb-3 text-xl w-full font-bold text-gray-500">
-          Enter your phone number, email or ID/Passport you used during
+          Enter your phone number, email, or ID/Passport you used during
           registration.
         </h4>
       </div>
       <div className="border-2 p-3 md:p-5 rounded-md w-[350px] md:w-[400px] mb-3">
-        <form action="" method="post" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div style={styles.qrCodeContainer} className="">
             <input
               type="text"
-              placeholder="Enter email, phone or id"
+              placeholder="Enter email, phone, or ID"
               className="w-full p-5 rounded"
               name="search"
               value={formData.search}
@@ -149,7 +165,7 @@ const FindGatePass = () => {
           {!successMessage && (
             <div className="">
               <button className="bg-blue-500 text-white p-3 rounded-md w-full uppercase font-bold">
-                {loading ? ( // Show loading state only for the clicked button
+                {loading ? (
                   <PulseLoader
                     color="#fff"
                     size={10}
@@ -169,7 +185,9 @@ const FindGatePass = () => {
           <div
             className={`text-lg text-red-800 bg-red-200 p-3 rounded-md font-[300]`}
           >
-            {errorMessages}
+            {errorMessages.map((errorMessage, index) => (
+              <div key={index}>{errorMessage}</div>
+            ))}
           </div>
           <button
             onClick={handleRedirect}
@@ -222,21 +240,3 @@ const styles = {
     marginBottom: 20,
   },
 };
-
-// public function findGatePass(Request $request)
-//     {
-//         $searchQuery = $request->input('query');
-
-//         $result = Attendee::where(function ($query) use ($searchQuery) {
-//             $query->where('full_name', 'like', "%{$searchQuery}%")
-//                 ->orWhere('email', 'like', "%{$searchQuery}%")
-//                 ->orWhere('phone', 'like', "%{$searchQuery}%")
-//                 ->orWhere('id_number', 'like', "%{$searchQuery}%");
-//         })->first();
-
-//         if ($result) {
-//             return response()->json(["data" => $result, "message" => "Gatepass Found!"]);
-//         } else {
-//             return response()->json(["data" => null, "message" => "Please register first to get your Gate Pass or get help from our team at the desk."]);
-//         }
-//     }

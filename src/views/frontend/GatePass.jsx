@@ -2,6 +2,7 @@ import React from "react";
 import QRCode from "qrcode.react";
 import { useLocation, useParams } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
+import CryptoJS, { AES } from "crypto-js";
 
 const GatePass = () => {
   const location = useLocation();
@@ -9,7 +10,17 @@ const GatePass = () => {
   const id = queryParams.get("id");
   const name = queryParams.get("name");
 
-  const urlWithId = `https://admin.indoeastafricaexpo.org/api/attendee/mark_gatepass_attendance/${id}`;
+  const decryptIds = (encryptedId) => {
+    // Decrypt the encrypted ID using the secret key
+    const secretKey = "1234567890";
+    const decryptedIdBytes = CryptoJS.AES.decrypt(encryptedId, secretKey);
+    const decryptedId = decryptedIdBytes.toString(CryptoJS.enc.Utf8);
+    return decryptedId;
+  };
+
+  const decryptedId = decryptIds(id);
+
+  const urlWithId = `https://admin.indoeastafricaexpo.org/api/attendee/mark_gatepass_attendance/${decryptedId}`;
 
   return (
     <div style={styles.container}>

@@ -9,6 +9,7 @@ import ConfirmationPage from "./ConfirmationPage";
 import GatePass from "./GatePass";
 import FindGatePass from "./FindGatePass";
 import ScanMe from "./ScanMe";
+import OnsiteRegistration from "./OnsiteRegistration";
 
 export {
   LandingPage,
@@ -22,4 +23,5 @@ export {
   GatePass,
   FindGatePass,
   ScanMe,
+  OnsiteRegistration,
 };
