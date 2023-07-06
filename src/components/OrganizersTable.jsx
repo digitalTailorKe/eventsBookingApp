@@ -11,6 +11,8 @@ const OrganizersTable = ({
   getTotalRegistered,
   getTotalAttended,
   setAttendeeCount,
+  onsiteTotalRegistered,
+  onsiteTotalRegisteredBy,
 }) => {
   const tableRef = useRef(null);
   const [dataTable, setDataTable] = useState(null);
@@ -35,6 +37,8 @@ const OrganizersTable = ({
         const count = data.attendeeCount;
         getTotalRegistered(count);
         getTotalAttended(data.attendanceCount);
+        onsiteTotalRegistered(data.onsiteRegistered);
+        onsiteTotalRegisteredBy(data.onsiteRegisteredBy);
 
         // Destroy the existing DataTable instance if it exists
         if (dataTable) {
@@ -74,15 +78,9 @@ const OrganizersTable = ({
               data: null,
               width: "130px",
               render: function (data, type, row) {
-                return `${
-                  data.atendee_attendances.length > 0
-                    ? `<button disabled class="m-0 font-bold shadow-md rounded-full cursor-pointer py-1 px-4 bg-green-200 hover:bg-green-400 hover:text-white text-green-800 border-gray-200" data-id="${row.id}" data-action="delete">
-                            Attending
-                        </button>`
-                    : `<button class="cancel_attendance m-0 font-bold shadow-md rounded-full cursor-pointer py-1 px-4 bg-orange-200 hover:bg-orange-400 hover:text-white text-orange-800 border-gray-200" data-id="${row.id}" data-action="delete">
+                return `<button class="cancel_attendance m-0 font-bold shadow-md rounded-full cursor-pointer py-1 px-4 bg-orange-200 hover:bg-orange-400 hover:text-white text-orange-800 border-gray-200" data-id="${row.id}" data-action="delete">
                             Mark Attend
-                        </button>`
-                }`;
+                        </button>`;
               },
             },
           ],

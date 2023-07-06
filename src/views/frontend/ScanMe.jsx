@@ -3,7 +3,8 @@ import QRCode from "qrcode.react";
 import PageTitle from "../../components/PageTitle";
 
 const ScanMe = () => {
-  const urlWithId = `https://indoeastafricaexpo.org/find-gatepass`;
+  // const urlWithId = `https://indoeastafricaexpo.org/find-gatepass`;
+  const urlWithId = `https://indoeastafricaexpo.org/onsite-registration`;
 
   return (
     <div style={styles.container}>

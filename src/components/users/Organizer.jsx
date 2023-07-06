@@ -104,6 +104,17 @@ const Organizer = () => {
     setTotalAttended(total);
   };
 
+  const [onSiteTotalRegistered, setOnsiteTotalRegistered] = useState(0);
+  const [onSiteTotalRegisteredBy, setOnsiteTotalRegisteredBy] = useState(0);
+
+  const onsiteTotalRegistered = (total) => {
+    setOnsiteTotalRegistered(total);
+  };
+
+  const onsiteTotalRegisteredBy = (total) => {
+    setOnsiteTotalRegisteredBy(total);
+  };
+
   const handleUpdateAttendeeCount = (total) => {
     setTotalAttended(totalAttended + total);
   };
@@ -238,6 +249,20 @@ const Organizer = () => {
                   </p>
                 </div>
 
+                {/* Total Registered */}
+                <div className="border p-4 rounded-md bg-orange-200 text-orange-800">
+                  <h2 className="text-lg font-bold mb-2 flex justify-between items-center">
+                    Onsite Self Registration{" "}
+                    <BiObjectsVerticalBottom
+                      style={{ display: "inline-block" }}
+                    />
+                  </h2>
+                  <hr />
+                  <p className="mt-3 text-center text-2xl">
+                    {onSiteTotalRegistered.toLocaleString()}
+                  </p>
+                </div>
+
                 {/* Total Attended */}
                 <div className="border p-4 rounded-md bg-green-200 text-green-800">
                   <h2 className="text-lg font-bold mb-2 flex justify-between items-center">
@@ -251,6 +276,20 @@ const Organizer = () => {
                     {totalAttended.toLocaleString()}
                   </p>
                 </div>
+
+                {/* Total Attended */}
+                <div className="border p-4 rounded-md bg-pink-200 text-pink-800">
+                  <h2 className="text-lg font-bold mb-2 flex justify-between items-center">
+                    Onsite Registered by Organizers{" "}
+                    <BiObjectsVerticalBottom
+                      style={{ display: "inline-block" }}
+                    />
+                  </h2>
+                  <hr />
+                  <p className="mt-3 text-center text-2xl">
+                    {onSiteTotalRegisteredBy.toLocaleString()}
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -259,6 +298,8 @@ const Organizer = () => {
               getTotalRegistered={getTotalRegistered}
               getTotalAttended={getTotalAttended}
               setAttendeeCount={handleUpdateAttendeeCount}
+              onsiteTotalRegistered={onsiteTotalRegistered}
+              onsiteTotalRegisteredBy={onsiteTotalRegisteredBy}
             />
 
             {/* Scanner Area */}
@@ -308,7 +349,7 @@ const Organizer = () => {
               </SearchModal>
             </div>
 
-            {/* Edit Profile Modal */}  
+            {/* Edit Profile Modal */}
             <div className="">
               <Modal
                 isOpen={profileModalOpen}

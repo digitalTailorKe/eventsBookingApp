@@ -3,7 +3,7 @@ import CountdownDays from "./CountdownDays";
 
 const Countdown = () => {
   const calculateTimeLeft = () => {
-    const difference = +new Date("2023-07-05") - +new Date();
+    const difference = +new Date("2023-07-07") - +new Date();
     let timeLeft = {};
 
     if (difference > 0) {

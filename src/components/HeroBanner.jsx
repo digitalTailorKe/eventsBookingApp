@@ -63,9 +63,7 @@ const HeroBanner = () => {
             </p>
           </div> */}
 
-          <div className="hidden md:block">
-            <Countdown />
-          </div>
+          <div className="hidden md:block">{/* <Countdown /> */}</div>
         </div>
 
         <div className="flex flex-col justify-center items-center mx-auto mb-3 md:hidden">
@@ -78,7 +76,7 @@ const HeroBanner = () => {
             </div>
           </div>
 
-          <Countdown />
+          {/* <Countdown /> */}
         </div>
 
         {/* Location Input */}
